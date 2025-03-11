@@ -1,0 +1,67 @@
+:root{
+    --primary: color-mix(in srgb, red 20%, #36FF00)
+}
+
+body{
+    background-color: #302f2f;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+input{
+    opacity: 0;
+    width: 0px;
+}
+
+img{
+    max-width: 250px;
+    border-radius: 999px;
+    outline: 2px solid var(--primary);
+    cursor: pointer;
+    transition: 200ms ease-in-out;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+img:hover{
+    outline: 8px solid var(--primary);
+}
+
+#toast{
+    visibility: hidden;
+    min-width: 100px;
+    margin-left: -125px;
+    background-color: var(--primary);
+    color: whitesmoke;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+    position: fixed;
+    z-index: 1;
+    right: 5%;
+    top: 30px;
+}
+
+#toast.show{
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein{
+    from{
+        top:0; opacity: 0;
+    }
+    top{
+        top:30px; opacity: 1;
+    }
+}
+
+@keyframes fadeout{
+    from{
+        top:30px; opacity: 1;
+    }
+    top{
+        top:0px; opacity: 0;
+    }
+}
