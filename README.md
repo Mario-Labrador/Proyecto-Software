@@ -11,11 +11,11 @@
 
 
 ## 👤Roles
-#### ⏹️Alberto Lacarta - Desarrollador sénior de software (Senior Software Architect)
+#### ⏹️ALBERTO LACARTA - Desarrollador sénior de software (Senior Software Architect)
 
-#### ⏹️Mario Labrador - Encargado del Proyecto (Proyect Manager)
+#### ⏹️MARIO LABRADOR - Encargado del Proyecto (Proyect Manager)
 
-#### ⏹️Mario Recio - Administrador de las bases de datos (Database Manager)
+#### ⏹️MARIO RECIO - Administrador de las bases de datos (Database Manager)
 
 
 ## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 26/3/2025
