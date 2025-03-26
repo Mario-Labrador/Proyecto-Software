@@ -7,11 +7,11 @@
 ## Contribución
 
 ## 👤Roles
-#### ⏹️Alberto Lacarta
+#### ⏹️Alberto Lacarta - Desarrollador sénior de software (Senior Software Architect)
 
-#### ⏹️Mario Labrador
+#### ⏹️Mario Labrador - Encargado del Proyecto (Proyect Manager)
 
-#### ⏹️Mario Recio
+#### ⏹️Mario Recio - Administrador de las bases de datos (Database Manager)
 
 ## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 26/3/2025
 ![proyecto_software_gantt gan_page0](https://github.com/user-attachments/assets/c6f26ff3-cf63-4543-ae84-126d006a4593)
