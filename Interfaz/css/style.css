@@ -1035,4 +1035,60 @@ a:focus {
 .footer_section p a {
   color: inherit;
 }
-/*# sourceMappingURL=style.css.map */
+.login_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.login_box {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login_box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #020230;
+}
+
+.login_box .form-group label {
+  font-weight: 500;
+  color: #020230;
+}
+
+.login_box .btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #03a7d3;
+  border: none;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+.login_box .btn-primary:hover {
+  background-color: #ff4646;
+}
+
+.login_box p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login_box p a {
+  color: #03a7d3;
+  text-decoration: none;
+}
+
+.login_box p a:hover {
+  text-decoration: underline;
+}
