@@ -18,8 +18,9 @@
 #### ⏹️MARIO RECIO - Administrador de las bases de datos (Database Manager)
 
 
-## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 26/3/2025
-![proyecto_software_gantt gan_page0](https://github.com/user-attachments/assets/c6f26ff3-cf63-4543-ae84-126d006a4593)
+## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 8/4/2025
+![proyecto_software_gantt](https://github.com/user-attachments/assets/970087b1-395e-4b4d-8f81-d67c93791405)
+
 
 ## ⏳Fases del diagrama de Gantt
 A continuación se muestra detalladamente cada fase del proyecto:
