@@ -19,7 +19,8 @@
 
 
 ## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 8/4/2025
-![proyecto_software_gantt](https://github.com/user-attachments/assets/970087b1-395e-4b4d-8f81-d67c93791405)
+![proyecto_software_gantt](https://github.com/user-attachments/assets/c38a5dd1-026d-4f2a-91b7-86011c8a4f08)
+
 
 
 ## ⏳Fases del diagrama de Gantt
