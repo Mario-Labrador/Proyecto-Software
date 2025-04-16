@@ -19,7 +19,7 @@ try {
     }
 
     // Verificar contraseña (asumiendo que está hasheada con password_hash)
-    if (!password_verify($password, $persona->getPassword())) {
+    if (!password_verify($password, $persona->getContrasenyaPersona())) {
         throw new Exception("❌ Contraseña incorrecta.");
     }
 

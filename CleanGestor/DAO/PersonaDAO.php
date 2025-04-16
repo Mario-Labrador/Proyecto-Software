@@ -29,6 +29,31 @@ class PersonaDAO {
         }
     }
 
+    // 🔹 Obtener una persona por su email (para login)
+    public function getPersonaByEmail($email) {
+        $pdo = Database::connect();
+        $sql = "SELECT * FROM persona WHERE emailPersona = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return new PersonaVO(
+                $result['dni'],
+                $result['nombrePersona'],
+                $result['apellidosPersona'],
+                $result['emailPersona'],
+                $result['contrasenyaPersona'],
+                $result['telefonoPersona'],
+                $result['fechaNacimiento']
+            );
+        } else {
+            return null;
+        }
+    }
+
     // Insertar una nueva persona
     public function insertPersona(PersonaVO $persona) {
         $pdo = Database::connect();
