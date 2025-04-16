@@ -19,37 +19,43 @@ class EmpresaDAO {
                 $result['idEmpresa'],
                 $result['nombreEmpresa'],
                 $result['telefonoEmpresa'],
-                $result['direccion']
+                $result['direccion'],
+                $result['correoDirector']  // <- importante
             );
         } else {
-            return null;  // Si no existe la empresa con ese ID
+            return null;
         }
     }
 
     // Insertar una nueva empresa
     public function insertEmpresa(EmpresaVO $empresa) {
         $pdo = Database::connect();
-        
-        // Asignar a variables para evitar los "Notice"
+
         $id = $empresa->getIdEmpresa();
         $nombre = $empresa->getNombreEmpresa();
         $telefono = $empresa->getTelefonoEmpresa();
         $direccion = $empresa->getDireccion();
-        
-        // SQL de inserción
-        $sql = "INSERT INTO empresa (idEmpresa, nombreEmpresa, telefonoEmpresa, direccion) 
-                VALUES (:idEmpresa, :nombreEmpresa, :telefonoEmpresa, :direccion)";
+        $correo = $empresa->getCorreoDirector();
+
+        $sql = "INSERT INTO empresa (idEmpresa, nombreEmpresa, telefonoEmpresa, direccion, correoDirector) 
+                VALUES (:idEmpresa, :nombreEmpresa, :telefonoEmpresa, :direccion, :correoDirector)";
         
         $stmt = $pdo->prepare($sql);
-        
-        // Bind de los parámetros
         $stmt->bindParam(':idEmpresa', $id);
         $stmt->bindParam(':nombreEmpresa', $nombre);
         $stmt->bindParam(':telefonoEmpresa', $telefono);
         $stmt->bindParam(':direccion', $direccion);
-
-        // Ejecutar
+        $stmt->bindParam(':correoDirector', $correo);
         $stmt->execute();
+    }
+
+    // Verifica si ya existe una empresa con ese correo de director
+    public function existeCorreoAdmin($email) {
+        $pdo = Database::connect();
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM empresa WHERE correoDirector = ?");
+        $stmt->execute([$email]);
+        $count = $stmt->fetchColumn();
+        return $count > 0;
     }
 }
 ?>

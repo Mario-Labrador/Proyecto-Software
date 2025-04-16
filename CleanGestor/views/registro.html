@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html>
 
-
 <head>
-  <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  
-  <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  
-  <!-- Site Metas -->
+
   <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  
   <title>Registro - CLEAN GESTOR</title>
 
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
@@ -26,27 +17,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('tipo_usuario').addEventListener('change', function() {
-        var rolGroup = document.getElementById('rol_trabajador_group');
-        if (this.value === 'trabajador') {
+    document.addEventListener('DOMContentLoaded', function () {
+      const tipoUsuarioSelect = document.getElementById('tipo_usuario');
+      const rolGroup = document.getElementById('rol_trabajador_group');
+      const rolSelect = document.getElementById('rol_trabajador');
+
+      tipoUsuarioSelect.addEventListener('change', function () {
+        const value = this.value.trim().toLowerCase();
+        if (value === 'trabajador') {
           rolGroup.style.display = 'block';
-          document.getElementById('rol_trabajador').setAttribute('required', 'required');
+          rolSelect.setAttribute('required', 'required');
         } else {
           rolGroup.style.display = 'none';
-          document.getElementById('rol_trabajador').removeAttribute('required');
-          document.getElementById('rol_trabajador').value = '';
+          rolSelect.removeAttribute('required');
+         rolSelect.value = '';
         }
       });
     });
   </script>
-  
+
   <style>
     @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(40px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -58,7 +54,7 @@
     }
 
     #rol_trabajador_group.show {
-      max-height: 200px; /* suficiente para el contenido */
+      max-height: 200px;
       opacity: 1;
     }
   </style>
@@ -66,26 +62,21 @@
 
 <body>
   <div class="hero_area">
-    <!-- header section starts -->
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <!-- Logo con animación -->
           <a class="navbar-brand animate__animated animate__fadeInDown" href="index.html">
             <span>CLEAN GESTOR</span>
           </a>
 
-          <!-- Botón de menú responsive -->
           <button class="navbar-toggler animate__animated animate__fadeInDown" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
             <span class=""> </span>
           </button>
 
-          <!-- Menú de navegación -->
           <div class="collapse navbar-collapse animate__animated animate__fadeInDown" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <!-- Botones del menú con GSAP -->
               <li class="nav-item active">
                 <a class="nav-link" href="index.html">INICIO</a>
               </li>
@@ -99,7 +90,6 @@
                 <a class="nav-link" href="contact.html">CONTACTO</a>
               </li>
             </ul>
-            <!-- Botón de búsqueda y contacto -->
             <div class="quote_btn-container">
               <form class="form-inline">
                 <button class="btn nav_search-btn animate__animated animate__fadeInUp delay-2s" type="submit">
@@ -116,15 +106,12 @@
       </div>
     </header>
 
-    <!-- header section ends -->
-
-    <!-- Registration Form Section -->
     <section class="login_section">
       <div class="login_box">
         <h2>Regístrate</h2>
         <form action="procesar_registro.php" method="POST">
           <div class="form-group">
-            <label for="DNI/NIF">DNI/NIF</label>
+            <label for="DNI">DNI/NIF</label>
             <input type="text" class="form-control" id="DNI" name="DNI" placeholder="Introduce tu DNI/NIF" required>
           </div>
           <div class="form-group">
@@ -141,11 +128,11 @@
           </div>
           <div class="form-group">
             <label for="telefono">Número de teléfono</label>
-            <input type="telefono" class="form-control" id="telefono" name="telefono" placeholder="Introduce tu número de teléfono" required>
+            <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Introduce tu número de teléfono" required>
           </div>
           <div class="form-group">
             <label for="fecha-nacimiento">Fecha de nacimiento</label>
-            <input type="fecha de nacimiento" class="form-control" id="fecha-nacimiento" name="fecha-nacimiento" placeholder="Introduce tu fecha de nacimiento" required>
+            <input type="date" class="form-control" id="fecha-nacimiento" name="fecha_nacimiento" required>
           </div>
           <div class="form-group">
             <label for="password">Contraseña</label>
@@ -182,8 +169,6 @@
 
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.js"></script>
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script>
     gsap.from(".navbar-nav .nav-link", {
@@ -192,18 +177,6 @@
       duration: 0.8,
       stagger: 0.3
     });
-  </script>
-  
-  <script>
-    // Animación para los botones del menú
-    gsap.from(".navbar-nav .nav-link", {
-      y: -50, // Baja desde arriba (-50px)
-      opacity: 0, // Comienza invisible
-      duration: 0.8, // Duración de la animación (0.8 segundos por botón)
-      stagger: 0.3 // Retraso entre cada botón (0.3 segundos)
-    });
-
-    // Animación para el contenido principal
     gsap.from(".detail-box h1", { duration: 2, x: -100, opacity: 0 });
     gsap.from(".detail-box p", { duration: 2, y: -50, opacity: 0, delay: 0.5 });
     gsap.from(".img-box img", { duration: 1.5, scale: 0.8, opacity: 0, delay: 1 });

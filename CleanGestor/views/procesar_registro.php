@@ -23,6 +23,17 @@ $rolTrabajador = $_POST['rol_trabajador'] ?? null;
 try {
     $pdo = Database::connect();
     $pdo->beginTransaction();
+    echo "<p>Tipo de usuario: <strong>$tipoUsuario</strong></p>";
+
+    // Validar correo si es administrador de empresa
+    if ($tipoUsuario === 'trabajador' && $rolTrabajador === 'administrador de empresa') {
+        $empresaDAO = new EmpresaDAO();
+        $esCorreoAdmin = $empresaDAO->existeCorreoAdmin($email); // NUEVA FUNCIÓN
+
+        if (!$esCorreoAdmin) {
+            throw new Exception("❌ El correo electrónico proporcionado no está registrado como correoAdmin de ninguna empresa.");
+        }
+    }
 
     // Insertar en Persona
     try {
@@ -30,12 +41,13 @@ try {
         $personaDAO = new PersonaDAO();
         $personaDAO->insertPersona($personaVO);
         echo "<p>✅ Persona insertada correctamente.</p>";
+        echo "<p>Tipo de usuario: <strong>$tipoUsuario</strong></p>";
     } catch (Exception $e) {
         throw new Exception("❌ Error al insertar persona: " . $e->getMessage());
     }
 
     // Insertar en Cliente si corresponde
-    if ($tipoUsuario === "cliente") {
+    if ($tipoUsuario === 'empresa') {
         try {
             $clienteVO = new ClienteVO($dni);
             $clienteDAO = new ClienteDAO();
