@@ -18,10 +18,10 @@
   <title>Login - CLEAN GESTOR</title>
 
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
   <link href="../assets/css/style.css" rel="stylesheet" />
   <link href="../assets/css/responsive.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand animate__animated animate__fadeInDown" href="index.html">
             <span>CLEAN GESTOR</span>
           </a>
 
@@ -52,6 +52,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">CONTACTO</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="perfil.html">PERFIL</a>
               </li>
             </ul>
           </div>
@@ -84,6 +87,23 @@
 
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- GSAP Script for Menu Buttons Animation -->
+  <script>
+    // Animación para los botones del menú
+    gsap.from(".navbar-nav .nav-link", {
+      y: -50, // Baja desde arriba (-50px)
+      opacity: 0, // Comienza invisible
+      duration: 0.8, // Duración de la animación (0.8 segundos por botón)
+      stagger: 0.3 // Retraso entre cada botón (0.3 segundos)
+    });
+
+    // Animación para el contenido principal
+    gsap.from(".detail-box h1", { duration: 2, x: -100, opacity: 0 });
+    gsap.from(".detail-box p", { duration: 2, y: -50, opacity: 0, delay: 0.5 });
+    gsap.from(".img-box img", { duration: 1.5, scale: 0.8, opacity: 0, delay: 1 });
+  </script>
 </body>
 
 </html>

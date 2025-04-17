@@ -17,20 +17,15 @@
   
   <title>CLEAN GESTOR</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
   <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
   <link href="../assets/css/style.css" rel="stylesheet" />
   <link href="../assets/css/responsive.css" rel="stylesheet" />
   <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
-
-  <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
 </head>
 
 <body>
-
     <div class="hero_area">
       <!-- header section starts -->
       <header class="header_section">
@@ -64,19 +59,10 @@
                 <li class="nav-item">
                   <a class="nav-link" href="contact.html">CONTACTO</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="perfil.html">PERFIL</a>
+                </li>
               </ul>
-              <!-- Botón de búsqueda y contacto -->
-              <div class="quote_btn-container">
-                <form class="form-inline">
-                  <button class="btn nav_search-btn animate__animated animate__fadeInUp delay-2s" type="submit">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </form>
-                <a href="">
-                  <i class="fa fa-phone"></i>
-                  <span>Call : 685 145 788</span>
-                </a>
-              </div>
             </div>
           </nav>
         </div>
@@ -102,7 +88,7 @@
 
                   <!-- Image Section -->
                   <div class="col-md-6 img-box animate__animated animate__fadeInRight delay-2s">
-                    <img src="assets/images/InicioEscoba1.png" alt="">
+                    <img src="../assets/images/InicioEscoba1.png" alt="">
                   </div>
                 </div>
               </div>
@@ -121,10 +107,10 @@
     <script>
       // Animación para los botones del menú
       gsap.from(".navbar-nav .nav-link", {
-        y: -50, // Baja desde arriba (-50px)
-        opacity: 0, // Comienza invisible
-        duration: 0.8, // Duración de la animación (0.8 segundos por botón)
-        stagger: 0.3 // Retraso entre cada botón (0.3 segundos)
+      y: -50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.3
       });
 
       // Animación para el contenido principal
