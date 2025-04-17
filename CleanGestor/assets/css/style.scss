@@ -5,7 +5,7 @@ $primary2: #ff4646;
 $textCol: #999;
 
 @mixin main-font {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 @mixin hero_btn($col1, $col2, $pad1, $pad2, $bRadius) {
