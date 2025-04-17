@@ -15,13 +15,17 @@ try {
     $persona = $personaDAO->getPersonaByEmail($email);
 
     if (!$persona) {
-        throw new Exception("No se encontró un usuario con ese correo.");
+        $_SESSION['error_msg'] = "No se encontró un usuario con ese correo.";
+        header("Location: error.php");
+        exit();
     }
 
     // Verificar contraseña (asumiendo que está hasheada con password_hash)
     if (!password_verify($password, $persona->getContrasenyaPersona())) {
-        throw new Exception("Contraseña incorrecta.");
-    }
+        $_SESSION['error_msg'] = "Contraseña incorrecta.";
+        header("Location: error.php");
+        exit();
+    }   
 
     // Determinar el tipo de usuario (cliente o trabajador)
     $clienteDAO = new ClienteDAO();
@@ -37,43 +41,25 @@ try {
         $trabajador = $trabajadorDAO->getTrabajadorByDni($persona->getDni());
         $rol = $trabajador->getRol();
     } else {
-        throw new Exception("Este usuario no tiene un rol asignado.");
+        $_SESSION['error_msg'] = "Este usuario no tiene un rol asignado.";
+        header("Location: error.php");
+        exit();
     }
 
     // Guardar info en sesión
     $_SESSION['dni'] = $persona->getDni();
-    $_SESSION['nombre'] = $persona->getNombrePersona();  // Cambié a getNombrePersona()
-    $_SESSION['email'] = $persona->getEmailPersona();   // Cambié a getEmailPersona()
+    $_SESSION['nombre'] = $persona->getNombrePersona();
+    $_SESSION['email'] = $persona->getEmailPersona();
     $_SESSION['tipo_usuario'] = $tipoUsuario;
     $_SESSION['rol'] = $rol;
+    $_SESSION['foto_perfil'] = $persona->getFotoPerfil();
 
-    // Redirigir según tipo
+    // Redirigir al perfil
     header("Location: perfil.php");
     exit();
 
-
-    //Aqui añadir dependiendo del tipo de usario que te redirija a una pagina u a otra 
-
-
 } catch (Exception $e) {
-    // Mostrar error directamente en pantalla
-    echo "<!DOCTYPE html>
-    <html lang='es'>
-    <head>
-        <meta charset='UTF-8'>
-        <title>Error de inicio de sesión</title>
-        <style>
-            body { font-family: Arial, sans-serif; background-color: #f8f8f8; text-align: center; padding: 50px; }
-            .error { color: red; font-size: 1.2em; }
-            a { text-decoration: none; color: #007bff; }
-        </style>
-    </head>
-    <body>
-        <h1>Error al iniciar sesión</h1>
-        <p class='error'>{$e->getMessage()}</p>
-        <p><a href='index.html'>Volver al inicio de sesión</a></p>
-    </body>
-    </html>";
+    $_SESSION['error_msg'] = "Error al iniciar sesión: " . $e->getMessage();
+    header("Location: error.php");
     exit();
 }
-?>

@@ -47,7 +47,8 @@ class PersonaDAO {
                 $result['emailPersona'],
                 $result['contrasenyaPersona'],
                 $result['telefonoPersona'],
-                $result['fechaNacimiento']
+                $result['fechaNacimiento'],
+                $result['fotoPerfil']
             );
         } else {
             return null;
@@ -64,7 +65,7 @@ class PersonaDAO {
         $apellidos = $persona->getApellidosPersona();
         $email = $persona->getEmailPersona();
         $contrasenya = $persona->getContrasenyaPersona();
-        $telefono = $persona->getTelefonoPersona();
+        $telefono = $persona->getTelefono();
         $fechaNacimiento = $persona->getFechaNacimiento();
         
         // SQL de inserción
@@ -84,6 +85,34 @@ class PersonaDAO {
 
         // Ejecutar
         $stmt->execute();
+    }
+    public function existeDni($dni) {
+        $pdo = Database::connect();
+        $sql = "SELECT COUNT(*) FROM persona WHERE dni = :dni";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':dni', $dni);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+    
+    // Verifica si un email ya existe
+    public function existeEmail($email) {
+        $pdo = Database::connect();
+        $sql = "SELECT COUNT(*) FROM persona WHERE emailPersona = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+    
+    // Verifica si un teléfono ya existe
+    public function existeTelefono($telefono) {
+        $pdo = Database::connect();
+        $sql = "SELECT COUNT(*) FROM persona WHERE telefonoPersona = :telefono";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':telefono', $telefono);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
     }
 }
 ?>

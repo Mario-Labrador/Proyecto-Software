@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include_once '../config/db.php';
 include_once '../VO/PersonaVO.php';
 include_once '../DAO/PersonaDAO.php';
@@ -24,7 +26,26 @@ try {
     $pdo = Database::connect();
     $pdo->beginTransaction();
 
-    echo "<p>Tipo de usuario: <strong>$tipoUsuario</strong></p>";
+    $personaDAO = new PersonaDAO();
+
+    // Validaciones de existencia
+    if ($personaDAO->existeDni($dni)) {
+        $_SESSION['error_msg'] = "El DNI ya está registrado.";
+        header("Location: error.php");
+        exit();
+    }
+
+    if ($personaDAO->existeEmail($email)) {
+        $_SESSION['error_msg'] = "El correo electrónico ya está registrado.";
+        header("Location: error.php");
+        exit();
+    }
+
+    if ($personaDAO->existeTelefono($telefono)) {
+        $_SESSION['error_msg'] = "El número de teléfono ya está registrado.";
+        header("Location: error.php");
+        exit();
+    }
 
     // Validar correo si es administrador de empresa
     if ($tipoUsuario === 'trabajador' && $rolTrabajador === 'administrador de empresa') {
@@ -32,45 +53,42 @@ try {
         $esCorreoAdmin = $empresaDAO->existeCorreoAdmin($email);
 
         if (!$esCorreoAdmin) {
-            throw new Exception("El correo electrónico no está registrado como correoAdmin de ninguna empresa.");
+            $_SESSION['error_msg'] = "El correo electrónico no está registrado como correoAdmin de ninguna empresa.";
+            header("Location: error.php");
+            exit();
         }
     }
 
-    // Hashear la contraseña para guardarla de forma segura
+    // Hashear la contraseña
     $passwordHasheada = password_hash($password, PASSWORD_DEFAULT);
 
     // Insertar en Persona
-    echo "<p>Insertando persona...</p>";
     $personaVO = new PersonaVO($dni, $nombre, $apellidos, $email, $passwordHasheada, $telefono, $fechaNacimiento);
-    $personaDAO = new PersonaDAO();
     $personaDAO->insertPersona($personaVO);
-    echo "<p>Persona insertada correctamente.</p>";
 
-    // Insertar en Cliente si corresponde
+    // Insertar en Cliente o Trabajador
     if ($tipoUsuario === 'cliente') {
-        echo "<p>Insertando cliente...</p>";
         $clienteVO = new ClienteVO($dni);
         $clienteDAO = new ClienteDAO();
         $clienteDAO->insertCliente($clienteVO);
-        echo "<p>Cliente insertado correctamente.</p>";
     }
 
-    // Insertar en Trabajador si corresponde
     if ($tipoUsuario === 'trabajador') {
-        echo "<p>Insertando trabajador con rol: <strong>$rolTrabajador</strong></p>";
         $trabajadorVO = new TrabajadorVO($rolTrabajador, null, $dni, null);
         $trabajadorDAO = new TrabajadorDAO();
         $trabajadorDAO->insertTrabajador($trabajadorVO);
-        echo "<p>Trabajador insertado correctamente.</p>";
     }
 
     $pdo->commit();
-    echo "<p> Todos los datos fueron insertados con éxito.</p>";
+    header("Location: registroExsitoso.php"); // Redirige si todo fue bien
+    exit();
 
 } catch (Exception $e) {
     if (isset($pdo)) {
         $pdo->rollBack();
     }
-    echo "<p><strong>Error en la transacción:</strong> " . $e->getMessage() . "</p>";
+    $_SESSION['error_msg'] = "Error en la transacción: " . $e->getMessage();
+    header("Location: error.php");
+    exit();
 }
 ?>

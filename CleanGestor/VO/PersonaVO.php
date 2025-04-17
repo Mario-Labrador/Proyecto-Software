@@ -10,9 +10,10 @@ class PersonaVO {
     private $contrasenyaPersona;
     private $telefonoPersona;
     private $fechaNacimiento;
+    private $fotoPerfil; 
 
     // Constructor
-    public function __construct($dni, $nombrePersona, $apellidosPersona, $emailPersona, $contrasenyaPersona, $telefonoPersona, $fechaNacimiento) {
+    public function __construct($dni, $nombrePersona, $apellidosPersona, $emailPersona, $contrasenyaPersona, $telefonoPersona, $fechaNacimiento, $fotoPerfil = null) {
         $this->dni = $dni;
         $this->nombrePersona = $nombrePersona;
         $this->apellidosPersona = $apellidosPersona;
@@ -20,6 +21,16 @@ class PersonaVO {
         $this->contrasenyaPersona = $contrasenyaPersona;
         $this->telefonoPersona = $telefonoPersona;
         $this->fechaNacimiento = $fechaNacimiento;
+        $this->fotoPerfil = $fotoPerfil; 
+    }
+
+    // Getter y Setter para FotoPerfil
+    public function getFotoPerfil() {
+        return $this->fotoPerfil;
+    }
+
+    public function setFotoPerfil($fotoPerfil) {
+        $this->fotoPerfil = $fotoPerfil;
     }
 
     // Métodos getter y setter
@@ -79,4 +90,5 @@ class PersonaVO {
         $this->fechaNacimiento = $fechaNacimiento;
     }
 }
+
 ?>

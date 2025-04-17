@@ -6,24 +6,19 @@ if (!isset($_SESSION['dni'])) {
     exit();
 }
 
-include_once '../DAO/PersonaDAO.php';
-
 // Obtener datos de la sesión
 $dni = $_SESSION['dni'];
 $nombre = $_SESSION['nombre'];
 $email = $_SESSION['email'];
 $tipo = $_SESSION['tipo_usuario'];
 $rol = $_SESSION['rol'] ?? '';
+$fotoPerfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de perfil desde la sesión
 
-// Crear instancia del DAO
-$personaDAO = new PersonaDAO();
-$persona = $personaDAO->getPersonaByDni($dni);
-
-// Obtener datos de la persona
-$telefono = $persona->getTelefono() ?? 'No disponible';
-$direccion = "..."; // Aquí deberías obtener la dirección de la base de datos o dejarla como "No disponible"
-$fechaRegistro = "..."; // Puedes agregar la fecha de registro si está disponible
-$sobreMi = "..."; // Lo mismo para sobreMi
+// Datos adicionales
+$telefono = $_SESSION['telefono'] ?? 'No disponible';
+$direccion = $_SESSION['direccion'] ?? 'No disponible';
+$fechaRegistro = $_SESSION['fecha_registro'] ?? 'No disponible';
+$sobreMi = $_SESSION['sobre_mi'] ?? 'No disponible';
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +49,7 @@ $sobreMi = "..."; // Lo mismo para sobreMi
   <div class="hero_area">
     <header class="header_section">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
           <a class="navbar-brand animate__animated animate__fadeInDown" href="index.html">
             <span>CLEAN GESTOR</span>
           </a>
@@ -79,7 +74,11 @@ $sobreMi = "..."; // Lo mismo para sobreMi
       <div class="container">
         <div class="profile-card animate__animated animate__fadeInUp">
           <div class="text-center">
-            <img src="../assets/images/user-default.png" alt="Foto de perfil" class="profile-image">
+            <!-- Mostrar la imagen de perfil o la predeterminada -->
+            <img src="<?php echo !empty($fotoPerfil) ? $fotoPerfil : '../assets/uploads/default.png'; ?>" 
+                 alt="Foto de perfil" 
+                 class="profile-image mb-2" 
+                 style="max-height: 200px; border-radius: 50%;">
             <h2 class="mt-3"><?php echo htmlspecialchars($nombre); ?></h2>
             <p class="text-muted mb-2"><?php echo ucfirst($tipo); ?> <?php echo $rol ? "($rol)" : ''; ?></p>
             <div class="profile-actions">
@@ -101,6 +100,31 @@ $sobreMi = "..."; // Lo mismo para sobreMi
             <h5>Sobre mí</h5>
             <p><?php echo htmlspecialchars($sobreMi); ?></p>
           </div>
+
+          <!-- Formulario para subir la foto de perfil -->
+          <div class="text-center mt-4">
+              <h3>Cambiar foto de perfil</h3>
+              <form action="subir_foto.php" method="POST" enctype="multipart/form-data">
+                  <div class="form-group">
+                      <input type="file" name="foto_perfil" class="form-control" accept="image/*" required>
+                  </div>
+                  <button type="submit" class="btn btn-success">Subir Foto</button>
+              </form>
+          </div>
+
+          <!-- Mostrar mensaje de éxito o error -->
+          <?php if (isset($_SESSION['success_foto'])): ?>
+              <div class="alert alert-success mt-3">
+                  <?php echo $_SESSION['success_foto']; unset($_SESSION['success_foto']); ?>
+              </div>
+          <?php endif; ?>
+
+          <?php if (isset($_SESSION['error_foto'])): ?>
+              <div class="alert alert-danger mt-3">
+                  <?php echo $_SESSION['error_foto']; unset($_SESSION['error_foto']); ?>
+              </div>
+          <?php endif; ?>
+          
         </div>
       </div>
     </section>
