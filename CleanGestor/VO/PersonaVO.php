@@ -1,7 +1,5 @@
 <?php
 
-include_once '../config/db.php';
-
 class PersonaVO {
     private $dni;
     private $nombrePersona;

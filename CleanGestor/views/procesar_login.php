@@ -20,7 +20,7 @@ try {
 
     // Verificar contraseña (asumiendo que está hasheada con password_hash)
     if (!password_verify($password, $persona->getContrasenyaPersona())) {
-        throw new Exception("❌Contraseña incorrecta.");
+        throw new Exception("Contraseña incorrecta.");
     }
 
     // Determinar el tipo de usuario (cliente o trabajador)
@@ -48,17 +48,19 @@ try {
     $_SESSION['rol'] = $rol;
 
     // Redirigir según tipo
-    if ($tipoUsuario === 'cliente') {
+   /* if ($tipoUsuario === 'cliente') {
         header("Location: ../cliente/dashboard_cliente.php");
     } else {
         header("Location: ../trabajador/dashboard_trabajador.php");
     }
+    exit();*/
+    header("Location: ../perfil.php");
     exit();
 
 } catch (Exception $e) {
     // En caso de error, redirigir de nuevo al login con mensaje
     $_SESSION['error_login'] = $e->getMessage();
-    header("Location: login.php");
+    header("Location: perfil.php");
     exit();
 }
 ?>
