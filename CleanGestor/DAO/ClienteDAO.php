@@ -27,8 +27,11 @@ class ClienteDAO {
         $sql = "INSERT INTO cliente (dni) VALUES (:dni)";
         
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':dni', $cliente->getDni());
-        
+
+        // Solución al Notice: usar una variable intermedia
+        $dni = $cliente->getDni();
+        $stmt->bindParam(':dni', $dni);
+
         $stmt->execute();
     }
 }

@@ -23,51 +23,47 @@ $rolTrabajador = $_POST['rol_trabajador'] ?? null;
 try {
     $pdo = Database::connect();
     $pdo->beginTransaction();
+
     echo "<p>Tipo de usuario: <strong>$tipoUsuario</strong></p>";
 
     // Validar correo si es administrador de empresa
     if ($tipoUsuario === 'trabajador' && $rolTrabajador === 'administrador de empresa') {
         $empresaDAO = new EmpresaDAO();
-        $esCorreoAdmin = $empresaDAO->existeCorreoAdmin($email); // NUEVA FUNCIÓN
+        $esCorreoAdmin = $empresaDAO->existeCorreoAdmin($email);
 
         if (!$esCorreoAdmin) {
-            throw new Exception("❌ El correo electrónico proporcionado no está registrado como correoAdmin de ninguna empresa.");
+            throw new Exception(" El correo electrónico no está registrado como correoAdmin de ninguna empresa.");
         }
     }
+
+    // Hashear la contraseña si quieres seguridad adicional
+    // $passwordHasheada = password_hash($password, PASSWORD_DEFAULT);
+    // Por ahora se usará la contraseña tal cual:
+    $passwordFinal = $password;
 
     // Insertar en Persona
-    try {
-        $personaVO = new PersonaVO($dni, $nombre, $apellidos, $email, $password, $telefono, $fechaNacimiento);
-        $personaDAO = new PersonaDAO();
-        $personaDAO->insertPersona($personaVO);
-        echo "<p>✅ Persona insertada correctamente.</p>";
-        echo "<p>Tipo de usuario: <strong>$tipoUsuario</strong></p>";
-    } catch (Exception $e) {
-        throw new Exception("❌ Error al insertar persona: " . $e->getMessage());
-    }
+    echo "<p> Insertando persona...</p>";
+    $personaVO = new PersonaVO($dni, $nombre, $apellidos, $email, $passwordFinal, $telefono, $fechaNacimiento);
+    $personaDAO = new PersonaDAO();
+    $personaDAO->insertPersona($personaVO);
+    echo "<p> Persona insertada correctamente.</p>";
 
     // Insertar en Cliente si corresponde
-    if ($tipoUsuario === 'empresa') {
-        try {
-            $clienteVO = new ClienteVO($dni);
-            $clienteDAO = new ClienteDAO();
-            $clienteDAO->insertCliente($clienteVO);
-            echo "<p>✅ Cliente insertado correctamente.</p>";
-        } catch (Exception $e) {
-            throw new Exception("❌ Error al insertar cliente: " . $e->getMessage());
-        }
+    if ($tipoUsuario === 'cliente') {
+        echo "<p> Insertando cliente...</p>";
+        $clienteVO = new ClienteVO($dni);
+        $clienteDAO = new ClienteDAO();
+        $clienteDAO->insertCliente($clienteVO);
+        echo "<p> Cliente insertado correctamente.</p>";
     }
 
     // Insertar en Trabajador si corresponde
     if ($tipoUsuario === 'trabajador') {
-        try {
-            $trabajadorVO = new TrabajadorVO($rolTrabajador, null, $dni, null);
-            $trabajadorDAO = new TrabajadorDAO();
-            $trabajadorDAO->insertTrabajador($trabajadorVO);
-            echo "<p>✅ Trabajador insertado correctamente con rol: <strong>$rolTrabajador</strong>.</p>";
-        } catch (Exception $e) {
-            throw new Exception("❌ Error al insertar trabajador: " . $e->getMessage());
-        }
+        echo "<p> Insertando trabajador con rol: <strong>$rolTrabajador</strong></p>";
+        $trabajadorVO = new TrabajadorVO($rolTrabajador, null, $dni, null);
+        $trabajadorDAO = new TrabajadorDAO();
+        $trabajadorDAO->insertTrabajador($trabajadorVO);
+        echo "<p>s Trabajador insertado correctamente.</p>";
     }
 
     $pdo->commit();

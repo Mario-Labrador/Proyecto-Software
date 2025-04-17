@@ -15,12 +15,12 @@ try {
     $persona = $personaDAO->getPersonaByEmail($email);
 
     if (!$persona) {
-        throw new Exception("❌ No se encontró un usuario con ese correo.");
+        throw new Exception(" No se encontró un usuario con ese correo.");
     }
 
     // Verificar contraseña (asumiendo que está hasheada con password_hash)
     if (!password_verify($password, $persona->getContrasenyaPersona())) {
-        throw new Exception("❌ Contraseña incorrecta.");
+        throw new Exception("❌Contraseña incorrecta.");
     }
 
     // Determinar el tipo de usuario (cliente o trabajador)
@@ -37,7 +37,7 @@ try {
         $trabajador = $trabajadorDAO->getTrabajadorByDni($persona->getDni());
         $rol = $trabajador->getRol();
     } else {
-        throw new Exception("❌ Este usuario no tiene un rol asignado.");
+        throw new Exception(" Este usuario no tiene un rol asignado.");
     }
 
     // Guardar info en sesión
