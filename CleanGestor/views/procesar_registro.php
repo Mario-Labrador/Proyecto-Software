@@ -65,7 +65,7 @@ try {
     }
 
     $pdo->commit();
-    echo "<p>🎉 Todos los datos fueron insertados con éxito.</p>";
+    echo "<p> Todos los datos fueron insertados con éxito.</p>";
 
 } catch (Exception $e) {
     if (isset($pdo)) {

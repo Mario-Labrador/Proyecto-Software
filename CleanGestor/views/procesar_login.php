@@ -51,6 +51,10 @@ try {
     header("Location: perfil.php");
     exit();
 
+
+    //Aqui añadir dependiendo del tipo de usario que te redirija a una pagina u a otra 
+
+
 } catch (Exception $e) {
     // Mostrar error directamente en pantalla
     echo "<!DOCTYPE html>
