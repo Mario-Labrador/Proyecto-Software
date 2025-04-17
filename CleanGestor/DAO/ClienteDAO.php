@@ -34,5 +34,18 @@ class ClienteDAO {
 
         $stmt->execute();
     }
+
+    // Método para verificar si un cliente existe por su DNI
+    public function esCliente($dni) {
+        $pdo = Database::connect();
+        $sql = "SELECT COUNT(*) FROM cliente WHERE dni = :dni";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':dni', $dni);
+        $stmt->execute();
+        
+        // Si existe el cliente, devolver true
+        $count = $stmt->fetchColumn();
+        return $count > 0;  // Si el número de registros es mayor que 0, existe el cliente
+    }
 }
 ?>

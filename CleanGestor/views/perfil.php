@@ -1,26 +1,31 @@
 <?php
 session_start();
 
+// Verificar si la sesión está activa
 if (!isset($_SESSION['dni'])) {
-  exit();
+    exit();
 }
 
 include_once '../DAO/PersonaDAO.php';
 
+// Obtener datos de la sesión
 $dni = $_SESSION['dni'];
 $nombre = $_SESSION['nombre'];
 $email = $_SESSION['email'];
 $tipo = $_SESSION['tipo_usuario'];
 $rol = $_SESSION['rol'] ?? '';
 
+// Crear instancia del DAO
 $personaDAO = new PersonaDAO();
 $persona = $personaDAO->getPersonaByDni($dni);
 
+// Obtener datos de la persona
 $telefono = $persona->getTelefono() ?? 'No disponible';
-$direccion = $persona->getDireccion() ?? 'No disponible';
-$fechaRegistro = $persona->getFechaRegistro() ?? '2024';
-$sobreMi = $persona->getDescripcion() ?? 'Este usuario aún no ha añadido una descripción.';
+$direccion = "..."; // Aquí deberías obtener la dirección de la base de datos o dejarla como "No disponible"
+$fechaRegistro = "..."; // Puedes agregar la fecha de registro si está disponible
+$sobreMi = "..."; // Lo mismo para sobreMi
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,11 +34,20 @@ $sobreMi = $persona->getDescripcion() ?? 'Este usuario aún no ha añadido una d
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
   <title>Perfil | CLEAN GESTOR</title>
-  <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+  
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css?v=<?php echo time(); ?>" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
-  <link href="../assets/css/style.css" rel="stylesheet" />
-  <link href="../assets/css/responsive.css" rel="stylesheet" />
+  <link href="../assets/css/style.css?v=<?php echo time(); ?>" rel="stylesheet" />
+  <link href="../assets/css/responsive.css?v=<?php echo time(); ?>" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <!-- Mostrar errores PHP (solo en desarrollo) -->
+  <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+  ?>
 </head>
 
 <body>
@@ -92,6 +106,7 @@ $sobreMi = $persona->getDescripcion() ?? 'Este usuario aún no ha añadido una d
     </section>
   </div>
 
+  <!-- Scripts JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script>
     gsap.from(".navbar-nav .nav-link", { y: -50, opacity: 0, duration: 0.8, stagger: 0.3 });

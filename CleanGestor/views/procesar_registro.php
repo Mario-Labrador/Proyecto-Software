@@ -32,38 +32,36 @@ try {
         $esCorreoAdmin = $empresaDAO->existeCorreoAdmin($email);
 
         if (!$esCorreoAdmin) {
-            throw new Exception(" El correo electrónico no está registrado como correoAdmin de ninguna empresa.");
+            throw new Exception("El correo electrónico no está registrado como correoAdmin de ninguna empresa.");
         }
     }
 
-    // Hashear la contraseña si quieres seguridad adicional
-    // $passwordHasheada = password_hash($password, PASSWORD_DEFAULT);
-    // Por ahora se usará la contraseña tal cual:
-    $passwordFinal = $password;
+    // Hashear la contraseña para guardarla de forma segura
+    $passwordHasheada = password_hash($password, PASSWORD_DEFAULT);
 
     // Insertar en Persona
-    echo "<p> Insertando persona...</p>";
-    $personaVO = new PersonaVO($dni, $nombre, $apellidos, $email, $passwordFinal, $telefono, $fechaNacimiento);
+    echo "<p>Insertando persona...</p>";
+    $personaVO = new PersonaVO($dni, $nombre, $apellidos, $email, $passwordHasheada, $telefono, $fechaNacimiento);
     $personaDAO = new PersonaDAO();
     $personaDAO->insertPersona($personaVO);
-    echo "<p> Persona insertada correctamente.</p>";
+    echo "<p>Persona insertada correctamente.</p>";
 
     // Insertar en Cliente si corresponde
     if ($tipoUsuario === 'cliente') {
-        echo "<p> Insertando cliente...</p>";
+        echo "<p>Insertando cliente...</p>";
         $clienteVO = new ClienteVO($dni);
         $clienteDAO = new ClienteDAO();
         $clienteDAO->insertCliente($clienteVO);
-        echo "<p> Cliente insertado correctamente.</p>";
+        echo "<p>Cliente insertado correctamente.</p>";
     }
 
     // Insertar en Trabajador si corresponde
     if ($tipoUsuario === 'trabajador') {
-        echo "<p> Insertando trabajador con rol: <strong>$rolTrabajador</strong></p>";
+        echo "<p>Insertando trabajador con rol: <strong>$rolTrabajador</strong></p>";
         $trabajadorVO = new TrabajadorVO($rolTrabajador, null, $dni, null);
         $trabajadorDAO = new TrabajadorDAO();
         $trabajadorDAO->insertTrabajador($trabajadorVO);
-        echo "<p>s Trabajador insertado correctamente.</p>";
+        echo "<p>Trabajador insertado correctamente.</p>";
     }
 
     $pdo->commit();

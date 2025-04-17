@@ -1,5 +1,7 @@
 <?php
 
+include_once '../config/db.php';
+
 class PersonaVO {
     private $dni;
     private $nombrePersona;
@@ -61,7 +63,7 @@ class PersonaVO {
         $this->contrasenyaPersona = $contrasenyaPersona;
     }
 
-    public function getTelefonoPersona() {
+    public function getTelefono() {
         return $this->telefonoPersona;
     }
 
