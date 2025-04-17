@@ -52,6 +52,7 @@ try {
     $_SESSION['email'] = $persona->getEmailPersona();
     $_SESSION['tipo_usuario'] = $tipoUsuario;
     $_SESSION['rol'] = $rol;
+    var_dump($persona->getFotoPerfil());  // Verifica qué valor tiene fotoPerfil antes de guardarlo en la sesión
     $_SESSION['foto_perfil'] = $persona->getFotoPerfil();
 
     // Redirigir al perfil

@@ -9,7 +9,7 @@ if (!isset($_SESSION['dni'])) {
 
 // Obtener los datos de la sesión
 $dni = $_SESSION['dni'];
-$fotoPerfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de perfil desde la sesión
+$foto_perfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de perfil desde la sesión
 
 echo "<h2>Valores obtenidos de la sesión</h2>";
 echo "<pre>";
@@ -18,14 +18,14 @@ echo "</pre>";
 
 // Verificar si la variable foto_perfil tiene valor
 echo "<h3>Verificando el valor de foto_perfil:</h3>";
-if (!empty($fotoPerfil)) {
-    echo "La variable 'foto_perfil' tiene el valor: " . htmlspecialchars($fotoPerfil) . "<br>";
+if (!empty($foto_perfil)) {
+    echo "La variable 'foto_perfil' tiene el valor: " . htmlspecialchars($foto_perfil) . "<br>";
 } else {
     echo "La variable 'foto_perfil' está vacía o no se ha establecido.<br>";
 }
 
 // Verificar si la ruta de la foto existe
-$rutaFoto = "../" . $fotoPerfil;
+$rutaFoto = "../" . $foto_perfil;
 echo "<h3>Verificando si la ruta de la foto existe:</h3>";
 
 if (file_exists($rutaFoto)) {
@@ -36,7 +36,7 @@ if (file_exists($rutaFoto)) {
 
 // Verificando si se está usando la foto por defecto
 echo "<h3>Verificando si se está usando la foto por defecto:</h3>";
-if (empty($fotoPerfil) || !file_exists($rutaFoto)) {
+if (empty($foto_perfil) || !file_exists($rutaFoto)) {
     echo "Se está usando la foto por defecto: '../assets/uploads/default.png'<br>";
 } else {
     echo "Se está usando la foto personalizada.<br>";

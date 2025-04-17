@@ -22,7 +22,8 @@ class PersonaDAO {
                 $result['emailPersona'],
                 $result['contrasenyaPersona'],
                 $result['telefonoPersona'],
-                $result['fechaNacimiento']
+                $result['fechaNacimiento'],
+                $result['foto_perfil']
             );
         } else {
             return null;  // Si no existe la persona con ese DNI
@@ -48,7 +49,7 @@ class PersonaDAO {
                 $result['contrasenyaPersona'],
                 $result['telefonoPersona'],
                 $result['fechaNacimiento'],
-                $result['fotoPerfil']
+                $result['foto_perfil']
             );
         } else {
             return null;
@@ -74,7 +75,7 @@ class PersonaDAO {
         
         $stmt = $pdo->prepare($sql);
         
-        // Bind de los parámetros
+        // Bind de los parámetros   
         $stmt->bindParam(':dni', $dni);
         $stmt->bindParam(':nombrePersona', $nombre);
         $stmt->bindParam(':apellidosPersona', $apellidos);

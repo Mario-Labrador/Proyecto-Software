@@ -12,7 +12,7 @@ $nombre = $_SESSION['nombre'];
 $email = $_SESSION['email'];
 $tipo = $_SESSION['tipo_usuario'];
 $rol = $_SESSION['rol'] ?? '';
-$fotoPerfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de perfil desde la sesión
+$foto_perfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de perfil desde la sesión
 
 // Datos adicionales
 $telefono = $_SESSION['telefono'] ?? 'No disponible';
@@ -75,7 +75,7 @@ $sobreMi = $_SESSION['sobre_mi'] ?? 'No disponible';
         <div class="profile-card animate__animated animate__fadeInUp">
           <div class="text-center">
             <!-- Mostrar la imagen de perfil o la predeterminada -->
-            <img src="<?php echo !empty($fotoPerfil) ? $fotoPerfil : '../assets/uploads/default.png'; ?>" 
+            <img src="<?php echo !empty($foto_perfil) ? $foto_perfil : '../assets/uploads/default.png'; ?>" 
                  alt="Foto de perfil" 
                  class="profile-image mb-2" 
                  style="max-height: 200px; border-radius: 50%;">
