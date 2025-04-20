@@ -30,41 +30,11 @@
       <!-- header section starts -->
       <header class="header_section">
         <div class="container-fluid">
-          <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <!-- Logo con animación -->
-            <a class="navbar-brand animate__animated animate__fadeInDown" href="index.html">
-              <span>CLEAN GESTOR</span>
-            </a>
-  
-            <!-- Botón de menú responsive -->
-            <button class="navbar-toggler animate__animated animate__fadeInDown" type="button" data-toggle="collapse"
-              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
-              <span class=""> </span>
-            </button>
-  
-            <!-- Menú de navegación -->
-            <div class="collapse navbar-collapse animate__animated animate__fadeInDown" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto">
-                <!-- Botones del menú con GSAP -->
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.html">INICIO</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="about.html">SOBRE NOSOTROS</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="servicios.html">SERVICIOS</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.html">CONTACTO</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="perfil.php">PERFIL</a>
-                </li>
-              </ul>
+          <header class="header_section">
+            <div class="container-fluid">
+              <?php include_once("navbar.php"); ?>
             </div>
-          </nav>
+          </header>
         </div>
       </header>
 
@@ -81,8 +51,8 @@
                     <p>Encuentra, contrata y gestiona servicios de limpieza de manera fácil, rápida y confiable, todo en un solo lugar.</p>
                     <!-- Botones con animación -->
                     <div class="btn-box">
-                      <a href="login.html" class="btn-1 animate__animated animate__fadeInDown delay-2s">Identifícate</a>
-                      <a href="informate.html" class="btn-2 animate__animated animate__fadeInDown delay-3s">Infórmate</a>
+                      <a href="login.php" class="btn-1 animate__animated animate__fadeInDown delay-2s">Identifícate</a>
+                      <a href="informate.php" class="btn-2 animate__animated animate__fadeInDown delay-3s">Infórmate</a>
                     </div>
                   </div>
 

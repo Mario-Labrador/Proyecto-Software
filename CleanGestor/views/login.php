@@ -30,35 +30,7 @@
     <!-- header section starts -->
     <header class="header_section">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand animate__animated animate__fadeInDown" href="index.html">
-            <span>CLEAN GESTOR</span>
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">INICIO</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">SOBRE NOSOTROS</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="servicios.html">SERVICIOS</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">CONTACTO</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="perfil.html">PERFIL</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <?php include_once("navbar.php"); ?>
       </div>
     </header>
     <!-- header section ends -->
@@ -79,7 +51,7 @@
           <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
         </form>
         <p>
-          ¿No tienes una cuenta? <a href="registro.html">Regístrate aquí</a>
+          ¿No tienes una cuenta? <a href="registro.php">Regístrate aquí</a>
         </p>
       </div>
     </section>
@@ -91,14 +63,6 @@
 
   <!-- GSAP Script for Menu Buttons Animation -->
   <script>
-    // Animación para los botones del menú
-    gsap.from(".navbar-nav .nav-link", {
-      y: -50, // Baja desde arriba (-50px)
-      opacity: 0, // Comienza invisible
-      duration: 0.8, // Duración de la animación (0.8 segundos por botón)
-      stagger: 0.3 // Retraso entre cada botón (0.3 segundos)
-    });
-
     // Animación para el contenido principal
     gsap.from(".detail-box h1", { duration: 2, x: -100, opacity: 0 });
     gsap.from(".detail-box p", { duration: 2, y: -50, opacity: 0, delay: 0.5 });

@@ -18,7 +18,7 @@ unset($_SESSION['error_msg']);
       <h4 class="alert-heading">¡Error!</h4>
       <p><?php echo htmlspecialchars($errorMsg); ?></p>
       <hr>
-      <a href="Index.html" class="btn btn-primary">Volver al inicio</a>
+      <a href="login.html" class="btn btn-primary">Volver atrás</a>
     </div>
   </div>
 </body>

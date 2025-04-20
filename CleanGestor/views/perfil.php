@@ -32,7 +32,7 @@ $sobreMi = $_SESSION['sobre_mi'] ?? 'No disponible';
   
   <!-- Estilos CSS -->
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css?v=<?php echo time(); ?>" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link href="../assets/css/style.css?v=<?php echo time(); ?>" rel="stylesheet" />
   <link href="../assets/css/responsive.css?v=<?php echo time(); ?>" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -49,24 +49,7 @@ $sobreMi = $_SESSION['sobre_mi'] ?? 'No disponible';
   <div class="hero_area">
     <header class="header_section">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container">
-          <a class="navbar-brand animate__animated animate__fadeInDown" href="index.html">
-            <span>CLEAN GESTOR</span>
-          </a>
-          <button class="navbar-toggler animate__animated animate__fadeInDown" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent">
-            <span class=""> </span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a class="nav-link" href="index.html">INICIO</a></li>
-              <li class="nav-item"><a class="nav-link" href="about.html">SOBRE NOSOTROS</a></li>
-              <li class="nav-item"><a class="nav-link" href="service.html">SERVICIOS</a></li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">CONTACTO</a></li>
-              <li class="nav-item"><a class="nav-link" href="perfil.php">PERFIL</a></li>
-            </ul>
-          </div>
-        </nav>
+        <?php include_once("navbar.php"); ?>
       </div>
     </header>
 
@@ -129,13 +112,5 @@ $sobreMi = $_SESSION['sobre_mi'] ?? 'No disponible';
       </div>
     </section>
   </div>
-
-  <!-- Scripts JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script>
-    gsap.from(".navbar-nav .nav-link", { y: -50, opacity: 0, duration: 0.8, stagger: 0.3 });
-    gsap.from(".profile-card", { duration: 1.2, y: 50, opacity: 0, delay: 0.5 });
-    gsap.from(".profile-actions .btn", { duration: 0.7, x: -30, opacity: 0, stagger: 0.2, delay: 1.2 });
-  </script>
 </body>
 </html>
