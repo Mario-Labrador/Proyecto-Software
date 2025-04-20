@@ -10,17 +10,36 @@ Antes de descargar el proyecto, asegúrate de tener los siguientes programas ins
 
 ## ⚙️Instalación y configuración
 
-1. lona el repositorio utilizando GitBash:
-```https://github.com/Mario-Labrador/Proyecto-Software.git```
+1. Clona el repositorio utilizando GitBash:
+
+```
+https://github.com/Mario-Labrador/Proyecto-Software.git
+```
+
 2. Ubica la carpeta **CleanGestor** en:
-```C:\xampp\htdocs```
-3. Activa el servicio de **Apache** para poder procesar las páginas web.
+```
+"C:\xampp\htdocs"
+```
+3. Activa el servicio de **Apache** para poder procesar las páginas web en el XAMPP Control Panel.
 4. Activa también el servicio **MySQL**.
-5. Una vez activo, haciendo click en el boton **Admin**, accederás a **phpMyAdmin**, donde deberás crear una nueva base de datos y en la pestaña importar, seleccionas la última versión del archivo **cleangestor.sql** del repositorio.
+Debe quedar así:
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a88d20ba-6312-41d4-845c-1713e98ad3b8" width="500">
+</p>
+
+5. Una vez activos, haz click en el boton **Admin** de **MySQL**. Accederás a **phpMyAdmin**.
+
+6. Crea una nueva base de datos y en la pestaña importar, seleccionas la última versión del archivo **cleangestor.sql** del repositorio.
+
 
 Una vez realizados estos pasos, ya estarás listo para utilizar la aplicación.
-Para acceder al menú principal de la aplicación, copia esta URL en el navegador:
-```http://localhost/CleanGestor/views/index.php```
+Para acceder al menú principal, copia esta URL en tu navegador:
+
+```
+http://localhost/CleanGestor/views/index.php
+```
+
 También puedes acceder haciendo click aquí: [CleanGestor](http://localhost/CleanGestor/views/index.php)
 
 ## 🌐Contribución
@@ -29,13 +48,22 @@ También puedes acceder haciendo click aquí: [CleanGestor](http://localhost/Cle
 
 2. Crea una nueva rama antes de hacer cambios
 
-```git checkout -b ```*```nombre-de-la-rama```*
-3. Realiza tus cambios y haz commit
-```git add .```
-```git commit -m "*Descripción del cambio*"```
+```
+git checkout -b nombre-de-la-rama
+```
 
-4. Sube tus cambios a GitHub
-```git push origin *nombre-de-la-rama*```
+3. Realiza tus cambios y haz commit
+
+```
+git add .
+git commit -m "Descripción del cambio"
+```
+
+5. Sube tus cambios a GitHub
+
+```
+git push origin nombre-de-la-rama
+```
 
 ## 👤Roles
 #### ⏹️ALBERTO LACARTA - Desarrollador sénior de software (Senior Software Architect)
