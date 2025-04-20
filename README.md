@@ -18,8 +18,8 @@
 #### ⏹️MARIO RECIO - Administrador de las bases de datos (Database Manager)
 
 
-## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 8/4/2025
-![proyecto_software_gantt](https://github.com/user-attachments/assets/c38a5dd1-026d-4f2a-91b7-86011c8a4f08)
+## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 20/4/2025
+![proyecto_software_gantt](https://github.com/user-attachments/assets/586c6ca9-2319-4ae3-a757-d900b2ae6ecc)
 
 
 
