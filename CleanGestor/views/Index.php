@@ -75,13 +75,6 @@
 
     <!-- GSAP Script for Menu Buttons Animation -->
     <script>
-      // Animación para los botones del menú
-      gsap.from(".navbar-nav .nav-link", {
-      y: -50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.3
-      });
 
       // Animación para el contenido principal
       gsap.from(".detail-box h1", { duration: 2, x: -100, opacity: 0 });

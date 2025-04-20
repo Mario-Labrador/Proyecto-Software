@@ -17,6 +17,7 @@ $nombre = $_POST['nombre'] ?? '';
 $apellidos = $_POST['apellidos'] ?? '';
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
+$confirm_password = $_POST['confirm_password'] ?? '';
 $telefono = $_POST['telefono'] ?? '';
 $fechaNacimiento = $_POST['fecha_nacimiento'] ?? '';
 $tipoUsuario = strtolower($_POST['tipo_usuario'] ?? '');
@@ -30,20 +31,30 @@ try {
 
     // Validaciones de existencia
     if ($personaDAO->existeDni($dni)) {
-        $_SESSION['error_msg'] = "El DNI ya está registrado.";
-        header("Location: error.php");
+        $_SESSION['registro_error_type'] = "dni_duplicado";
+        $_SESSION['registro_data'] = $_POST;
+        header("Location: registro.php");
         exit();
     }
 
     if ($personaDAO->existeEmail($email)) {
-        $_SESSION['error_msg'] = "El correo electrónico ya está registrado.";
-        header("Location: error.php");
+        $_SESSION['registro_error_type'] = "email_duplicado";
+        $_SESSION['registro_data'] = $_POST;
+        header("Location: registro.php");
         exit();
     }
 
     if ($personaDAO->existeTelefono($telefono)) {
-        $_SESSION['error_msg'] = "El número de teléfono ya está registrado.";
-        header("Location: error.php");
+        $_SESSION['registro_error_type'] = "telefono_duplicado";
+        $_SESSION['registro_data'] = $_POST;
+        header("Location: registro.php");
+        exit();
+    }
+
+    if ($password !== $confirm_password) {
+        $_SESSION['registro_error_type'] = 'password_mismatch';
+        $_SESSION['registro_data'] = $_POST;
+        header("Location: registro.php");
         exit();
     }
 
@@ -53,8 +64,9 @@ try {
         $esCorreoAdmin = $empresaDAO->existeCorreoAdmin($email);
 
         if (!$esCorreoAdmin) {
-            $_SESSION['error_msg'] = "El correo electrónico no está registrado como correoAdmin de ninguna empresa.";
-            header("Location: error.php");
+            $_SESSION['registro_error_type'] = "no_correo_admin";
+            $_SESSION['registro_data'] = $_POST;
+            header("Location: registro.php");
             exit();
         }
     }
@@ -87,8 +99,5 @@ try {
     if (isset($pdo)) {
         $pdo->rollBack();
     }
-    $_SESSION['error_msg'] = "Error en la transacción: " . $e->getMessage();
-    header("Location: error.php");
-    exit();
 }
 ?>

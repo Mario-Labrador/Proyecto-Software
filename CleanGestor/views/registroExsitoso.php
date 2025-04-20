@@ -43,7 +43,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <span>CLEAN GESTOR</span>
           </a>
 
@@ -53,11 +53,11 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a class="nav-link" href="index.html">INICIO</a></li>
-              <li class="nav-item"><a class="nav-link" href="about.html">SOBRE NOSOTROS</a></li>
-              <li class="nav-item"><a class="nav-link" href="service.html">SERVICIOS</a></li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">CONTACTO</a></li>
-              <li class="nav-item"><a class="nav-link" href="perfil.html">PERFIL</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.php">INICIO</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.php">SOBRE NOSOTROS</a></li>
+              <li class="nav-item"><a class="nav-link" href="service.php">SERVICIOS</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.php">CONTACTO</a></li>
+              <li class="nav-item"><a class="nav-link" href="perfil.php">PERFIL</a></li>
             </ul>
           </div>
         </nav>
@@ -72,7 +72,7 @@
           <h2>¡Registro exitoso!</h2>
           <p>Tu cuenta ha sido creada correctamente.</p>
           <p>Ahora puedes iniciar sesión para comenzar a usar la plataforma.</p>
-          <a href="login.html" class="btn btn-primary">Iniciar Sesión</a>
+          <a href="login.php" class="btn btn-primary">Iniciar Sesión</a>
         </div>
       </div>
     </section>

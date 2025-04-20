@@ -1,3 +1,15 @@
+<?php
+// Agrega esto AL INICIO de tu login.php (antes de <!DOCTYPE>)
+session_start();
+if (isset($_SESSION['dni'])) {
+  header("Location: perfil.php");
+  exit();
+}
+$preservedEmail = $_SESSION['preserved_email'] ?? '';
+$errorType = $_SESSION['error_type'] ?? '';
+unset($_SESSION['error_type'], $_SESSION['preserved_email']);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -42,12 +54,24 @@
         <form action="procesar_login.php" method="POST">
           <div class="form-group">
             <label for="email">Correo Electrónico</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu correo" required>
+            <input type="email" class="form-control <?= $errorType === 'email_no_existe' ? 'is-invalid' : '' ?>"  id="email" name="email" value="<?= htmlspecialchars($preservedEmail) ?>" placeholder="Introduce tu correo" required>
           </div>
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Introduce tu contraseña" required>
+            <input type="password" class="form-control <?= $errorType === 'password_incorrecta' ? 'is-invalid' : '' ?>"  id="password" name="password" placeholder="Introduce tu contraseña" required>
           </div>
+          <?php if ($errorType): ?>
+            <div class="alert alert-danger animate__animated animate__headShake mb-4">
+                <?php 
+                echo match($errorType) {
+                    'email_no_existe' => 'Correo no registrado',
+                    'password_incorrecta' => 'Contraseña incorrecta',
+                    'sin_rol' => 'Usuario sin rol asignado',
+                    default => 'Error desconocido'
+                };
+                ?>
+            </div>
+          <?php endif; ?>
           <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
         </form>
         <p>
@@ -61,7 +85,6 @@
   <script src="js/bootstrap.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-  <!-- GSAP Script for Menu Buttons Animation -->
   <script>
     // Animación para el contenido principal
     gsap.from(".detail-box h1", { duration: 2, x: -100, opacity: 0 });

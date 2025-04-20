@@ -1,3 +1,10 @@
+<?php
+session_start();
+$errorType = $_SESSION['registro_error_type'] ?? '';
+$registroData = $_SESSION['registro_data'] ?? [];
+unset($_SESSION['registro_error_type'], $_SESSION['registro_data']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,35 +49,35 @@
         <form action="procesar_registro.php" method="POST">
           <div class="form-group">
             <label for="DNI/NIF">DNI/NIF</label>
-            <input type="text" class="form-control" id="DNI" name="DNI" placeholder="Introduce tu DNI/NIF" required>
+            <input type="text" class="form-control <?= $errorType === 'dni_duplicado' ? 'is-invalid' : '' ?>" value="<?= htmlspecialchars($registroData['DNI'] ?? '') ?>" id="DNI" name="DNI" placeholder="Introduce tu DNI/NIF" required>
           </div>
           <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduce tu nombre" required>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="<?= htmlspecialchars($registroData['nombre'] ?? '') ?>" placeholder="Introduce tu nombre" required>
           </div>
           <div class="form-group">
             <label for="apellidos">Apellidos</label>
-            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Introduce tus apellidos" required>
+            <input type="text" class="form-control" id="apellidos" name="apellidos" value="<?= htmlspecialchars($registroData['apellidos'] ?? '') ?>" placeholder="Introduce tus apellidos" required>
           </div>
           <div class="form-group">
             <label for="email">Correo Electrónico</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu correo" required>
+            <input type="email" class="form-control <?= $errorType === 'email_duplicado' || $errorType === 'no_correo_admin' ? 'is-invalid' : '' ?>" value="<?= htmlspecialchars($registroData['email'] ?? '') ?>" id="email" name="email" placeholder="Introduce tu correo" required>
           </div>
           <div class="form-group">
             <label for="telefono">Número de teléfono</label>
-            <input type="telefono" class="form-control" id="telefono" name="telefono" placeholder="Introduce tu número de teléfono" required>
+            <input type="telefono" class="form-control <?= $errorType === 'telefono_duplicado' ? 'is-invalid' : '' ?>" value="<?= htmlspecialchars($registroData['telefono'] ?? '') ?>" id="telefono" name="telefono" placeholder="Introduce tu número de teléfono" required>
           </div>
           <div class="form-group">
             <label for="fecha-nacimiento">Fecha de nacimiento</label>
-            <input type="date" class="form-control" id="fecha-nacimiento" name="fecha-nacimiento" required>
+            <input type="date" class="form-control" id="fecha-nacimiento" value="<?= htmlspecialchars($registroData['fecha-nacimiento'] ?? '') ?>" name="fecha-nacimiento" required>
           </div>
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Introduce tu contraseña" required>
+            <input type="password" class="form-control <?= $errorType === 'password_mismatch' ? 'is-invalid' : '' ?>"  id="password" name="password" placeholder="Introduce tu contraseña" required>
           </div>
           <div class="form-group">
             <label for="confirm_password">Confirmar Contraseña</label>
-            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirma tu contraseña" required>
+            <input type="password" class="form-control <?= $errorType === 'password_mismatch' ? 'is-invalid' : '' ?>"  id="confirm_password" name="confirm_password" placeholder="Confirma tu contraseña" required>
           </div>
           <div class="form-group">
             <label for="tipo_usuario">Tipo de usuario</label>
@@ -88,6 +95,20 @@
               <option value="empleado">Empleado normal</option>
             </select>
           </div>
+          <?php if ($errorType): ?>
+            <div class="alert alert-danger animate__animated animate__headShake mb-4">
+                <?php 
+                echo match($errorType) {
+                    'dni_duplicado' => 'El DNI ya está registrado',
+                    'email_duplicado' => 'El correo electrónico ya está registrado',
+                    'telefono_duplicado' => 'El número de teléfono ya está registrado',
+                    'password_mismatch' => 'Las contraseñas no coinciden',
+                    'no_correo_admin' => 'Este correo no está registrado como administrador de empresa',
+                    default => 'Error en el registro'
+                };
+                ?>
+            </div>
+          <?php endif; ?>
           <button type="submit" class="btn btn-primary">Registrarse</button>
         </form>
         <p>

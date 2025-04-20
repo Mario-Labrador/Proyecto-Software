@@ -15,19 +15,19 @@ try {
     $persona = $personaDAO->getPersonaByEmail($email);
 
     if (!$persona) {
-        $_SESSION['error_msg'] = "No se encontró un usuario con ese correo.";
-        header("Location: error.php");
+        $_SESSION['error_type'] = 'email_no_existe';
+        unset($_SESSION['preserved_email']);
+        header("Location: login.php");
         exit();
     }
 
-    // Verificar contraseña (asumiendo que está hasheada con password_hash)
     if (!password_verify($password, $persona->getContrasenyaPersona())) {
-        $_SESSION['error_msg'] = "Contraseña incorrecta.";
-        header("Location: error.php");
+        $_SESSION['error_type'] = 'password_incorrecta';
+        $_SESSION['preserved_email'] = $email;
+        header("Location: login.php");
         exit();
     }   
 
-    // Determinar el tipo de usuario (cliente o trabajador)
     $clienteDAO = new ClienteDAO();
     $trabajadorDAO = new TrabajadorDAO();
 
@@ -41,26 +41,25 @@ try {
         $trabajador = $trabajadorDAO->getTrabajadorByDni($persona->getDni());
         $rol = $trabajador->getRol();
     } else {
-        $_SESSION['error_msg'] = "Este usuario no tiene un rol asignado.";
-        header("Location: error.php");
+        $_SESSION['error_type'] = 'sin_rol';
+        header("Location: login.php");
         exit();
     }
 
-    // Guardar info en sesión
+    // Guardar datos de sesión
     $_SESSION['dni'] = $persona->getDni();
     $_SESSION['nombre'] = $persona->getNombrePersona();
     $_SESSION['email'] = $persona->getEmailPersona();
     $_SESSION['tipo_usuario'] = $tipoUsuario;
     $_SESSION['rol'] = $rol;
-    var_dump($persona->getFotoPerfil());  // Verifica qué valor tiene fotoPerfil antes de guardarlo en la sesión
-    $_SESSION['foto_perfil'] = $persona->getFotoPerfil();
+    $_SESSION['foto_perfil'] = $persona->getFotoPerfil() ?? '../assets/uploads/default.png';
 
-    // Redirigir al perfil
     header("Location: perfil.php");
     exit();
 
 } catch (Exception $e) {
-    $_SESSION['error_msg'] = "Error al iniciar sesión: " . $e->getMessage();
-    header("Location: error.php");
+    $_SESSION['error_type'] = 'error_general';
+    $_SESSION['error_message'] = $e->getMessage();
+    header("Location: login.php");
     exit();
 }
