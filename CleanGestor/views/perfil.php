@@ -3,22 +3,20 @@ session_start();
 
 // Verificar si la sesión está activa
 if (!isset($_SESSION['dni'])) {
-    exit();
+  header("Location: login.php");
+  exit();
 }
 
 // Obtener datos de la sesión
-$dni = $_SESSION['dni'];
-$nombre = $_SESSION['nombre'];
-$email = $_SESSION['email'];
-$tipo = $_SESSION['tipo_usuario'];
+$dni = $_SESSION['dni'] ?? '';
+$nombre = $_SESSION['nombre'] ?? '';
+$apellidos = $_SESSION['apellidos'] ?? '';
+$email = $_SESSION['email'] ?? '';
+$telefono = $_SESSION['telefono'] ?? '';
+$fechaNacimiento = $_SESSION['fechaNacimiento'] ?? '';
+$tipo = $_SESSION['tipo_usuario'] ?? '';
 $rol = $_SESSION['rol'] ?? '';
 $foto_perfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de perfil desde la sesión
-
-// Datos adicionales
-$telefono = $_SESSION['telefono'] ?? 'No disponible';
-$direccion = $_SESSION['direccion'] ?? 'No disponible';
-$fechaRegistro = $_SESSION['fecha_registro'] ?? 'No disponible';
-$sobreMi = $_SESSION['sobre_mi'] ?? 'No disponible';
 ?>
 
 <!DOCTYPE html>
@@ -62,10 +60,10 @@ $sobreMi = $_SESSION['sobre_mi'] ?? 'No disponible';
                  alt="Foto de perfil" 
                  class="profile-image mb-2" 
                  style="max-height: 200px; border-radius: 50%;">
-            <h2 class="mt-3"><?php echo htmlspecialchars($nombre); ?></h2>
+            <h2 class="mt-3"><?php echo htmlspecialchars($nombre . ' ' . $apellidos); ?></h2>
             <p class="text-muted mb-2"><?php echo ucfirst($tipo); ?> <?php echo $rol ? "($rol)" : ''; ?></p>
             <div class="profile-actions">
-              <a href="editar-perfil.php" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar Perfil</a>
+              <a href="editar_perfil.php" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar Perfil</a>
               <a href="logout.php" class="btn btn-danger"><i class="fa fa-sign-out"></i> Cerrar Sesión</a>
             </div>
           </div>
@@ -74,40 +72,12 @@ $sobreMi = $_SESSION['sobre_mi'] ?? 'No disponible';
             <div class="row">
               <div class="col-md-6"><label>Correo electrónico</label><p><?php echo htmlspecialchars($email); ?></p></div>
               <div class="col-md-6"><label>Teléfono</label><p><?php echo htmlspecialchars($telefono); ?></p></div>
-              <div class="col-md-6"><label>Dirección</label><p><?php echo htmlspecialchars($direccion); ?></p></div>
-              <div class="col-md-6"><label>Miembro desde</label><p><?php echo htmlspecialchars($fechaRegistro); ?></p></div>
+              <div class="col-md-6"><label>DNI/NIF</label><p><?php echo htmlspecialchars($dni); ?></p></div>
+              <div class="col-md-6"><label>Fecha de nacimiento</label><p><?php echo htmlspecialchars(date('d/m/Y', strtotime($fechaNacimiento))); ?></p></div>
+              
             </div>
           </div>
-          <hr>
-          <div class="mt-3">
-            <h5>Sobre mí</h5>
-            <p><?php echo htmlspecialchars($sobreMi); ?></p>
-          </div>
-
-          <!-- Formulario para subir la foto de perfil -->
-          <div class="text-center mt-4">
-              <h3>Cambiar foto de perfil</h3>
-              <form action="subir_foto.php" method="POST" enctype="multipart/form-data">
-                  <div class="form-group">
-                      <input type="file" name="foto_perfil" class="form-control" accept="image/*" required>
-                  </div>
-                  <button type="submit" class="btn btn-success">Subir Foto</button>
-              </form>
-          </div>
-
-          <!-- Mostrar mensaje de éxito o error -->
-          <?php if (isset($_SESSION['success_foto'])): ?>
-              <div class="alert alert-success mt-3">
-                  <?php echo $_SESSION['success_foto']; unset($_SESSION['success_foto']); ?>
-              </div>
-          <?php endif; ?>
-
-          <?php if (isset($_SESSION['error_foto'])): ?>
-              <div class="alert alert-danger mt-3">
-                  <?php echo $_SESSION['error_foto']; unset($_SESSION['error_foto']); ?>
-              </div>
-          <?php endif; ?>
-          
+          <hr>    
         </div>
       </div>
     </section>

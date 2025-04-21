@@ -19,7 +19,8 @@ $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 $confirm_password = $_POST['confirm_password'] ?? '';
 $telefono = $_POST['telefono'] ?? '';
-$fechaNacimiento = $_POST['fecha_nacimiento'] ?? '';
+$fechaInput = $_POST['fecha-nacimiento'];
+$fechaNacimiento = date('Y-m-d', DateTime::createFromFormat('d/m/Y', $fechaInput) ? strtotime(str_replace('/', '-', $fechaInput)) : strtotime($fechaInput));
 $tipoUsuario = strtolower($_POST['tipo_usuario'] ?? '');
 $rolTrabajador = $_POST['rol_trabajador'] ?? null;
 
@@ -92,12 +93,13 @@ try {
     }
 
     $pdo->commit();
-    header("Location: registroExsitoso.php"); // Redirige si todo fue bien
+    header("Location: registro_exitoso.php"); // Redirige si todo fue bien
     exit();
 
 } catch (Exception $e) {
     if (isset($pdo)) {
         $pdo->rollBack();
     }
+    die("Error en el registro: " . $e->getMessage());
 }
 ?>

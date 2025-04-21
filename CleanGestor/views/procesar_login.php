@@ -50,6 +50,8 @@ try {
     $_SESSION['dni'] = $persona->getDni();
     $_SESSION['nombre'] = $persona->getNombrePersona();
     $_SESSION['email'] = $persona->getEmailPersona();
+    $_SESSION['telefono'] = $persona->getTelefono();
+    $_SESSION['fechaNacimiento'] = $persona->getFechaNacimiento();
     $_SESSION['tipo_usuario'] = $tipoUsuario;
     $_SESSION['rol'] = $rol;
     $_SESSION['foto_perfil'] = $persona->getFotoPerfil() ?? '../assets/uploads/default.png';

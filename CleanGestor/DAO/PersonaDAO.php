@@ -115,5 +115,44 @@ class PersonaDAO {
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }
+
+    public function updatePersona(PersonaVO $persona) {
+        $pdo = Database::connect();
+    
+        $sql = "UPDATE persona SET 
+                    nombrePersona = :nombrePersona,
+                    apellidosPersona = :apellidosPersona,
+                    emailPersona = :emailPersona,
+                    contrasenyaPersona = :contrasenyaPersona,
+                    telefonoPersona = :telefonoPersona,
+                    fechaNacimiento = :fechaNacimiento,
+                    foto_perfil = :foto_perfil
+                WHERE dni = :dni";
+        
+        // Guardar resultados en variables temporales
+        $nombre = $persona->getNombrePersona();
+        $apellidos = $persona->getApellidosPersona();
+        $email = $persona->getEmailPersona();
+        $contrasenya = $persona->getContrasenyaPersona();
+        $telefono = $persona->getTelefono();
+        $fechaNacimiento = $persona->getFechaNacimiento();
+        $fotoPerfil = $persona->getFotoPerfil();
+        $dni = $persona->getDni();
+        
+        $stmt = $pdo->prepare($sql);
+        
+        // Ahora usa las variables temporales
+        $stmt->bindParam(':nombrePersona', $nombre);
+        $stmt->bindParam(':apellidosPersona', $apellidos);
+        $stmt->bindParam(':emailPersona', $email);
+        $stmt->bindParam(':contrasenyaPersona', $contrasenya);
+        $stmt->bindParam(':telefonoPersona', $telefono);
+        $stmt->bindParam(':fechaNacimiento', $fechaNacimiento);
+        $stmt->bindParam(':foto_perfil', $fotoPerfil);
+        $stmt->bindParam(':dni', $dni);
+        
+        $stmt->execute();
+    }
+    
 }
 ?>

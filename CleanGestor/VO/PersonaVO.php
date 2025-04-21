@@ -34,8 +34,8 @@ class PersonaVO {
     }
 
     public function setFotoPerfil($foto_perfil) {
-        $this->fotoPerfil = $foto_perfil;
-    }
+        $this->foto_perfil = $foto_perfil;
+    }    
 
     // Métodos getter y setter
     public function getDni() {
@@ -82,7 +82,7 @@ class PersonaVO {
         return $this->telefonoPersona;
     }
 
-    public function setTelefonoPersona($telefonoPersona) {
+    public function setTelefono($telefonoPersona) {
         $this->telefonoPersona = $telefonoPersona;
     }
 
