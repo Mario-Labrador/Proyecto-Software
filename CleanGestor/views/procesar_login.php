@@ -49,6 +49,7 @@ try {
     // Guardar datos de sesión
     $_SESSION['dni'] = $persona->getDni();
     $_SESSION['nombre'] = $persona->getNombrePersona();
+    $_SESSION['apellidos'] = $persona->getApellidosPersona();
     $_SESSION['email'] = $persona->getEmailPersona();
     $_SESSION['telefono'] = $persona->getTelefono();
     $_SESSION['fechaNacimiento'] = $persona->getFechaNacimiento();
