@@ -30,6 +30,9 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
                         </summary>
                         <div class="navbar-profile-settings">
                             <div class="d-flex flex-column align-items-center gap-2">
+                                <div class="text-black mb-2">
+                                    <i class="fa fa-user me-2"></i>Hola, <?php echo $_SESSION['nombre'] ?? 'Usuario'; ?>
+                                </div>
                                 <a href="perfil.php" class="btn btn-primary w-100 mb-2">
                                     <i class="fa fa-pencil"></i> Mi Perfil
                                 </a>
