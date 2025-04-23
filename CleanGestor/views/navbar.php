@@ -32,7 +32,14 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
                                 <div class="text-black mb-2">
                                     <i class="fa fa-user me-2"></i>Hola, <?php echo $_SESSION['nombre'] ?? 'Usuario'; ?>
                                 </div>
-                                <a href="perfil.php" class="btn btn-primary w-100 mb-2">
+                                <?php
+                                  $tipoUsuario = $_SESSION['tipo_usuario'] ?? '';
+                                  $perfilUrl = 'perfil.php'; // Default
+                                  if ($tipoUsuario === 'trabajador') {
+                                      $perfilUrl = 'perfilTrabajador.php';
+                                  }
+                                ?>
+                                <a href="<?php echo $perfilUrl; ?>" class="btn btn-primary w-100 mb-2">
                                     <i class="fa fa-pencil"></i> Mi Perfil
                                 </a>
                                 <a href="logout.php" class="btn btn-danger w-100">

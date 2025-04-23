@@ -105,15 +105,17 @@ $empresasDisponibles = !$idEmpresa ? $empresaDAO->getAllEmpresas() : [];
                   <h4>Empresas disponibles:</h4>
                   <div class="row">
                     <?php foreach ($empresasDisponibles as $empresa): ?>
-                      <div class="col-md-6">
-                        <div class="card service-card h-100" style="background:#0275d8; color:#fff; border:none;">
-                          <div class="card-body">
+                        <div class="col-md-6">
+                            <a href="perfilEmpresa.php?id=<?php echo htmlspecialchars($empresa['idEmpresa']); ?>" style="text-decoration: none;">
+                            <div class="card service-card h-100" style="background:#0275d8; color:#fff; border:none; cursor:pointer;">
+                            <div class="card-body">
                             <h5 class="card-title fw-bold"><?php echo htmlspecialchars($empresa['nombreEmpresa']); ?></h5>
                             <p class="card-text">Teléfono: <?php echo htmlspecialchars($empresa['telefonoEmpresa']); ?></p>
                             <p class="card-text">Dirección: <?php echo htmlspecialchars($empresa['direccion']); ?></p>
+                           </div>
                           </div>
-                        </div>
-                      </div>
+                         </a>
+                       </div>
                     <?php endforeach; ?>
                   </div>
                 <?php endif; ?>
