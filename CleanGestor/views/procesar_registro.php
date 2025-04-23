@@ -61,7 +61,7 @@ try {
     }
 
     // Validar correo si es administrador de empresa
-    if ($tipoUsuario === 'trabajador' && $rolTrabajador === 'administrador de empresa') {
+    if ($tipoUsuario === 'trabajador' && $rolTrabajador === 'administrador') {
         $esCorreoAdmin = $empresaDAO->existeCorreoAdmin($email);
 
         if (!$esCorreoAdmin) {

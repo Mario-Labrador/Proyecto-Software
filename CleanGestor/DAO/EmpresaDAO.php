@@ -1,6 +1,7 @@
 <?php
 include_once '../config/db.php';
 include_once '../VO/EmpresaVO.php';
+include_once '../VO/ContratoVO.php';  // Asegúrate de incluir el VO de Contrato
 
 class EmpresaDAO {
 
@@ -58,13 +59,15 @@ class EmpresaDAO {
         return $count > 0;
     }
 
-    
+    // Obtener todas las empresas
     public function getAllEmpresas() {
-    $pdo = Database::connect();
-    $sql = "SELECT idEmpresa, nombreEmpresa, telefonoEmpresa, direccion FROM empresa"; // Cambiado 'id', 'nombre', etc., por los nombres correctos
-    $stmt = $pdo->query($sql);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve un array con todas las empresas
+        $pdo = Database::connect();
+        $sql = "SELECT idEmpresa, nombreEmpresa, telefonoEmpresa, direccion FROM empresa";
+        $stmt = $pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);  // Devuelve un array con todas las empresas
     }
+
+    // Obtener una empresa por el correo del administrador
     public function getEmpresaByAdministradorEmail($email) {
         $pdo = Database::connect();  // Asegúrate de establecer la conexión aquí
         $sql = "SELECT * FROM empresa WHERE correoDirector = ?";
@@ -84,6 +87,8 @@ class EmpresaDAO {
     
         return null;
     }
+
+    // Actualizar la empresa asignada a un trabajador
     public function actualizarEmpresaTrabajador($dni, $idEmpresa) {
         $pdo = Database::connect();
         $sql = "UPDATE trabajador SET idEmpresa = :idEmpresa WHERE dni = :dni";
@@ -91,6 +96,32 @@ class EmpresaDAO {
         $stmt->bindParam(':idEmpresa', $idEmpresa);
         $stmt->bindParam(':dni', $dni);
         $stmt->execute();
+    }
+
+    // Obtener el historial de empresas donde ha trabajado un trabajador
+    public function obtenerHistorialEmpresas($dni) {
+        $pdo = Database::connect();
+        $sql = "SELECT e.nombreEmpresa, c.fecha 
+                FROM contrato c 
+                JOIN empresa e ON c.idEmpresa = e.idEmpresa 
+                WHERE c.dni = :dni";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+        $stmt->execute();
+
+        // Obtener los resultados como un array asociativo
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Crear un array para almacenar objetos ContratoVO
+        $historialEmpresas = [];
+        foreach ($result as $row) {
+            // Crear un objeto ContratoVO para cada fila y agregarlo al array
+            $historialEmpresas[] = new ContratoVO($row['nombreEmpresa'], $row['fecha']);
+        }
+
+        // Retornar el historial de empresas como un array de objetos ContratoVO
+        return $historialEmpresas;
     }
 }
 ?>

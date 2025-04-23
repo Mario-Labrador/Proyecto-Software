@@ -112,12 +112,15 @@ $solicitudes = $idEmpresa ? $solicitudDAO->obtenerSolicitudesPorEmpresa($idEmpre
                     <?php foreach ($solicitudes as $solicitud): ?>
                       <div class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                          <strong><?php echo htmlspecialchars($solicitud['nombre_trabajador']); ?></strong>
-                          <p class="mb-0"><?php echo htmlspecialchars($solicitud['email_trabajador']); ?></p>
+                          <!-- Hacer clickeable el DNI y redirigir a perfilTrabajadorLectura.php -->
+                          <a href="perfilTrabajadorLectura.php?dni=<?php echo htmlspecialchars($solicitud->getDni()); ?>" class="text-decoration-none">
+                            <strong><?php echo htmlspecialchars($solicitud->getDni()); ?></strong>
+                          </a>
+                          <p class="mb-0"><?php echo htmlspecialchars($solicitud->getEstado()); ?></p> <!-- Acceder usando getter -->
                         </div>
                         <div>
-                          <a href="aceptar_solicitud.php?id=<?php echo $solicitud['idSolicitud']; ?>&accion=aceptar" class="btn btn-success btn-sm">Aceptar</a>
-                          <a href="rechazar_solicitud.php?id=<?php echo $solicitud['idSolicitud']; ?>" class="btn btn-danger btn-sm">Rechazar</a>
+                          <a href="aceptar_solicitud.php?id=<?php echo $solicitud->getId(); ?>&accion=aceptar" class="btn btn-success btn-sm">Aceptar</a>
+                          <a href="rechazar_solicitud.php?id=<?php echo $solicitud->getId(); ?>" class="btn btn-danger btn-sm">Rechazar</a>
                         </div>
                       </div>
                     <?php endforeach; ?>
@@ -134,3 +137,4 @@ $solicitudes = $idEmpresa ? $solicitudDAO->obtenerSolicitudesPorEmpresa($idEmpre
   </div>
 </body>
 </html>
+<?php

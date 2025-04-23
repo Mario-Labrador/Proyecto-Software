@@ -56,5 +56,22 @@ class SolicitudDAO {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$nuevoEstado, $id]);
     }
+    public function getSolicitudById($id) {
+        $sql = "SELECT * FROM solicitudempleo WHERE idSolicitud = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($fila) {
+            return new SolicitudVO(
+                $fila['idSolicitud'],
+                $fila['dniTrabajador'],
+                $fila['idEmpresa'],
+                $fila['fechaSolicitud'],
+                $fila['estado']
+            );
+        }
+        return null;  // Si no se encuentra la solicitud
+    }
 }
 ?>
