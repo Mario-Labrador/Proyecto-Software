@@ -140,7 +140,7 @@ a:focus {
 }
 
 .custom_nav-container .navbar-nav .nav-item .nav-link {
-  padding: 3px 15px;
+  padding: 9px 15px;
   margin: 10px 15px;
   color: #ffffff;
   text-align: center;
@@ -1198,4 +1198,17 @@ a:focus {
   .service-card {
     margin-bottom: 24px !important;
   }
+}
+
+.navbar-profile-settings {
+  position: absolute;
+  top: 70px; /* Ajusta según la altura de tu navbar */
+  right: 10px; /* Separación del borde derecho */
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  min-width: 180px;
+  z-index: 10;
+  text-align: center;
+  padding: 10px;
 }
