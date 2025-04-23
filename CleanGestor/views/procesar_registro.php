@@ -29,6 +29,7 @@ try {
     $pdo->beginTransaction();
 
     $personaDAO = new PersonaDAO();
+    $empresaDAO = new EmpresaDAO(); // Instanciar aquí para usar luego si es necesario
 
     // Validaciones de existencia
     if ($personaDAO->existeDni($dni)) {
@@ -61,7 +62,6 @@ try {
 
     // Validar correo si es administrador de empresa
     if ($tipoUsuario === 'trabajador' && $rolTrabajador === 'administrador de empresa') {
-        $empresaDAO = new EmpresaDAO();
         $esCorreoAdmin = $empresaDAO->existeCorreoAdmin($email);
 
         if (!$esCorreoAdmin) {
@@ -90,10 +90,20 @@ try {
         $trabajadorVO = new TrabajadorVO($rolTrabajador, null, $dni, null);
         $trabajadorDAO = new TrabajadorDAO();
         $trabajadorDAO->insertTrabajador($trabajadorVO);
+
+        // Si el trabajador es administrador, asociarlo a la empresa correspondiente
+        if ($rolTrabajador === 'administrador') {
+            $empresa = $empresaDAO->getEmpresaByAdministradorEmail($email);
+            if ($empresa) {
+                $trabajadorDAO->actualizarEmpresaTrabajador($dni, $empresa->getIdEmpresa());
+            } else {
+                throw new Exception("No se encontró la empresa asociada al correo del administrador.");
+            }
+        }
     }
 
     $pdo->commit();
-    header("Location: registro_exitoso.php"); // Redirige si todo fue bien
+    header("Location: registro_exitoso.php");
     exit();
 
 } catch (Exception $e) {

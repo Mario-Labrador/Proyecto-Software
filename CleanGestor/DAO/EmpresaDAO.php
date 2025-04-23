@@ -65,5 +65,32 @@ class EmpresaDAO {
     $stmt = $pdo->query($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve un array con todas las empresas
     }
+    public function getEmpresaByAdministradorEmail($email) {
+        $pdo = Database::connect();  // Asegúrate de establecer la conexión aquí
+        $sql = "SELECT * FROM empresa WHERE correoDirector = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$email]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($row) {
+            return new EmpresaVO(
+                $row['idEmpresa'], 
+                $row['nombreEmpresa'], 
+                $row['telefonoEmpresa'], 
+                $row['direccion'], 
+                $row['correoDirector']
+            );
+        }
+    
+        return null;
+    }
+    public function actualizarEmpresaTrabajador($dni, $idEmpresa) {
+        $pdo = Database::connect();
+        $sql = "UPDATE trabajador SET idEmpresa = :idEmpresa WHERE dni = :dni";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idEmpresa', $idEmpresa);
+        $stmt->bindParam(':dni', $dni);
+        $stmt->execute();
+    }
 }
 ?>

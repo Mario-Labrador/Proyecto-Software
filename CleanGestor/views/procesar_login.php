@@ -60,10 +60,16 @@ try {
 
     // Redirigir según el tipo de usuario
     if ($tipoUsuario === 'trabajador') {
-        $_SESSION['idEmpresa'] = $idEmpresa;  
-        header("Location: perfilTrabajador.php");
+        $_SESSION['idEmpresa'] = $idEmpresa;
+
+        // Verificar si el trabajador es administrador
+        if ($rol === 'administrador') {
+            header("Location: perfilAdministrador.php");  // Redirigir a perfil administrador
+        } else {
+            header("Location: perfilTrabajador.php");  // Redirigir a perfil trabajador
+        }
     } else {
-        header("Location: perfil.php");
+        header("Location: perfil.php");  // Redirigir a perfil de cliente
     }
     exit();
 

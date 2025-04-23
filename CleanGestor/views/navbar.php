@@ -36,7 +36,12 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
                                   $tipoUsuario = $_SESSION['tipo_usuario'] ?? '';
                                   $perfilUrl = 'perfil.php'; // Default
                                   if ($tipoUsuario === 'trabajador') {
-                                      $perfilUrl = 'perfilTrabajador.php';
+                                      $rol = $_SESSION['rol'] ?? '';
+                                      if ($rol === 'administrador') {
+                                          $perfilUrl = 'perfilAdministrador.php';  // Redirigir al perfil del administrador
+                                      } else {
+                                          $perfilUrl = 'perfilTrabajador.php';  // Redirigir al perfil del trabajador
+                                      }
                                   }
                                 ?>
                                 <a href="<?php echo $perfilUrl; ?>" class="btn btn-primary w-100 mb-2">

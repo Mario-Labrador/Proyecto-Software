@@ -72,5 +72,14 @@ class TrabajadorDAO {
         $count = $stmt->fetchColumn();
         return $count > 0; // Retorna true si existe al menos un trabajador con ese DNI
     }
+    public function actualizarEmpresaTrabajador($dni, $idEmpresa) {
+        $pdo = Database::connect();
+        $sql = "UPDATE trabajador SET idEmpresa = :idEmpresa WHERE dni = :dni";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':dni', $dni);
+        $stmt->bindParam(':idEmpresa', $idEmpresa);
+        $stmt->execute();
+    }
 }
+
 ?>
