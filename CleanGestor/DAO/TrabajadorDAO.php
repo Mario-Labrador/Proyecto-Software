@@ -47,6 +47,8 @@ class TrabajadorDAO {
 
         $stmt->execute();
     }
+
+    // Verificar si un correo pertenece a un administrador
     public function verificarCorreoAdmin($correo) {
         $pdo = Database::connect();
         $sql = "SELECT * FROM empresa WHERE correoAdmin = :correo";
@@ -57,6 +59,18 @@ class TrabajadorDAO {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $result ? true : false; // Retorna true si existe un admin con ese correo, de lo contrario false
+    }
+
+    // Verificar si un trabajador existe por su DNI
+    public function esTrabajador($dni) {
+        $pdo = Database::connect();
+        $sql = "SELECT COUNT(*) FROM trabajador WHERE dni = :dni";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':dni', $dni);
+        $stmt->execute();
+        
+        $count = $stmt->fetchColumn();
+        return $count > 0; // Retorna true si existe al menos un trabajador con ese DNI
     }
 }
 ?>

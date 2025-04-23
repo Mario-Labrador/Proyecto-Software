@@ -52,11 +52,16 @@
               En CLEAN GESTOR, nos especializamos en conectar a clientes con servicios de limpieza de alta calidad. Nuestro objetivo es simplificar el proceso de encontrar, contratar y gestionar servicios de limpieza, ofreciendo una plataforma confiable y fácil de usar.
             </p>
             <p>
-              Ademas de lo nombrado anteriormente, nuestra página le ofrece a las empresas el servicio de poder gestionar su empleados y todo lo relacionado con su empresa.
+              Además de lo nombrado anteriormente, nuestra página le ofrece a las empresas el servicio de poder gestionar sus empleados y todo lo relacionado con su empresa. 
             </p>
-            <a href="service.html">
-              Descubre nuestros servicios
+            <?php if (!isset($_SESSION['dni'])): ?>
+            <p>
+              Regístrate o Identifícate para poder disfrutar de todos los servicios que ofrecemos.
+            </p>
+            <a href="login.html">
+              Identifícate/Regístrate  
             </a>
+            <?php endif; ?>
           </div>
         </div>
         <div class="col-md-6">

@@ -40,6 +40,7 @@ try {
         $tipoUsuario = 'trabajador';
         $trabajador = $trabajadorDAO->getTrabajadorByDni($persona->getDni());
         $rol = $trabajador->getRol();
+        $idEmpresa = $trabajador->getIdEmpresa();
     } else {
         $_SESSION['error_type'] = 'sin_rol';
         header("Location: login.php");
@@ -57,10 +58,16 @@ try {
     $_SESSION['rol'] = $rol;
     $_SESSION['foto_perfil'] = $persona->getFotoPerfil() ?? '../assets/uploads/default.png';
 
-    header("Location: perfil.php");
+    // Redirigir según el tipo de usuario
+    if ($tipoUsuario === 'trabajador') {
+        $_SESSION['idEmpresa'] = $idEmpresa;  
+        header("Location: perfilTrabajador.php");
+    } else {
+        header("Location: perfil.php");
+    }
     exit();
 
-} catch (Exception $e) {
+} catch (Exception $e) {    
     $_SESSION['error_type'] = 'error_general';
     $_SESSION['error_message'] = $e->getMessage();
     header("Location: login.php");

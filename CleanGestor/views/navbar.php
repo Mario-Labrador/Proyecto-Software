@@ -13,9 +13,8 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a class="nav-link" href="index.php">INICIO</a></li>
-            <li class="nav-item"><a class="nav-link" href="about.php">SOBRE NOSOTROS</a></li>
+            <li class="nav-item"><a class="nav-link" href="informate.php">SOBRE NOSOTROS</a></li>
             <li class="nav-item"><a class="nav-link" href="servicios.php">SERVICIOS</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.php">CONTACTO</a></li>
             <?php if (isset($_SESSION['dni'])): ?>
                 <li class="nav-item" style="display: flex; align-items: center;">
                     <details style="position: relative;">

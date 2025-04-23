@@ -15,4 +15,5 @@ echo "<strong>Email:</strong> " . htmlspecialchars($_SESSION['email']) . "<br>";
 echo "<strong>Tipo de usuario:</strong> " . htmlspecialchars($_SESSION['tipo_usuario']) . "<br>";
 echo "<strong>Rol:</strong> " . htmlspecialchars($_SESSION['rol']) . "<br>";
 echo "<strong>Foto de perfil:</strong> " . (empty($_SESSION['foto_perfil']) ? 'No tiene foto de perfil' : $_SESSION['foto_perfil']) . "<br>";
+echo "<strong>Id de la empresa:</strong> " . (isset($_SESSION['idEmpresa']) ? htmlspecialchars($_SESSION['idEmpresa']) : 'No asignado') . "<br>";
 ?>

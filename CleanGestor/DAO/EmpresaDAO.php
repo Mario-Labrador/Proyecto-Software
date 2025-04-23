@@ -57,5 +57,13 @@ class EmpresaDAO {
         $count = $stmt->fetchColumn();
         return $count > 0;
     }
+
+    
+    public function getAllEmpresas() {
+    $pdo = Database::connect();
+    $sql = "SELECT idEmpresa, nombreEmpresa, telefonoEmpresa, direccion FROM empresa"; // Cambiado 'id', 'nombre', etc., por los nombres correctos
+    $stmt = $pdo->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve un array con todas las empresas
+    }
 }
 ?>
