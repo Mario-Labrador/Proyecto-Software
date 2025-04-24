@@ -73,5 +73,12 @@ class SolicitudDAO {
         }
         return null;  // Si no se encuentra la solicitud
     }
+    public function eliminarSolicitud($idSolicitud) {
+        $sql = "DELETE FROM solicitudempleo WHERE idSolicitud = :idSolicitud";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':idSolicitud', $idSolicitud);
+        
+        return $stmt->execute();
+    }
 }
 ?>

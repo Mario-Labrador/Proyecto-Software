@@ -12,8 +12,8 @@ $idSolicitud = $_GET['id'] ?? null;
 if ($idSolicitud) {
     $solicitudDAO = new SolicitudDAO();
 
-    // Cambiar el estado de la solicitud a "rechazada"
-    $solicitudDAO->actualizarEstado($idSolicitud, 'rechazada');
+    // Eliminar la solicitud de la base de datos
+    $solicitudDAO->eliminarSolicitud($idSolicitud);
 
     // Redirigir a la lista de solicitudes
     header("Location: perfil.php");

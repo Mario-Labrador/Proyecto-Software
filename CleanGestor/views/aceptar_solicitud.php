@@ -1,7 +1,8 @@
 <?php
 session_start();
 include_once '../DAO/SolicitudDAO.php';
-include_once '../DAO/EmpresaDAO.php';
+include_once '../DAO/EmpresaDAO.php';  // Asegúrate de incluir el DAO de Empresa
+include_once '../DAO/TrabajadorDAO.php'; // Incluir el DAO de Trabajador
 
 if (!isset($_SESSION['dni'])) {
     header("Location: login.php");
@@ -14,20 +15,25 @@ $accion = $_GET['accion'] ?? '';
 if ($idSolicitud && $accion === 'aceptar') {
     $solicitudDAO = new SolicitudDAO();
     $empresaDAO = new EmpresaDAO();
+    $trabajadorDAO = new TrabajadorDAO(); // Instanciamos el DAO de Trabajador
 
     // Obtener la solicitud por ID
     $solicitud = $solicitudDAO->getSolicitudById($idSolicitud);
 
     if ($solicitud) {
-        // Cambiar el estado de la solicitud a "aceptada"
-        $solicitudDAO->actualizarEstado($idSolicitud, 'aceptada');
+        // Eliminar la solicitud de la base de datos
+        $solicitudDAO->eliminarSolicitud($idSolicitud);
 
-        // Asignar la empresa al trabajador (si se necesita hacer alguna acción adicional en este sentido)
-        // Este paso dependerá de la lógica de negocio que tengas (por ejemplo, si se requiere agregar el trabajador a la empresa)
+        // Asignar el trabajador a la empresa
+        $dniTrabajador = $solicitud->getDni();// DNI del trabajador
+        $idEmpresa = $solicitud->getIdEmpresa(); // ID de la empresa que acepta la solicitud
 
-        // Redirigir a la lista de solicitudes
+        // Llamamos al método de TrabajadorDAO para actualizar el idEmpresa del trabajador
+        $trabajadorDAO->actualizarEmpresaTrabajador($dniTrabajador, $idEmpresa);
+
+        // Redirigir a la lista de solicitudes o a donde desees
         header("Location: perfil.php");
-        exit();  // Importante para evitar que el código siga ejecutándose
+        exit();  // Aseguramos que el código no siga ejecutándose después de la redirección
     }
 }
 ?>
