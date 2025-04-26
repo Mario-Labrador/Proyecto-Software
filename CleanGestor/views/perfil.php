@@ -28,7 +28,6 @@ $foto_perfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de 
   <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
   <title>Perfil | CLEAN GESTOR</title>
   
-  <!-- Estilos CSS -->
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css?v=<?php echo time(); ?>" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link href="../assets/css/style.css?v=<?php echo time(); ?>" rel="stylesheet" />

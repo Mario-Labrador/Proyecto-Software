@@ -15,7 +15,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Registro - CLEAN GESTOR</title>
+  <title>Servicios | CLEAN GESTOR</title>
 
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
   <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
@@ -29,58 +29,58 @@
 
 <body>
   <div class="hero_area">
-    <!-- header section starts -->
+    <!-- header section starts --> 
     <header class="header_section">
       <div class="container-fluid">
         <?php include_once("navbar.php"); ?>
       </div>
     </header>
 
-    <section class="service_section">
-      <div class="container">
+    <section class="service_section" style="background-color: #fff">
+      <div class="container" >
         <div class="mb-5 text-center">
-          <h2 class="fw-bold">Nuestros Servicios</h2>
-          <p>
+          <h2 class="mt-3">Nuestros Servicios</h2>
+          <p> 
             Encuentra, contrata y gestiona servicios de limpieza de manera fácil, rápida y confiable.
           </p>
         </div>
+
+        <?php
+        // Conexión a la base de datos
+        $conexion = new mysqli("localhost", "root", "", "gestor");
+        if ($conexion->connect_error) {
+            die("Error de conexión: " . $conexion->connect_error);
+        }
+
+        // Consulta para obtener servicios y empresa
+        $sql = "SELECT s.idServicio, s.nombreServicio, s.descripcion, s.precio, s.sueldo, s.horas, e.nombreEmpresa
+                FROM servicio s
+                JOIN empresa e ON s.idEmpresa = e.idEmpresa";
+        $resultado = $conexion->query($sql);
+        ?>
+
         <div class="row">
-          <!-- Servicio 1 -->
-          <div class="col-md-6">
-            <div class="card service-card h-100" style="background:#0275d8; color:#fff; border:none;">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">Limpieza de Oficinas</h5>
-                <p class="card-text">Empresa: CleanPro S.A.</p>
+        <section class="service_section" style="background-color: #fff">
+        <div class="container">
+          <div class="row">
+            <?php while($row = $resultado->fetch_assoc()): ?>
+              <div class="col-md-6">
+                <a href="detalle_servicio.php?id=<?php echo $row['idServicio']; ?>" style="text-decoration:none;">
+                  <div class="card service-card h-100" style="background:#0275d8; color:#fff; border:none; cursor:pointer;">
+                    <div class="card-body">
+                      <h5 class="card-title fw-bold"><?php echo htmlspecialchars($row['nombreServicio']); ?></h5>
+                      <p class="card-text">Empresa: <?php echo htmlspecialchars($row['nombreEmpresa']); ?></p>
+                      <p class="card-text"><?php echo htmlspecialchars($row['descripcion']); ?></p>
+                    </div>
+                  </div>
+                </a>
               </div>
-            </div>
+            <?php endwhile; ?>
           </div>
-          <!-- Servicio 2 -->
-          <div class="col-md-6">
-            <div class="card service-card h-100" style="background:#5cb85c; color:#fff; border:none;">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">Desinfección Industrial</h5>
-                <p class="card-text">Empresa: Higiene Total</p>
-              </div>
-            </div>
-          </div>
-          <!-- Servicio 3 -->
-          <div class="col-md-6">
-            <div class="card service-card h-100" style="background:#f0ad4e; color:#fff; border:none;">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">Limpieza de Alfombras</h5>
-                <p class="card-text">Empresa: Brillo Express</p>
-              </div>
-            </div>
-          </div>
-          <!-- Servicio 4 -->
-          <div class="col-md-6">
-            <div class="card service-card h-100" style="background:#5bc0de; color:#fff; border:none;">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">Mantenimiento de Jardines</h5>
-                <p class="card-text">Empresa: Verde Vivo</p>
-              </div>
-            </div>
-          </div>
+        </div>
+      </section>
+      <?php $conexion->close(); ?>
+
         </div>
       </div>
     </section>
@@ -116,5 +116,4 @@
     });
   </script>
 </body>
-
 </html>
