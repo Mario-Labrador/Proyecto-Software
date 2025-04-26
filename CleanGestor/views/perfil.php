@@ -35,6 +35,9 @@ $foto_perfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de 
   <link href="../assets/css/responsive.css?v=<?php echo time(); ?>" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
   <!-- Mostrar errores PHP (solo en desarrollo) -->
   <?php
     ini_set('display_errors', 1);
@@ -82,5 +85,10 @@ $foto_perfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de 
       </div>
     </section>
   </div>
+
+  <!-- jQuery, Popper.js y Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

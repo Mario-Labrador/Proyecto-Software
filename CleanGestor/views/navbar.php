@@ -7,8 +7,8 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
         <span>CLEAN GESTOR</span>
     </a>
     <button class="navbar-toggler animate__animated animate__fadeInDown" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent">
-        <span class=""> </span>
+        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
@@ -16,6 +16,19 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
             <li class="nav-item"><a class="nav-link" href="informate.php">SOBRE NOSOTROS</a></li>
             <li class="nav-item"><a class="nav-link" href="servicios.php">SERVICIOS</a></li>
             <?php if (isset($_SESSION['dni'])): ?>
+                <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>
+                    <!-- Menú desplegable ÁREA CLIENTE -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="areaClienteDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ÁREA CLIENTE
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="areaClienteDropdown">
+                            <a class="dropdown-item" href="servicios.php">Servicios</a>
+                            <a class="dropdown-item" href="valoraciones.php">Valoraciones</a>
+                        </div>
+                    </li>
+                <?php endif; ?>
+                <!-- Perfil del usuario -->
                 <li class="nav-item" style="display: flex; align-items: center;">
                     <details style="position: relative;">
                         <summary style="list-style: none; cursor: pointer; outline: none; border: none; background: none; margin-top: 6px;">
