@@ -31,7 +31,7 @@
 
 <body class="sub_page">
   <div class="hero_area">
-    <!-- header section starts -->
+    <!-- header section starts --> 
     <header class="header_section">
       <div class="container-fluid">
         <?php include_once("navbar.php"); ?>
@@ -107,6 +107,10 @@
             </div>
           </div>
         </div>
+      </section>
+      <?php $conexion->close(); ?>
+
+        </div>
       </div>
     </div>
   </section>
@@ -155,5 +159,4 @@
     }
   </script>
 </body>
-
 </html>
