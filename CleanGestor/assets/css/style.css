@@ -432,9 +432,9 @@ a:focus {
           align-items: center;
   text-align: center;
   padding: 25px;
-  background-color: #ffffff;
-  -webkit-box-shadow: 0 0 5px 0 rgb(255, 255, 255);
-          box-shadow: 0 0 5px 0 rgb(255, 255, 255);
+  background-color: #fafafa;
+  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
 }
 
 .service_section .box .img-box {
@@ -484,7 +484,7 @@ a:focus {
 }
 
 .server_section {
-  background: linear-gradient(110deg, transparent 25%, #ffffff 25%);
+  background: linear-gradient(110deg, transparent 25%, #020230 25%);
   padding: 55px 0;
   color: #ffffff;
 }
