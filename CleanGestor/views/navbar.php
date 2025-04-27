@@ -28,6 +28,19 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
                         </div>
                     </li>
                 <?php endif; ?>
+
+                <?php if ($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'administrador'): ?>
+                    <!-- Menú desplegable MI EMPRESA -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="miEmpresaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            MI EMPRESA
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="miEmpresaDropdown">
+                            <a class="dropdown-item" href="misServicios.php">Mis Servicios</a>
+                        </div>
+                    </li>
+                <?php endif; ?>
+
                 <!-- Perfil del usuario -->
                 <li class="nav-item" style="display: flex; align-items: center;">
                     <details style="position: relative;">

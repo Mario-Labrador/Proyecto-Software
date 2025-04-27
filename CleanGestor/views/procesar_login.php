@@ -41,6 +41,11 @@ try {
         $trabajador = $trabajadorDAO->getTrabajadorByDni($persona->getDni());
         $rol = $trabajador->getRol();
         $idEmpresa = $trabajador->getIdEmpresa();
+
+        // Depuración: Verificar el valor de idEmpresa
+        if ($idEmpresa == 0) {
+            die("Error: El trabajador no está asociado a ninguna empresa válida. ID Empresa: $idEmpresa");
+        }
     } else {
         $_SESSION['error_type'] = 'sin_rol';
         header("Location: login.php");
@@ -57,10 +62,14 @@ try {
     $_SESSION['tipo_usuario'] = $tipoUsuario;
     $_SESSION['rol'] = $rol;
     $_SESSION['foto_perfil'] = $persona->getFotoPerfil() ?? '../assets/uploads/default.png';
+    $_SESSION['idEmpresa'] = $idEmpresa;
 
     // Redirigir según el tipo de usuario
     if ($tipoUsuario === 'trabajador') {
-        $_SESSION['idEmpresa'] = $idEmpresa;
+$_SESSION['idEmpresa'] = $idEmpresa;
+
+        // Verificar si el trabajador es administrador
+    $_SESSION['idEmpresa'] = $idEmpresa;
 
         // Verificar si el trabajador es administrador
         if ($rol === 'administrador') {

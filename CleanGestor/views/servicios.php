@@ -5,33 +5,16 @@
   <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-  <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-  <!-- Site Metas -->
   <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-
   <title>Servicios - CLEAN GESTOR</title>
-
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
-  <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
   <link href="../assets/css/style.css" rel="stylesheet" />
-  <link href="../assets/css/responsive.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <!-- Google Fonts: Montserrat -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="sub_page">
   <div class="hero_area">
-    <!-- header section starts --> 
+    <!-- header section starts -->
     <header class="header_section">
       <div class="container-fluid">
         <?php include_once("navbar.php"); ?>
@@ -45,27 +28,25 @@
     <div class="container">
       <div class="mb-5 text-center">
         <h2 class="fw-bold">Nuestros Servicios</h2>
-        <p>
-          Encuentra, contrata y gestiona servicios de limpieza de manera fácil, rápida y confiable.
-        </p>
+        <p>Encuentra, contrata y gestiona servicios de limpieza de forma fácil, rápida y confiable.</p>
       </div>
 
       <?php
-        // Conexión a la base de datos
-        $conexion = new mysqli("localhost", "root", "", "gestor");
-        if ($conexion->connect_error) {
-            die("Error de conexión: " . $conexion->connect_error);
-        }
+      // Conexión a la base de datos
+      $conexion = new mysqli("localhost", "root", "", "gestor");
+      if ($conexion->connect_error) {
+          die("Error de conexión: " . $conexion->connect_error);
+      }
 
-        // Consulta para obtener servicios y empresa
-        $sql = "SELECT s.idServicio, s.nombreServicio, s.descripcion, s.precio, s.sueldo, s.horas, e.nombreEmpresa
-                FROM servicio s
-                JOIN empresa e ON s.idEmpresa = e.idEmpresa";
-        $resultado = $conexion->query($sql);
-        if (!$resultado) {
+      // Consulta para obtener servicios y empresa
+      $sql = "SELECT s.idServicio, s.nombreServicio, s.descripcion, s.precio, s.horas, e.nombreEmpresa
+              FROM servicio s
+              JOIN empresa e ON s.idEmpresa = e.idEmpresa";
+      $resultado = $conexion->query($sql);
+      if (!$resultado) {
           die("Error en la consulta: " . $conexion->error);
-        }
-        ?>
+      }
+      ?>
 
       <!-- Buscador y botón de filtro -->
       <div class="mb-4 d-flex">
@@ -75,9 +56,12 @@
             Filtrar
           </button>
           <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-            <li><a class="dropdown-item" href="#" onclick="filterBy('precio')">Por precio</a></li>
-            <li><a class="dropdown-item" href="#" onclick="filterBy('valoracion')">Por valoración</a></li>
-            <li><a class="dropdown-item" href="#" onclick="filterBy('veces_contratado')">Por veces contratado</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterBy('precioAsc')">De más barato a más caro</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterBy('precioDesc')">De más caro a más barato</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterBy('valoracionDesc')">Mejor valorado</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterBy('valoracionAsc')">Peor valorado</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterBy('veces_contratadoDesc')">Más veces contratado</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterBy('veces_contratadoAsc')">Menos veces contratado</a></li>
           </ul>
         </div>
       </div>
@@ -87,27 +71,26 @@
         <p>De momento no ofrecemos ningún servicio con ese nombre</p>
       </div>
 
+      <!-- Lista de servicios -->
       <div class="row" id="serviceList">
-        <div class="container">
-          <div class="row">
-            <?php while($row = $resultado->fetch_assoc()): ?>
-              <div class="col-md-6">
-                <a href="detalle_servicio.php?id=<?php echo $row['idServicio']; ?>" style="text-decoration:none;">
-                  <div class="card service-card h-100" style="background:#0275d8; color:#fff; border:none; cursor:pointer;">
-                    <div class="card-body">
-                      <h5 class="card-title fw-bold"><?php echo htmlspecialchars($row['nombreServicio']); ?></h5>
-                      <p class="card-text">Empresa: <?php echo htmlspecialchars($row['nombreEmpresa']); ?></p>
-                      <p class="card-text"><?php echo htmlspecialchars($row['descripcion']); ?></p>
-                    </div>
-                  </div>
-                </a>
+        <?php while ($row = $resultado->fetch_assoc()): ?>
+          <div class="col-md-6 service-item" data-precio="<?php echo $row['precio']; ?>">
+            <a href="detalle_servicio.php?id=<?php echo $row['idServicio']; ?>" style="text-decoration:none;">
+              <div class="card service-card h-100 shadow-sm" style="background:#f8f9fa; color:#000; border:1px solid #ddd; cursor:pointer;">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold"><?php echo htmlspecialchars($row['nombreServicio']); ?></h5>
+                  <p class="card-text"><strong>Empresa:</strong> <?php echo htmlspecialchars($row['nombreEmpresa']); ?></p>
+                  <p class="card-text"><?php echo htmlspecialchars($row['descripcion']); ?></p>
+                  <hr>
+                  <p class="card-text"><strong>Precio:</strong> <?php echo htmlspecialchars($row['precio']); ?> €</p>
+                  <p class="card-text"><strong>Horas:</strong> <?php echo htmlspecialchars($row['horas']); ?></p>
+                </div>
               </div>
-            <?php endwhile; ?>
+            </a>
           </div>
-        </div>
+        <?php endwhile; ?>
       </div>
       <?php $conexion->close(); ?>
-
     </div>
   </section>
 
@@ -115,15 +98,9 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <script>
-    // Animación para el contenido principal
-    gsap.from(".detail-box h1", { duration: 2, x: -100, opacity: 0 });
-    gsap.from(".detail-box p", { duration: 2, y: -50, opacity: 0, delay: 0.5 });
-    gsap.from(".img-box img", { duration: 1.5, scale: 0.8, opacity: 0, delay: 1 });
-
-    // Función para filtrar servicios
+    // Función para filtrar servicios por texto
     function filterServices() {
       const searchInput = document.getElementById('serviceSearch').value.toLowerCase();
       const serviceItems = document.querySelectorAll('.service-item');
@@ -148,10 +125,30 @@
       }
     }
 
-    // Función para manejar el filtro (placeholder para futuras funcionalidades)
+    // Función para filtrar servicios por criterio
     function filterBy(criteria) {
-      console.log(`Filtrar por: ${criteria}`);
-      // Aquí puedes añadir la lógica para filtrar por precio, valoración o veces contratado
+      const serviceList = document.getElementById('serviceList');
+      const serviceItems = Array.from(document.querySelectorAll('.service-item'));
+
+      if (criteria === 'precioAsc') {
+        // Ordenar por precio (ascendente)
+        serviceItems.sort((a, b) => {
+          const precioA = parseFloat(a.getAttribute('data-precio'));
+          const precioB = parseFloat(b.getAttribute('data-precio'));
+          return precioA - precioB;
+        });
+      } else if (criteria === 'precioDesc') {
+        // Ordenar por precio (descendente)
+        serviceItems.sort((a, b) => {
+          const precioA = parseFloat(a.getAttribute('data-precio'));
+          const precioB = parseFloat(b.getAttribute('data-precio'));
+          return precioB - precioA;
+        });
+      }
+
+      // Limpiar y reordenar los elementos en el DOM
+      serviceList.innerHTML = '';
+      serviceItems.forEach(item => serviceList.appendChild(item));
     }
   </script>
 </body>
