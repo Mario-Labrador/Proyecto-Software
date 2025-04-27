@@ -128,117 +128,6 @@ a:focus {
   padding-left: 25px;
 }
 
-.navbar-brand span {
-  font-weight: bold;
-  color: #ffffff;
-  font-size: 24px;
-  text-transform: uppercase;
-}
-
-.custom_nav-container {
-  padding: 10px 0;
-}
-
-.custom_nav-container .navbar-nav .nav-item .nav-link {
-  padding: 9px 15px;
-  margin: 10px 15px;
-  color: #ffffff;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.custom_nav-container .nav_search-btn {
-  width: 35px;
-  height: 35px;
-  padding: 0;
-  border: none;
-  color: #ffffff;
-  margin: 0 20px;
-}
-
-.custom_nav-container .navbar-toggler {
-  outline: none;
-}
-
-.custom_nav-container .navbar-toggler {
-  padding: 0;
-  width: 37px;
-  height: 42px;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
-.custom_nav-container .navbar-toggler span {
-  display: block;
-  width: 35px;
-  height: 4px;
-  background-color: #ffffff;
-  margin: 7px 0;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  position: relative;
-  border-radius: 5px;
-  transition: all 0.3s;
-}
-
-.custom_nav-container .navbar-toggler span::before, .custom_nav-container .navbar-toggler span::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #ffffff;
-  top: -10px;
-  border-radius: 5px;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
-.custom_nav-container .navbar-toggler span::after {
-  top: 10px;
-}
-
-.custom_nav-container .navbar-toggler[aria-expanded="true"] {
-  -webkit-transform: rotate(360deg);
-          transform: rotate(360deg);
-}
-
-.custom_nav-container .navbar-toggler[aria-expanded="true"] span {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
-
-.custom_nav-container .navbar-toggler[aria-expanded="true"] span::before, .custom_nav-container .navbar-toggler[aria-expanded="true"] span::after {
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
-  top: 0;
-}
-
-.custom_nav-container .navbar-toggler[aria-expanded="true"] .s-1 {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  margin: 0;
-  margin-bottom: -4px;
-}
-
-.custom_nav-container .navbar-toggler[aria-expanded="true"] .s-2 {
-  display: none;
-}
-
-.custom_nav-container .navbar-toggler[aria-expanded="true"] .s-3 {
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-  margin: 0;
-  margin-top: -4px;
-}
-
-.custom_nav-container .navbar-toggler[aria-expanded="false"] .s-1,
-.custom_nav-container .navbar-toggler[aria-expanded="false"] .s-2,
-.custom_nav-container .navbar-toggler[aria-expanded="false"] .s-3 {
-  -webkit-transform: none;
-          transform: none;
-}
-
 .quote_btn-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1200,15 +1089,145 @@ a:focus {
   }
 }
 
-.navbar-profile-settings {
-  position: absolute;
-  top: 70px; /* Ajusta según la altura de tu navbar */
-  right: 10px; /* Separación del borde derecho */
-  background: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  min-width: 180px;
-  z-index: 10;
+/* Navbar Brand */
+.navbar-brand span {
+  font-weight: bold;
+  color: #fff;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+/* Navbar Container */
+.custom_nav-container {
+  padding: 10px 0;
+}
+
+/* Navbar Nav Items */
+.custom_nav-container .navbar-nav {
+  align-items: center;
+}
+
+.custom_nav-container .navbar-nav .nav-item .nav-link {
+  padding: 10px 15px;
+  margin: 0 8px;
+  color: #fff;
   text-align: center;
-  padding: 10px;
+  text-transform: uppercase;
+  font-family: 'Montserrat', Arial, sans-serif;
+  transition: background 0.2s, color 0.2s;
+}
+
+.custom_nav-container .navbar-nav .nav-item .nav-link:hover,
+.custom_nav-container .navbar-nav .nav-item .nav-link:focus {
+  background: rgba(255,255,255,0.08);
+  color: #03A7D3;
+  border-radius: 8px;
+}
+
+/* Navbar Search Button */
+.custom_nav-container .nav_search-btn {
+  width: 35px;
+  height: 35px;
+  border: none;
+  color: #fff;
+  margin: 0 20px;
+  background: transparent;
+}
+
+/* Navbar Toggler (Hamburger) */
+.custom_nav-container .navbar-toggler {
+  padding: 0;
+  width: 37px;
+  height: 42px;
+  border: none;
+  background: none;
+  outline: none;
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.custom_nav-container .navbar-toggler span {
+  display: block;
+  width: 35px;
+  height: 4px;
+  background: #fff;
+  margin: 7px 0;
+  border-radius: 5px;
+  position: relative;
+  transition: all 0.3s;
+}
+
+/* Hamburger Animation */
+.custom_nav-container .navbar-toggler[aria-expanded="true"] {
+  transform: rotate(360deg);
+}
+.custom_nav-container .navbar-toggler[aria-expanded="true"] .s-1 {
+  transform: rotate(45deg) translateY(10px);
+}
+.custom_nav-container .navbar-toggler[aria-expanded="true"] .s-2 {
+  opacity: 0;
+}
+.custom_nav-container .navbar-toggler[aria-expanded="true"] .s-3 {
+  transform: rotate(-45deg) translateY(-10px);
+}
+.custom_nav-container .navbar-toggler .s-1,
+.custom_nav-container .navbar-toggler .s-2,
+.custom_nav-container .navbar-toggler .s-3 {
+  transition: all 0.3s;
+}
+
+/* Dropdown Animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar .dropdown-menu {
+  opacity: 0;
+  transform: translateY(10%);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  min-width: 220px;
+  border-radius: 1rem;
+  border: none;
+  margin-top: 0;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.navbar .dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  animation: slideDown 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* Dropdown Items */
+.navbar .dropdown-menu .dropdown-item {
+  padding: 10px 20px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #333;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.navbar .dropdown-menu .dropdown-item:hover,
+.navbar .dropdown-menu .dropdown-item:focus {
+  background: #f0f4fa;
+  color: #0d6efd;
+}
+
+/* Responsive: Center toggler icon bars */
+@media (max-width: 991.98px) {
+  .custom_nav-container .navbar-nav {
+    align-items: flex-start;
+  }
+  .custom_nav-container .navbar-nav .nav-item .nav-link {
+    margin: 8px 0;
+  }
 }

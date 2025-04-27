@@ -21,13 +21,14 @@ $foto_perfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de 
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
   <title>Perfil | CLEAN GESTOR</title>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css?v=<?php echo time(); ?>" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link href="../assets/css/style.css?v=<?php echo time(); ?>" rel="stylesheet" />
@@ -58,7 +59,7 @@ $foto_perfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de 
         <div class="profile-card animate__animated animate__fadeInUp">
           <div class="text-center">
             <!-- Mostrar la imagen de perfil o la predeterminada -->
-            <img src="<?php echo !empty($foto_perfil) ? $foto_perfil : '../assets/uploads/default.png'; ?>" 
+            <img src="<?php echo !empty($foto_perfil) ? $foto_perfil : '../assets/images/default.png'; ?>" 
                  alt="Foto de perfil" 
                  class="profile-image mb-2" 
                  style="max-height: 200px; border-radius: 50%;">
