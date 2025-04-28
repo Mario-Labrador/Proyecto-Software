@@ -40,19 +40,18 @@ $imagen = !empty($servicio['imagen']) ? $servicio['imagen'] : '../assets/images/
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
     <title>Detalle del Servicio | CLEAN GESTOR</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Tus estilos personalizados -->
     <link href="../assets/css/style.css?v=2" rel="stylesheet" />
     <link href="../assets/css/responsive.css" rel="stylesheet" />
-    <!-- Iconos y fuentes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body class="sub_page">
     <!-- NAVBAR -->
@@ -103,14 +102,18 @@ $imagen = !empty($servicio['imagen']) ? $servicio['imagen'] : '../assets/images/
     </div>
 
     <!-- Bootstrap 5 JS y animaciones -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <?php
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../assets/uploads/default.png';
+    ?>
+
+    <!-- jQuery, Popper.js y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script>
-        gsap.from(".navbar-nav .nav-link", { y: -50, opacity: 0, duration: 0.8, stagger: 0.3 });
-        gsap.from(".profile-card", { duration: 1.2, y: 50, opacity: 0, delay: 0.5 });
-        gsap.from(".profile-actions .btn", { duration: 0.7, x: -30, opacity: 0, stagger: 0.2, delay: 1.2 });
-        gsap.from("#profile-photo", { y: -100, opacity: 0, duration: 1, delay: 1 });
-    </script>
+
+
     <script>
       document.querySelectorAll('.dropdown').forEach(dropdown => {
         dropdown.addEventListener('hidden.bs.dropdown', () => {
