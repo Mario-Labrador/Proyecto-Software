@@ -29,7 +29,7 @@ $stmt->bind_param("i", $idServicio);
 
 if ($stmt->execute()) {
     // Redirigir con un mensaje de éxito
-    header("Location: eliminar_servicio.php?mensaje=Servicio eliminado correctamente");
+    header("Location: eliminar_servicio.php?mensaje=Servicio eliminado correctamente&finalizado=true");
 } else {
     // Redirigir con un mensaje de error
     header("Location: eliminar_servicio.php?error=No se pudo eliminar el servicio");

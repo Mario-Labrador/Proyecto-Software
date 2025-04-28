@@ -20,7 +20,7 @@ if (!$idEmpresa) {
     die("Error: No se pudo determinar la empresa asociada al administrador.");
 }
 
-$sql = "SELECT idServicio, nombreServicio, descripcion, precio, horas FROM servicio WHERE idEmpresa = ?";
+$sql = "SELECT idServicio, nombreServicio, descripcion, precio, horas, fotoServicio FROM servicio WHERE idEmpresa = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $idEmpresa);
 $stmt->execute();
@@ -59,6 +59,11 @@ $resultado = $stmt->get_result();
 
   <section class="service_section layout_padding">
     <div class="container">
+      <!-- Botón de Volver -->
+      <a href="javascript:history.back()" class="btn btn-link text-decoration-none mb-3">
+        ← Volver
+      </a>
+
       <div class="mb-5 text-center">
         <h2 class="fw-bold">Eliminar Servicio</h2>
         <p>Selecciona el servicio que deseas eliminar.</p>
@@ -68,6 +73,9 @@ $resultado = $stmt->get_result();
       <?php if (isset($_GET['mensaje'])): ?>
         <div class="alert alert-success text-center">
           <?php echo htmlspecialchars($_GET['mensaje']); ?>
+        </div>
+        <div class="text-center mt-4">
+          <a href="misServicios.php" class="btn btn-primary">Finalizar</a>
         </div>
       <?php elseif (isset($_GET['error'])): ?>
         <div class="alert alert-danger text-center">
@@ -80,6 +88,12 @@ $resultado = $stmt->get_result();
           <?php while ($row = $resultado->fetch_assoc()): ?>
             <div class="col-md-6 mb-4">
               <div class="card">
+                <!-- Mostrar la imagen del servicio -->
+                <img 
+                  src="<?php echo !empty($row['fotoServicio']) ? htmlspecialchars($row['fotoServicio']) : '../assets/images/default_service.png'; ?>" 
+                  class="card-img-top" 
+                  alt="Imagen del servicio" 
+                  style="max-height: 200px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title"><?php echo htmlspecialchars($row['nombreServicio']); ?></h5>
                   <p class="card-text"><?php echo htmlspecialchars($row['descripcion']); ?></p>
@@ -126,6 +140,13 @@ $resultado = $stmt->get_result();
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+  <script>
+        gsap.from(".navbar-nav .nav-link", { y: -50, opacity: 0, duration: 0.8, stagger: 0.3 });
+        gsap.from(".profile-card", { duration: 1.2, y: 50, opacity: 0, delay: 0.5 });
+        gsap.from(".profile-actions .btn", { duration: 0.7, x: -30, opacity: 0, stagger: 0.2, delay: 1.2 });
+        gsap.from("#profile-photo", { y: -100, opacity: 0, duration: 1, delay: 1 });
+  </script>
+  
   <script>
     // Función para mostrar el modal de confirmación
     function confirmDelete(idServicio, nombreServicio) {

@@ -54,8 +54,8 @@
                     <p>Encuentra, contrata y gestiona servicios de limpieza de manera fácil, rápida y confiable, todo en un solo lugar.</p>
                     <!-- Botones con animación -->
                     <div class="btn-box">
-                      <a href="login.php" class="btn-1 animate__animated animate__fadeInDown delay-2s">Identifícate</a>
-                      <a href="informate.php" class="btn-2 animate__animated animate__fadeInDown delay-3s">Infórmate</a>
+                      <a href="login.php" class="btn-modern">Identifícate</a>
+                      <a href="informate.php" class="btn-modern">Infórmate</a>
                     </div>
                   </div>
 

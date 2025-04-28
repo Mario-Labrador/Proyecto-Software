@@ -45,7 +45,7 @@
       }
 
       // Consulta para obtener servicios y empresa
-      $sql = "SELECT s.idServicio, s.nombreServicio, s.descripcion, s.precio, s.horas, e.nombreEmpresa
+      $sql = "SELECT s.idServicio, s.nombreServicio, s.descripcion, s.precio, s.horas, e.nombreEmpresa, s.fotoServicio
               FROM servicio s
               JOIN empresa e ON s.idEmpresa = e.idEmpresa";
       $resultado = $conexion->query($sql);
@@ -55,8 +55,8 @@
       ?>
 
       <!-- Buscador y botón de filtro -->
-      <div class="mb-4 d-flex">
-        <input type="text" id="serviceSearch" class="form-control me-2" placeholder="Buscar servicios..." onkeyup="filterServices()">
+      <div class="mb-4 d-flex justify-content-center">
+        <input type="text" id="serviceSearch" class="form-control me-2 w-50" placeholder="Buscar servicios..." onkeyup="filterServices()">
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown" aria-expanded="false">
             Filtrar
@@ -80,16 +80,23 @@
       <!-- Lista de servicios -->
       <div class="row" id="serviceList">
         <?php while ($row = $resultado->fetch_assoc()): ?>
-          <div class="col-md-6 service-item" data-precio="<?php echo $row['precio']; ?>">
+          <div class="col-md-4 col-sm-6 mb-4 service-item" data-precio="<?php echo $row['precio']; ?>">
             <a href="detalle_servicio.php?id=<?php echo $row['idServicio']; ?>" style="text-decoration:none;">
-              <div class="card service-card h-100 shadow-sm" style="background:#f8f9fa; color:#000; border:1px solid #ddd; cursor:pointer;">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold"><?php echo htmlspecialchars($row['nombreServicio']); ?></h5>
-                  <p class="card-text"><strong>Empresa:</strong> <?php echo htmlspecialchars($row['nombreEmpresa']); ?></p>
-                  <p class="card-text"><?php echo htmlspecialchars($row['descripcion']); ?></p>
-                  <hr>
-                  <p class="card-text"><strong>Precio:</strong> <?php echo htmlspecialchars($row['precio']); ?> €</p>
-                  <p class="card-text"><strong>Horas:</strong> <?php echo htmlspecialchars($row['horas']); ?></p>
+              <div class="card service-card h-100 shadow-sm" style="background:#fff; color:#000; border:1px solid #ddd; cursor:pointer; border-radius: 10px;">
+                <!-- Imagen del servicio -->
+                <div class="text-center p-3">
+                  <img 
+                    src="<?php echo !empty($row['fotoServicio']) ? htmlspecialchars($row['fotoServicio']) : '../assets/images/default_service.png'; ?>" 
+                    class="card-img-top" 
+                    alt="Imagen del servicio" 
+                    style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <!-- Información del servicio -->
+                <div class="card-body text-center">
+                  <h6 class="card-title fw-bold mb-2"><?php echo htmlspecialchars($row['nombreServicio']); ?></h6>
+                  <p class="card-text text-muted mb-1"><strong>Ofrecido por:</strong> <?php echo htmlspecialchars($row['nombreEmpresa']); ?></p>
+                  <p class="card-text text-primary fw-bold mb-2" style="font-size: 2rem;" ><?php echo htmlspecialchars($row['precio']); ?> €</p>
+                  <p class="card-text text-muted"><strong>Horas:</strong> <?php echo htmlspecialchars($row['horas']); ?></p>
                 </div>
               </div>
             </a>
