@@ -96,20 +96,22 @@ $conexion->close();
       <div class="row">
         <?php if (count($servicios) > 0): ?>
           <?php foreach ($servicios as $servicio): ?>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4">
               <div class="card">
                 <!-- Mostrar la imagen del servicio -->
                 <img 
                   src="<?php echo !empty($servicio['fotoServicio']) ? htmlspecialchars($servicio['fotoServicio']) : '../assets/images/default_service.png'; ?>" 
                   class="card-img-top" 
                   alt="Imagen del servicio" 
-                  style="max-height: 200px; object-fit: cover;">
+                  style="width: 100%; height: 150px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                 <div class="card-body">
                   <h5 class="card-title"><?php echo htmlspecialchars($servicio['nombreServicio']); ?></h5>
                   <p class="card-text"><?php echo htmlspecialchars($servicio['descripcion']); ?></p>
                   <p class="card-text"><strong>Precio:</strong> <?php echo htmlspecialchars($servicio['precio']); ?> €</p>
                   <p class="card-text"><strong>Horas:</strong> <?php echo htmlspecialchars($servicio['horas']); ?></p>
                   <p class="card-text"><strong>Sueldo:</strong> <?php echo htmlspecialchars($servicio['sueldo']); ?> €</p>
+                  <!-- Botón de Editar -->
+                  <a href="editar_servicio.php?id=<?php echo $servicio['idServicio']; ?>" class="btn btn-warning btn-sm">Editar</a>
                 </div>
               </div>
             </div>

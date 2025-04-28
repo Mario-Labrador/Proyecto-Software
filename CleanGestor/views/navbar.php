@@ -43,7 +43,8 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
                             MI EMPRESA
                         </a>
                         <div class="dropdown-menu" aria-labelledby="miEmpresaDropdown">
-                            <a class="dropdown-item" href="misServicios.php">Mis Servicios</a>
+                            <a class="dropdown-item" href="misServicios.php"><i class="fas fa-briefcase me-2"></i>Mis Servicios</a>
+                            <a class="dropdown-item" href="estadisticas.php"><i class="fas fa-chart-bar me-2"></i>Estadisticas</a>
                         </div>
                     </li>
             <?php endif; ?>

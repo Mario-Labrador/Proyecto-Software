@@ -25,6 +25,8 @@ if (!$idEmpresa) {
   <title>Añadir Servicio - CLEAN GESTOR</title>
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
   <link href="../assets/css/style.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body class="sub_page">

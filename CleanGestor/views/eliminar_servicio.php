@@ -36,8 +36,14 @@ $resultado = $stmt->get_result();
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
   <title>Eliminar Servicio - CLEAN GESTOR</title>
+  <link href="../assets/css/responsive.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
   <link href="../assets/css/style.css" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
   <style>
     .modal {
       z-index: 1050 !important;
@@ -58,11 +64,11 @@ $resultado = $stmt->get_result();
   </div>
 
   <section class="service_section layout_padding">
-    <div class="container">
-      <!-- Botón de Volver -->
-      <a href="javascript:history.back()" class="btn btn-link text-decoration-none mb-3">
+    <div class="container" >
+      <!-- Botón de Volver 
+      <a href="javascript:history.back()" class="btn btn-link text-decoration-none mb-3" >
         ← Volver
-      </a>
+      </a> -->
 
       <div class="mb-5 text-center">
         <h2 class="fw-bold">Eliminar Servicio</h2>
@@ -86,20 +92,20 @@ $resultado = $stmt->get_result();
       <div class="row">
         <?php if ($resultado->num_rows > 0): ?>
           <?php while ($row = $resultado->fetch_assoc()): ?>
-            <div class="col-md-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4">
               <div class="card">
                 <!-- Mostrar la imagen del servicio -->
                 <img 
                   src="<?php echo !empty($row['fotoServicio']) ? htmlspecialchars($row['fotoServicio']) : '../assets/images/default_service.png'; ?>" 
                   class="card-img-top" 
                   alt="Imagen del servicio" 
-                  style="max-height: 200px; object-fit: cover;">
+                  style="width: 100%; height: 150px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                 <div class="card-body">
                   <h5 class="card-title"><?php echo htmlspecialchars($row['nombreServicio']); ?></h5>
                   <p class="card-text"><?php echo htmlspecialchars($row['descripcion']); ?></p>
                   <p class="card-text"><strong>Precio:</strong> <?php echo htmlspecialchars($row['precio']); ?> €</p>
                   <p class="card-text"><strong>Horas:</strong> <?php echo htmlspecialchars($row['horas']); ?></p>
-                  <button class="btn btn-danger" onclick="confirmDelete(<?php echo $row['idServicio']; ?>, '<?php echo htmlspecialchars($row['nombreServicio']); ?>')">Eliminar</button>
+                  <button class="btn btn-danger btn-sm" onclick="confirmDelete(<?php echo $row['idServicio']; ?>, '<?php echo htmlspecialchars($row['nombreServicio']); ?>')">Eliminar</button>
                 </div>
               </div>
             </div>
@@ -136,17 +142,6 @@ $resultado = $stmt->get_result();
   $stmt->close();
   $conexion->close();
   ?>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-  <script>
-        gsap.from(".navbar-nav .nav-link", { y: -50, opacity: 0, duration: 0.8, stagger: 0.3 });
-        gsap.from(".profile-card", { duration: 1.2, y: 50, opacity: 0, delay: 0.5 });
-        gsap.from(".profile-actions .btn", { duration: 0.7, x: -30, opacity: 0, stagger: 0.2, delay: 1.2 });
-        gsap.from("#profile-photo", { y: -100, opacity: 0, duration: 1, delay: 1 });
-  </script>
-  
   <script>
     // Función para mostrar el modal de confirmación
     function confirmDelete(idServicio, nombreServicio) {
@@ -169,5 +164,14 @@ $resultado = $stmt->get_result();
       });
     });
   </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
