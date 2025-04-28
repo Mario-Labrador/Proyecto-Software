@@ -100,7 +100,7 @@ $conexion->close();
               <div class="card">
                 <!-- Mostrar la imagen del servicio -->
                 <img 
-                  src="<?php echo !empty($servicio['fotoServicio']) ? htmlspecialchars($servicio['fotoServicio']) : '../assets/uploads/default_service.png'; ?>" 
+                  src="<?php echo !empty($servicio['fotoServicio']) ? htmlspecialchars($servicio['fotoServicio']) : '../assets/images/default_service.png'; ?>" 
                   class="card-img-top" 
                   alt="Imagen del servicio" 
                   style="max-height: 200px; object-fit: cover;">
