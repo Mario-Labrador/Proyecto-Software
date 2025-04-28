@@ -16,7 +16,7 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto align-items-center">
+        <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item"><a class="nav-link" href="index.php">INICIO</a></li>
             <li class="nav-item"><a class="nav-link" href="informate.php">SOBRE NOSOTROS</a></li>
             <li class="nav-item"><a class="nav-link" href="servicios.php">SERVICIOS</a></li>
