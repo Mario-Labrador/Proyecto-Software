@@ -10,13 +10,11 @@ if (!isset($_SESSION['dni']) || $_SESSION['tipo_usuario'] !== 'trabajador' || $_
     exit();
 }
 
-// Obtener el idEmpresa desde la sesión
 $idEmpresa = $_SESSION['idEmpresa'] ?? null;
 if (!$idEmpresa) {
     die("Error: No se pudo determinar la empresa asociada al administrador.");
 }
 
-// Conexión a la base de datos
 $conexion = new mysqli("localhost", "root", "", "gestor");
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
@@ -29,8 +27,20 @@ $precio = $_POST['precio'];
 $horas = $_POST['horas'];
 $sueldo = $_POST['sueldo'];
 
+// Manejar la subida de la imagen
+$fotoServicio = null;
+if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+    $directorioSubida = "../assets/uploads/";
+    $nombreArchivo = uniqid() . "_" . basename($_FILES['imagen']['name']);
+    $rutaCompleta = $directorioSubida . $nombreArchivo;
+
+    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaCompleta)) {
+        $fotoServicio = $rutaCompleta;
+    }
+}
+
 // Crear un objeto ServicioVO
-$servicio = new ServicioVO($nombreServicio, $descripcion, $precio, $horas, $sueldo, $idEmpresa);
+$servicio = new ServicioVO($nombreServicio, $descripcion, $precio, $horas, $sueldo, $idEmpresa, $fotoServicio);
 
 // Crear un objeto ServicioDAO y guardar el servicio
 $servicioDAO = new ServicioDAO($conexion);
@@ -40,6 +50,5 @@ if ($servicioDAO->insertarServicio($servicio)) {
     header("Location: añadir_servicio.php?error=No se pudo añadir el servicio");
 }
 
-// Cerrar la conexión
 $conexion->close();
 ?>

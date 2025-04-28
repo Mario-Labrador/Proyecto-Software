@@ -11,8 +11,8 @@ class ServicioDAO {
 
     // Método para insertar un servicio
     public function insertarServicio(ServicioVO $servicio) {
-        $sql = "INSERT INTO servicio (nombreServicio, descripcion, precio, horas, sueldo, idEmpresa)
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO servicio (nombreServicio, descripcion, precio, horas, sueldo, idEmpresa, fotoServicio)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conexion->prepare($sql);
 
         // Asignar valores a variables antes de pasarlas a bind_param
@@ -22,16 +22,18 @@ class ServicioDAO {
         $horas = $servicio->getHoras();
         $sueldo = $servicio->getSueldo();
         $idEmpresa = $servicio->getEmpresa();
+        $fotoServicio = $servicio->getFotoServicio(); // Cambiado de "imagen" a "fotoServicio"
 
         // Pasar las variables por referencia
         $stmt->bind_param(
-            "ssddis", // Tipos de datos: string, string, double, double, integer, string
+            "ssddiss", // Tipos de datos: string, string, double, double, integer, string, string
             $nombreServicio,
             $descripcion,
             $precio,
             $horas,
             $sueldo,
-            $idEmpresa
+            $idEmpresa,
+            $fotoServicio
         );
 
         if ($stmt->execute()) {

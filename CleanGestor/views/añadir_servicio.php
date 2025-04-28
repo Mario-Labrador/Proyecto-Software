@@ -42,7 +42,7 @@ if (!$idEmpresa) {
         <h2 class="fw-bold">Añadir Servicio</h2>
         <p>Rellena los campos para añadir un nuevo servicio.</p>
       </div>
-      <form action="procesar_añadir_servicio.php" method="POST">
+      <form action="procesar_añadir_servicio.php" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="nombreServicio" class="form-label">Nombre del Servicio</label>
           <input type="text" class="form-control" id="nombreServicio" name="nombreServicio" required>
@@ -62,6 +62,10 @@ if (!$idEmpresa) {
         <div class="mb-3">
           <label for="sueldo" class="form-label">Sueldo</label>
           <input type="number" class="form-control" id="sueldo" name="sueldo" step="0.01" required>
+        </div>
+        <div class="mb-3">
+          <label for="imagen" class="form-label">Imagen del Servicio</label>
+          <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
         </div>
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Guardar Servicio</button>

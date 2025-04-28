@@ -8,9 +8,10 @@ class ServicioVO {
     private $horas;
     private $sueldo;
     private $empresa;
+    private $fotoServicio;
 
     // Constructor
-    public function __construct($nombreServicio, $descripcion, $precio, $horas, $sueldo, $empresa, $idServicio = null) {
+    public function __construct($nombreServicio, $descripcion, $precio, $horas, $sueldo, $empresa, $fotoServicio = null, $idServicio = null) {
         $this->idServicio = $idServicio;
         $this->nombreServicio = $nombreServicio;
         $this->descripcion = $descripcion;
@@ -18,6 +19,7 @@ class ServicioVO {
         $this->horas = $horas;
         $this->sueldo = $sueldo;
         $this->empresa = $empresa;
+        $this->fotoServicio = $fotoServicio; 
     }
 
     // Getters y Setters
@@ -75,6 +77,14 @@ class ServicioVO {
 
     public function setEmpresa($empresa) {
         $this->empresa = $empresa;
+    }
+
+    public function getFotoServicio() {
+        return $this->fotoServicio;
+    }
+
+    public function setFotoServicio($fotoServicio) {
+        $this->fotoServicio = $fotoServicio;
     }
 }
 ?>

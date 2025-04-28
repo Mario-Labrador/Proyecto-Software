@@ -21,7 +21,11 @@ if (!$idEmpresa) {
 }
 
 // Consultar los servicios asociados a la empresa
-$sql = "SELECT idServicio, nombreServicio, descripcion, precio, horas, sueldo FROM servicio WHERE idEmpresa = ?";
+<img 
+  src="<?php echo !empty($servicio['fotoServicio']) ? htmlspecialchars($servicio['fotoServicio']) : '../assets/uploads/default_service.png'; ?>" 
+  class="card-img-top" 
+  alt="Imagen del servicio" 
+  style="max-height: 200px; object-fit: cover;">$sql = "SELECT idServicio, nombreServicio, descripcion, precio, horas, sueldo, fotoServicio FROM servicio WHERE idEmpresa = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $idEmpresa);
 $stmt->execute();
@@ -98,6 +102,12 @@ $conexion->close();
           <?php foreach ($servicios as $servicio): ?>
             <div class="col-md-4 mb-4">
               <div class="card">
+                <!-- Mostrar la imagen del servicio -->
+                <img 
+                  src="<?php echo !empty($servicio['fotoServicio']) ? htmlspecialchars($servicio['fotoServicio']) : '../assets/uploads/default_service.png'; ?>" 
+                  class="card-img-top" 
+                  alt="Imagen del servicio" 
+                  style="max-height: 200px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title"><?php echo htmlspecialchars($servicio['nombreServicio']); ?></h5>
                   <p class="card-text"><?php echo htmlspecialchars($servicio['descripcion']); ?></p>
