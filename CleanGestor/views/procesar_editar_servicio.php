@@ -22,10 +22,33 @@ $precio = $_POST['precio'];
 $horas = $_POST['horas'];
 $sueldo = $_POST['sueldo'];
 
-// Actualizar los datos del servicio
-$sql = "UPDATE servicio SET nombreServicio = ?, descripcion = ?, precio = ?, horas = ?, sueldo = ? WHERE idServicio = ?";
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param("ssdddi", $nombreServicio, $descripcion, $precio, $horas, $sueldo, $idServicio);
+// Manejar la subida de la foto
+$fotoServicio = null;
+if (isset($_FILES['fotoServicio']) && $_FILES['fotoServicio']['error'] === UPLOAD_ERR_OK) {
+    $directorioDestino = "../assets/images/";
+    $nombreArchivo = basename($_FILES['fotoServicio']['name']);
+    $rutaArchivo = $directorioDestino . $nombreArchivo;
+
+    // Mover el archivo subido al directorio de destino
+    if (move_uploaded_file($_FILES['fotoServicio']['tmp_name'], $rutaArchivo)) {
+        $fotoServicio = $rutaArchivo; // Guardar la ruta del archivo
+    } else {
+        die("Error al subir la foto.");
+    }
+}
+
+// Actualizar los datos del servicio en la base de datos
+if ($fotoServicio) {
+    // Si se subió una nueva foto, actualiza también la columna de la foto
+    $sql = "UPDATE servicio SET nombreServicio = ?, descripcion = ?, precio = ?, horas = ?, sueldo = ?, fotoServicio = ? WHERE idServicio = ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("ssdddsi", $nombreServicio, $descripcion, $precio, $horas, $sueldo, $fotoServicio, $idServicio);
+} else {
+    // Si no se subió una nueva foto, no actualices la columna de la foto
+    $sql = "UPDATE servicio SET nombreServicio = ?, descripcion = ?, precio = ?, horas = ?, sueldo = ? WHERE idServicio = ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("ssdddi", $nombreServicio, $descripcion, $precio, $horas, $sueldo, $idServicio);
+}
 
 if ($stmt->execute()) {
     header("Location: misServicios.php?mensaje=Servicio actualizado correctamente");

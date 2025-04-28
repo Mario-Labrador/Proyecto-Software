@@ -140,17 +140,6 @@ $resultado = $stmt->get_result();
   $stmt->close();
   $conexion->close();
   ?>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script>
-        gsap.from(".navbar-nav .nav-link", { y: -50, opacity: 0, duration: 0.8, stagger: 0.3 });
-        gsap.from(".profile-card", { duration: 1.2, y: 50, opacity: 0, delay: 0.5 });
-        gsap.from(".profile-actions .btn", { duration: 0.7, x: -30, opacity: 0, stagger: 0.2, delay: 1.2 });
-        gsap.from("#profile-photo", { y: -100, opacity: 0, duration: 1, delay: 1 });
-  </script>
   
   <script>
     // Función para mostrar el modal de confirmación
