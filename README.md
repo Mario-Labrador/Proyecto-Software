@@ -30,7 +30,7 @@ Debe quedar así:
 
 5. Una vez activos, haz click en el boton **Admin** de **MySQL**. Accederás a **phpMyAdmin**.
 
-6. Crea una nueva base de datos y en la pestaña importar, seleccionas la última versión del archivo **cleangestor.sql** del repositorio.
+6. Crea una nueva base de datos llamada "gestor" y en la pestaña importar, seleccionas la última versión del archivo **cleangestor.sql** del repositorio.
 
 
 Una vez realizados estos pasos, ya estarás listo para utilizar la aplicación.
@@ -74,8 +74,7 @@ git push origin nombre-de-la-rama
 
 
 ## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 20/4/2025
-![proyecto_software_gantt](https://github.com/user-attachments/assets/586c6ca9-2319-4ae3-a757-d900b2ae6ecc)
-
+![proyecto_software_gantt](https://github.com/user-attachments/assets/016729f6-a93f-4910-afc4-ea22033d75e2)
 
 
 ## ⏳Fases del diagrama de Gantt
