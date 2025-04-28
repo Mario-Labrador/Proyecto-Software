@@ -40,9 +40,11 @@ $imagen = !empty($servicio['imagen']) ? $servicio['imagen'] : '../assets/images/
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
     <title>Detalle del Servicio | CLEAN GESTOR</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../assets/css/style.css?v=2" rel="stylesheet" />
     <link href="../assets/css/responsive.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -104,97 +106,6 @@ $imagen = !empty($servicio['imagen']) ? $servicio['imagen'] : '../assets/images/
     if (session_status() === PHP_SESSION_NONE) session_start();
     $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../assets/uploads/default.png';
     ?>
-
-
-
-
-    <nav class="navbar navbar-expand-lg custom_nav-container">
-        <a class="navbar-brand animate__animated animate__fadeInDown" href="index.php">
-            <span>CLEAN GESTOR</span>
-        </a>
-        <button class="navbar-toggler animate__animated animate__fadeInDown" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item"><a class="nav-link" href="index.php">INICIO</a></li>
-                <li class="nav-item"><a class="nav-link" href="informate.php">SOBRE NOSOTROS</a></li>
-                <li class="nav-item"><a class="nav-link" href="servicios.php">SERVICIOS</a></li>
-                <?php if (isset($_SESSION['dni'])): ?>
-                
-                <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>
-                    <!-- Menú ÁREA CLIENTE -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="areaClienteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle me-1"></i> ÁREA CLIENTE
-                        </a>
-                        <ul class="dropdown-menu shadow rounded" aria-labelledby="areaClienteDropdown">
-                            <li><a class="dropdown-item" href="servicios.php"><i class="fas fa-concierge-bell me-2"></i>Servicios</a></li>
-                            <li><a class="dropdown-item" href="servicios_contratados.php"><i class="fas fa-handshake me-2"></i>Servicios Contratados</a></li>
-                            <li><a class="dropdown-item" href="valoraciones.php"><i class="fas fa-star me-2"></i>Valoraciones</a></li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
-                
-                <?php if ($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'administrador'): ?>
-                        <!-- Menú desplegable MI EMPRESA -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="miEmpresaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                MI EMPRESA
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="miEmpresaDropdown">
-                                <a class="dropdown-item" href="misServicios.php">Mis Servicios</a>
-                            </div>
-                        </li>
-                <?php endif; ?>
-
-                <!-- Perfil del usuario -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 10px 15px;">
-                        <img 
-                            src="<?php echo htmlspecialchars($foto_perfil); ?>"
-                            alt="Foto de perfil"
-                            class="rounded-circle shadow-sm border border-2"
-                            style="height: 42px; width: 42px; object-fit: cover; margin-right: 8px;"
-                        >
-                        <span class="fw-semibold"><?php echo $_SESSION['nombre'] ?? 'Usuario'; ?></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end shadow rounded" aria-labelledby="profileDropdown">
-                        <li class="px-3 py-2 text-center">
-                            <img 
-                                src="<?php echo htmlspecialchars($foto_perfil); ?>"
-                                alt="Foto de perfil"
-                                class="rounded-circle mb-2"
-                                style="height: 60px; width: 60px; object-fit: cover; border: 2px solid #eee;"
-                            >
-                            <div class="fw-bold" style="font-family: 'Montserrat', Arial, sans-serif;"><?php echo $_SESSION['nombre'] ?? 'Usuario'; ?></div>
-                            <small class="text-muted"><?php echo $_SESSION['email'] ?? ''; ?></small>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item" href="perfil.php" style="font-family: 'Montserrat', Arial, sans-serif;">
-                                <i class="fa fa-pencil me-2"></i> Mi Perfil
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-danger" href="logout.php" style="font-family: 'Montserrat', Arial, sans-serif;">
-                                <i class="fa fa-sign-out me-2"></i> Cerrar Sesión
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-primary px-4 ms-2 rounded-pill" href="login.php">
-                            <i class="fas fa-sign-in-alt me-2"></i>INICIAR SESIÓN
-                        </a>
-                    </li>
-                <?php endif; ?>
-
-            </ul>
-        </div>
-    </nav>
 
     <!-- jQuery, Popper.js y Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
