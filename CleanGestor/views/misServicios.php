@@ -21,11 +21,7 @@ if (!$idEmpresa) {
 }
 
 // Consultar los servicios asociados a la empresa
-<img 
-  src="<?php echo !empty($servicio['fotoServicio']) ? htmlspecialchars($servicio['fotoServicio']) : '../assets/uploads/default_service.png'; ?>" 
-  class="card-img-top" 
-  alt="Imagen del servicio" 
-  style="max-height: 200px; object-fit: cover;">$sql = "SELECT idServicio, nombreServicio, descripcion, precio, horas, sueldo, fotoServicio FROM servicio WHERE idEmpresa = ?";
+$sql = "SELECT idServicio, nombreServicio, descripcion, precio, horas, sueldo, fotoServicio FROM servicio WHERE idEmpresa = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $idEmpresa);
 $stmt->execute();
