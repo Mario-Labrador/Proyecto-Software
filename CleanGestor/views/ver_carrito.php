@@ -88,7 +88,7 @@ $totalServicios = 0;
                     <p><strong>Precio Total:</strong> <?= number_format($totalPrecio, 2, ',', '.') ?> €</p>
                     <div class="d-grid gap-2">
                         <?php if ($totalServicios > 0): ?>
-                            <a href="finalizar_contrato.php?idContrato=<?= $idContrato ?>" class="btn btn-success">
+                            <a href="pago2.php?idContrato=<?= $idContrato ?>" class="btn btn-success">
                                 <i class="fas fa-check"></i> Finalizar Contrato
                             </a>
                         <?php else: ?>

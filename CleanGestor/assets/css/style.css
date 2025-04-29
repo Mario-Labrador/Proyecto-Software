@@ -1283,7 +1283,6 @@ a:focus {
     outline: none;
   }
 
-<<<<<<< Updated upstream
   .success-box {
     background-color: white;
     color: #333;
@@ -1305,7 +1304,6 @@ a:focus {
   .success-box .btn {
     margin-top: 20px;
   }
-=======
   #carrito-flotante {
     animation: bounce 2s infinite;
 }
@@ -1375,4 +1373,3 @@ a:focus {
   font-size: 1rem;
   padding: 10px 15px;
 }
->>>>>>> Stashed changes
