@@ -19,6 +19,25 @@ if (!isset($_GET['dni'])) {
 
 $dniTrabajador = $_GET['dni'];
 
+// Obtener el origen de la navegación (valor por defecto: 'empleados')
+$from = isset($_GET['from']) ? $_GET['from'] : 'empleados';
+
+// Sanear y validar el valor
+$allowed_from = ['ofertas', 'empleados'];
+if (!in_array($from, $allowed_from)) {
+    $from = 'empleados'; // Valor por defecto si no es válido
+}
+
+// Determinar la URL de retorno
+switch ($from) {
+    case 'ofertas':
+        $url_retorno = 'solicitudes_empleo.php'; // Ajusta al nombre correcto de tu página de ofertas
+        break;
+    case 'empleados':
+    default:
+        $url_retorno = 'misTrabajadores.php';
+}
+
 // Obtener datos del trabajador
 $trabajadorDAO = new TrabajadorDAO();
 $trabajador = $trabajadorDAO->getTrabajadorByDni($dniTrabajador);
@@ -74,59 +93,37 @@ $historialEmpresas = $empresaDAO->obtenerHistorialEmpresas($dniTrabajador);
 
     <section class="profile-section">
       <div class="container">
-        <div class="row">
-          <!-- Columna izquierda: Información del perfil del trabajador -->
-          <div class="col-md-6">
-            <div class="profile-card animate__animated animate__fadeInUp">
-              <div class="text-center">
-                <!-- Imagen de perfil -->
-                <img src="<?php echo !empty($persona->getFotoPerfil()) ? $persona->getFotoPerfil() : '../assets/uploads/default.png'; ?>" 
-                     alt="Foto de perfil" 
-                     class="profile-image mb-2" 
-                     style="max-height: 200px; border-radius: 50%;">
-                <h2 class="mt-3"><?php echo htmlspecialchars($persona->getNombrePersona() . ' ' . $persona->getApellidosPersona()); ?></h2>
-                <div class="profile-actions">
-                  <a href="perfilAdministrador.php" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al perfil administrador</a>
-                </div>
-              </div>
-              <hr>
-              <div class="profile-info mt-4">
-                <div class="row">
-                  <div class="col-md-6"><label>Correo electrónico</label><p><?php echo htmlspecialchars($persona->getEmailPersona()); ?></p></div>
-                  <div class="col-md-6"><label>Teléfono</label><p><?php echo htmlspecialchars($persona->getTelefono()); ?></p></div>
-                  <div class="col-md-6"><label>DNI/NIF</label><p><?php echo htmlspecialchars($persona->getDni()); ?></p></div>
-                  <div class="col-md-6"><label>Fecha de nacimiento</label><p><?php echo htmlspecialchars(date('d/m/Y', strtotime($persona->getFechaNacimiento()))); ?></p></div>
-                </div>
-              </div>
-              <hr>
+        <div class="profile-card animate__animated animate__fadeInUp">
+          <div class="text-center">
+            <!-- Imagen de perfil -->
+            <img src="<?php echo !empty($persona->getFotoPerfil()) ? $persona->getFotoPerfil() : '../assets/uploads/default.png'; ?>" 
+                  alt="Foto de perfil" 
+                  class="profile-image mb-2" 
+                  style="max-height: 200px; border-radius: 50%;">
+            <h2 class="mt-3"><?php echo htmlspecialchars($persona->getNombrePersona() . ' ' . $persona->getApellidosPersona()); ?></h2>
+            <div class="profile-actions">
+                <a href="<?= htmlspecialchars($url_retorno) ?>" class="btn btn-primary">
+                    <i class="fa fa-arrow-left"></i> Volver al perfil administrador
+                </a>
+            </div>
+
+          </div>
+          <hr>
+          <div class="profile-info mt-4">
+            <div class="row">
+              <div class="col-md-6"><label>Correo electrónico</label><p><?php echo htmlspecialchars($persona->getEmailPersona()); ?></p></div>
+              <div class="col-md-6"><label>Teléfono</label><p><?php echo htmlspecialchars($persona->getTelefono()); ?></p></div>
+              <div class="col-md-6"><label>DNI/NIF</label><p><?php echo htmlspecialchars($persona->getDni()); ?></p></div>
+              <div class="col-md-6"><label>Fecha de nacimiento</label><p><?php echo htmlspecialchars(date('d/m/Y', strtotime($persona->getFechaNacimiento()))); ?></p></div>
             </div>
           </div>
-
-          <!-- Columna derecha: Historial de empresas -->
-          <div class="col-md-6">
-            <div class="profile-card animate__animated animate__fadeInUp">
-              <div class="text-center">
-                <h3 class="mt-3">Historial de empresas</h3>
-                <hr>
-                <?php if (count($historialEmpresas) > 0): ?>
-                  <ul>
-                    <?php foreach ($historialEmpresas as $historial): ?>
-                      <li>
-                        <strong><?php echo htmlspecialchars($historial->getNombreEmpresa()); ?></strong>
-                        - <?php echo htmlspecialchars($historial->getFechaContrato()); ?>
-                      </li>
-                    <?php endforeach; ?>
-                  </ul>
-                <?php else: ?>
-                  <p>No tienes historial de empresas.</p>
-                <?php endif; ?>
-              </div>
-            </div>
-          </div>
-
+          <hr>
         </div>
       </div>
     </section>
   </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

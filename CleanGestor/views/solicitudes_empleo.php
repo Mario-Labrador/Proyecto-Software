@@ -24,7 +24,8 @@ $solicitudDAO = new SolicitudDAO();
 $personaDAO = new PersonaDAO();
 
 // Obtener datos de la empresa
-$nombreEmpresa = $empresaDAO->getEmpresaById($idEmpresa)->getNombreEmpresa();
+$empresa = $empresaDAO->getEmpresaById($idEmpresa);
+$nombreEmpresa = $empresa ? $empresa->getNombreEmpresa() : "Empresa desconocida";
 
 // Obtener solicitudes de empleo
 $solicitudes = $solicitudDAO->obtenerSolicitudesPorEmpresa($idEmpresa);
@@ -56,17 +57,17 @@ $solicitudes = $solicitudDAO->obtenerSolicitudesPorEmpresa($idEmpresa);
         </div>
         </header>
     </div>
-        <div class="profile-card animate__animated animate__fadeInUp" style="margin-top: 100px;">
-            <div class="row align-items-center">
-                <div class="col-md-12">
-                    <div class="text-center">
-                        <h3 class="mb-4">Administrador de <?= htmlspecialchars($nombreEmpresa) ?></h3>
-                        <hr>
-                        
-                        <?php if (!empty($solicitudes)): ?>
-                            <h4 class="mb-4">Solicitudes de empleo pendientes:</h4>
-                            <div class="list-group">
-                            <?php foreach ($solicitudes as $solicitud): 
+    <div class="profile-card animate__animated animate__fadeInUp" style="margin-top: 100px;">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <h3 class="mb-4">Administrador de <?= htmlspecialchars($nombreEmpresa) ?></h3>
+                    <hr>
+                    
+                    <?php if (!empty($solicitudes)): ?>
+                        <h4 class="mb-4">Solicitudes de empleo pendientes:</h4>
+                        <div class="list-group">
+                        <?php foreach ($solicitudes as $solicitud): 
                             $trabajador = $personaDAO->getPersonaByDni($solicitud->getDni());
                         ?>
                         <div class="list-group-item justify-content-between d-flex align-items-center">
@@ -88,13 +89,15 @@ $solicitudes = $solicitudDAO->obtenerSolicitudesPorEmpresa($idEmpresa);
                             <div class="flex-grow-1">
                                 <div class="d-flex flex-column">
                                 <strong class="nombre-solicitante">
-                                    <a href="perfilTrabajadorLectura.php?dni=<?= urlencode($solicitud->getDni()) ?>" 
-                                    class="btn btn-link p-0 m-0 align-baseline" 
-                                    style="font-weight: bold; font-size: 1.1em;">
-                                        <?= $trabajador ? 
-                                            htmlspecialchars($trabajador->getNombrePersona()." ".$trabajador->getApellidosPersona()) :
-                                            "Usuario no encontrado" ?>
-                                    </a> 
+                                    <?php if ($trabajador): ?>
+                                        <a href="detalle_empleado.php?dni=<?= urlencode($trabajador->getDni()) ?>&from=ofertas"
+                                            class="btn btn-link p-0 m-0 align-baseline" 
+                                            style="font-weight: bold; font-size: 1.1em;">
+                                            <?= htmlspecialchars($trabajador->getNombrePersona() . " " . $trabajador->getApellidosPersona()) ?>
+                                        </a>
+                                    <?php else: ?>
+                                        Usuario no encontrado
+                                    <?php endif; ?>
                                 </strong>
                                     <small class="text-muted">
                                         DNI: <?= htmlspecialchars($solicitud->getDni()) ?>
@@ -104,25 +107,23 @@ $solicitudes = $solicitudDAO->obtenerSolicitudesPorEmpresa($idEmpresa);
                             
                             <!-- Botones de acción -->
                             <div class="acciones">
-                                <a href="aceptar_solicitud.php?id=<?= $solicitud->getId() ?>&accion=aceptar" 
+                                <a href="aceptar_solicitud.php?id=<?= urlencode($solicitud->getId()) ?>&accion=aceptar" 
                                 class="btn btn-success btn-sm">
                                 <i class="fas fa-check"></i> Aceptar
                                 </a>
-                                <a href="rechazar_solicitud.php?id=<?= $solicitud->getId() ?>" 
+                                <a href="rechazar_solicitud.php?id=<?= urlencode($solicitud->getId()) ?>" 
                                 class="btn btn-danger btn-sm">
                                 <i class="fas fa-times"></i> Rechazar
                                 </a>
                             </div>
                         </div>
                         <?php endforeach; ?>
-
-                            </div>
-                        <?php else: ?>
-                            <div class="alert alert-info">
-                                No hay solicitudes de empleo pendientes.
-                            </div>
-                        <?php endif; ?>
-                    </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="alert alert-info">
+                            No hay solicitudes de empleo pendientes.
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

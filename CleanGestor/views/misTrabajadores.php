@@ -112,10 +112,10 @@ foreach ($trabajadores as $trabajador) {
         <div class="col-auto">
           <img src="<?php echo htmlspecialchars($trabajador['foto_perfil']); ?>"
                alt="Foto de perfil"
-               style="width:50px; height:50px; object-fit:cover; border-radius:50%;">
+               style="width:70px; height:70px; object-fit:cover; border-radius:50%;">
         </div>
         <div class="col-3 d-flex align-items-center">
-          <span class="font-weight-bold mr-1">DNI:</span>
+          <span class="font-weight-bold mr-1">DNI:</span> 
           <span><?php echo htmlspecialchars($trabajador['dni']); ?></span>
         </div>
         <div class="col-5 d-flex align-items-center">
@@ -124,7 +124,7 @@ foreach ($trabajadores as $trabajador) {
         </div>
         <!-- Botones alineados en la misma fila -->
         <div class="col-auto d-flex justify-content-end">
-          <a href="perfilTrabajadorLectura.php?dni=<?php echo urlencode($trabajador['dni']); ?>" class="btn btn-primary btn-sm me-2">
+          <a href="detalle_empleado.php?dni=<?php echo urlencode($trabajador['dni']); ?>&from=ofertas" class="btn btn-primary btn-sm me-2">
             Detalles
           </a>
           <a href="procesar_despido.php?dni=<?php echo urlencode($trabajador['dni']); ?>" 

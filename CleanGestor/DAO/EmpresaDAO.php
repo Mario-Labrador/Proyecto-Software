@@ -103,7 +103,8 @@ class EmpresaDAO {
         $pdo = Database::connect();
         $sql = "SELECT e.nombreEmpresa, c.fecha 
                 FROM contrato c 
-                JOIN empresa e ON c.id_empresa = e.idEmpresa 
+                JOIN trabajador t ON c.dni = t.dni
+                JOIN empresa e ON t.idEmpresa = e.idEmpresa 
                 WHERE c.dni = :dni";
     
         $stmt = $pdo->prepare($sql);
@@ -118,6 +119,9 @@ class EmpresaDAO {
         }
         return $historialEmpresas;    
     }
+    
+    
+    
     public function getTrabajadoresPorEmpresa($idEmpresa) {
         $pdo = Database::connect();
         $sql = "SELECT * FROM trabajador WHERE idEmpresa = :idEmpresa";

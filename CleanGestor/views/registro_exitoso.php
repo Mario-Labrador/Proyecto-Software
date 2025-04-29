@@ -11,29 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link href="../assets/css/style.css" rel="stylesheet" />
   <link href="../assets/css/responsive.css" rel="stylesheet" />
-  <style>
-    .success-box {
-      background-color: white;
-      color: #333;
-      border-radius: 15px;
-      padding: 40px;
-      max-width: 600px;
-      margin: 80px auto;
-      box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
-    }
-
-    .success-box h2 {
-      font-weight: 600;
-    }
-
-    .success-box p {
-      font-size: 1.1em;
-    }
-
-    .success-box .btn {
-      margin-top: 20px;
-    }
-  </style>
 </head>
 
 <body>
