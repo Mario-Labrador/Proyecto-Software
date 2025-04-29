@@ -123,5 +123,27 @@ class EmpresaDAO {
         // Retornar el historial de empresas como un array de objetos ContratoVO
         return $historialEmpresas;
     }
+    public function getTrabajadoresPorEmpresa($idEmpresa) {
+        $pdo = Database::connect();
+        $sql = "SELECT * FROM trabajador WHERE idEmpresa = :idEmpresa";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idEmpresa', $idEmpresa, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $trabajadoresData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $trabajadores = [];
+    
+        foreach ($trabajadoresData as $row) {
+            $trabajadores[] = new TrabajadorVO(
+                $row['rol'],
+                $row['especialidad'],
+                $row['dni'],
+                $row['idEmpresa']
+            );
+        }
+    
+        return $trabajadores; // Devuelve un array de objetos TrabajadorVO
+    }
+    
 }
 ?>

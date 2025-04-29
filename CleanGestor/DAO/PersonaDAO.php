@@ -153,6 +153,38 @@ class PersonaDAO {
         
         $stmt->execute();
     }
+    public function getFotoPerfilPorDni($dni) {
+        $pdo = Database::connect();
+        $sql = "SELECT foto_perfil FROM persona WHERE dni = :dni";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':dni', $dni);
+        $stmt->execute();
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['foto_perfil'] : '../assets/images/default.png'; // Si no tiene foto, usar la predeterminada
+    }
+
+    // Obtener el nombre completo de la persona según el DNI
+    public function getNombrePorDni($dni) {
+        $pdo = Database::connect();
+        $sql = "SELECT nombrePersona FROM persona WHERE dni = :dni";  
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':dni', $dni);
+        $stmt->execute();
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['nombrePersona'] : null;  
+    }
+    public function getApelldioPorDni($dni) {
+        $pdo = Database::connect();
+        $sql = "SELECT apellidosPersona FROM persona WHERE dni = :dni"; 
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':dni', $dni);
+        $stmt->execute();
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['apellidosPersona'] : null;  
+    }
     
 }
 ?>

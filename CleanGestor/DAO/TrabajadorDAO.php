@@ -80,6 +80,8 @@ class TrabajadorDAO {
         $stmt->bindParam(':idEmpresa', $idEmpresa);
         $stmt->execute();
     }
+   
 }
+
 
 ?>
