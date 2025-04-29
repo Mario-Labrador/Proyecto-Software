@@ -2,10 +2,8 @@
 require_once '../vendor/autoload.php';  // Usa Composer para cargar la librería Stripe
 
 // Configura tu clave secreta de prueba de Stripe
-\Stripe\Stripe::setApiKey('sk_test_51RJGemRiSDxu7JZh0lntrnDAZ8Gs4GZitFspHbofMBQXvriDZkQ1rRTSjoKbYsYyB4rFA22kJLwVk2aEbCSLDGuB00FNM8xJ0b');
 
 // Obtén el token enviado desde el frontend
-$token = $_POST['stripeToken'];
 
 if (!$token) {
     die('Token no recibido. El pago no pudo ser procesado.');
