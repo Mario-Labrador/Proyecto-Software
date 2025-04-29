@@ -52,33 +52,49 @@ $yaSolicito = $solicitudDAO->yaHaSolicitado($dni, $idEmpresa);
 </head>
 <body>
   <div class="hero_area">
-    <header class="header_section">
-      <div class="container-fluid">
-        <?php include_once("navbar.php"); ?>
-      </div>
-    </header>
+      <header class="header_section">
+        <div class="container-fluid">
+          <?php include_once("navbar.php"); ?>
+        </div>
+      </header>
 
-    <section class="profile-section mt-4">
+    <section class="profile-section">
       <div class="container">
         <div class="profile-card animate__animated animate__fadeInUp">
           <div class="text-center">
             <img src="../assets/images/building-icon.png" 
-                 alt="Logo empresa" 
-                 class="profile-image mb-2" 
-                 style="max-height: 200px; border-radius: 50%;">
+                alt="Logo empresa" 
+                class="profile-image mb-2" 
+                style="max-height: 200px; border-radius: 50%;">
             <h2 class="mt-3"><?php echo htmlspecialchars($empresa->getNombreEmpresa()); ?></h2>
             <p class="text-muted mb-2">Empresa registrada</p>
           </div>
           <hr>
           <div class="profile-info mt-4">
-            <div class="row">
+            <div class="row mb-2">
               <div class="col-md-6">
-                <label>Teléfono</label>
+                <label><strong>ID de Empresa</strong></label>
+                <p><?php echo htmlspecialchars($empresa->getIdEmpresa()); ?></p>
+              </div>
+              <div class="col-md-6">
+                <label><strong>Nombre</strong></label>
+                <p><?php echo htmlspecialchars($empresa->getNombreEmpresa()); ?></p>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-6">
+                <label><strong>Teléfono</strong></label>
                 <p><?php echo htmlspecialchars($empresa->getTelefonoEmpresa()); ?></p>
               </div>
               <div class="col-md-6">
-                <label>Dirección</label>
+                <label><strong>Dirección</strong></label>
                 <p><?php echo htmlspecialchars($empresa->getDireccion()); ?></p>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-6">
+                <label><strong>Correo del Director</strong></label>
+                <p><?php echo htmlspecialchars($empresa->getCorreoDirector()); ?></p>
               </div>
             </div>
           </div>
@@ -90,7 +106,7 @@ $yaSolicito = $solicitudDAO->yaHaSolicitado($dni, $idEmpresa);
                 </form>
           <?php elseif ($yaSolicito): ?>
             <p class="text-warning text-center mt-3">Ya has enviado una solicitud a esta empresa.</p>
-            <?php endif; ?>
+          <?php endif; ?>
         </div>
       </div>
     </section>

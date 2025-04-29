@@ -103,25 +103,20 @@ class EmpresaDAO {
         $pdo = Database::connect();
         $sql = "SELECT e.nombreEmpresa, c.fecha 
                 FROM contrato c 
-                JOIN empresa e ON c.idEmpresa = e.idEmpresa 
+                JOIN empresa e ON c.id_empresa = e.idEmpresa 
                 WHERE c.dni = :dni";
-
+    
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
         $stmt->execute();
-
-        // Obtener los resultados como un array asociativo
+    
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Crear un array para almacenar objetos ContratoVO
+    
         $historialEmpresas = [];
         foreach ($result as $row) {
-            // Crear un objeto ContratoVO para cada fila y agregarlo al array
             $historialEmpresas[] = new ContratoVO($row['nombreEmpresa'], $row['fecha']);
         }
-
-        // Retornar el historial de empresas como un array de objetos ContratoVO
-        return $historialEmpresas;
+        return $historialEmpresas;    
     }
     public function getTrabajadoresPorEmpresa($idEmpresa) {
         $pdo = Database::connect();

@@ -53,6 +53,8 @@ $historialEmpresas = $empresaDAO->obtenerHistorialEmpresas($dniTrabajador);
   <link href="../assets/css/style.css?v=<?php echo time(); ?>" rel="stylesheet" />
   <link href="../assets/css/responsive.css?v=<?php echo time(); ?>" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
   <!-- Mostrar errores (desarrollo) -->
   <?php
