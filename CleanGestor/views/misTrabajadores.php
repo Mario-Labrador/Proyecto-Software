@@ -106,45 +106,41 @@ foreach ($trabajadores as $trabajador) {
       <div class="row">
         <?php if (!empty($trabajadoresConFoto)): ?>
           <ul class="list-group">
-  <?php foreach ($trabajadoresConFoto as $trabajador): ?>
-    <li class="list-group-item">
-      <div class="row align-items-center">
-        <div class="col-auto">
-          <img src="<?php echo htmlspecialchars($trabajador['foto_perfil']); ?>"
-               alt="Foto de perfil"
-               style="width:70px; height:70px; object-fit:cover; border-radius:50%;">
-        </div>
-        <div class="col-3 d-flex align-items-center">
-          <span class="font-weight-bold mr-1">DNI:</span> 
-          <span><?php echo htmlspecialchars($trabajador['dni']); ?></span>
-        </div>
-        <div class="col-5 d-flex align-items-center">
-          <span class="font-weight-bold mr-1">NOMBRE:</span>
-          <span><?php echo htmlspecialchars($trabajador['nombre'] . ' ' . $trabajador['apellido']); ?></span>
-        </div>
-        <!-- Botones alineados en la misma fila -->
-        <div class="col-auto d-flex justify-content-end">
-          <a href="detalle_empleado.php?dni=<?php echo urlencode($trabajador['dni']); ?>&from=ofertas" class="btn btn-primary btn-sm me-2">
-            Detalles
-          </a>
-          <a href="procesar_despido.php?dni=<?php echo urlencode($trabajador['dni']); ?>" 
-            class="btn btn-danger btn-sm"
-            onclick="return confirm('¿Estás seguro?');">
-            Despedir
-          </a>
-        </div>
-      </div>
-    </li>
-  <?php endforeach; ?>
-</ul>
-
+            <?php foreach ($trabajadoresConFoto as $trabajador): ?>
+              <li class="list-group-item">
+                <div class="row align-items-center">
+                  <!-- Columna foto -->
+                  <div class="col-auto" style="width:80px;">
+                    <img src="<?php echo htmlspecialchars($trabajador['foto_perfil']); ?>"
+                        alt="Foto de perfil"
+                        style="width:70px; height:70px; object-fit:cover; border-radius:50%;">
+                  </div>
+                  <!-- Columna DNI -->
+                  <div class="col-2" style="min-width:120px;">
+                    <span class="font-weight-bold">DNI:</span>
+                    <span><?php echo htmlspecialchars($trabajador['dni']); ?></span>
+                  </div>
+                  <!-- Columna Nombre -->
+                  <div class="col-4" style="min-width:180px;">
+                    <span class="font-weight-bold">NOMBRE:</span>
+                    <span><?php echo htmlspecialchars($trabajador['nombre'] . ' ' . $trabajador['apellido']); ?></span>
+                  </div>
+                  <!-- Columna botones -->
+                  <div class="col d-flex justify-content-end">
+                    <a href="detalle_empleado.php?dni=<?php echo urlencode($trabajador['dni']); ?>&from=empleados" class="btn btn-primary btn-sm me-2">Detalles</a>
+                    <a href="servicios_asignados.php?dni=<?php echo urlencode($trabajador['dni']); ?>" class="btn btn-success btn-sm me-2">Servicios asignados</a>
+                    <a href="procesar_despido.php?dni=<?php echo urlencode($trabajador['dni']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro?');">Despedir</a>
+                  </div>
+                </div>
+              </li>
+            <?php endforeach; ?>
+          </ul>
         <?php else: ?>
           <div class="col-md-12">
             <p class="text-center">No hay trabajadores asociados a esta empresa.</p>
           </div>
         <?php endif; ?>
       </div>
-
     </div>
   </div>
 

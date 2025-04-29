@@ -31,7 +31,7 @@ if (!in_array($from, $allowed_from)) {
 // Determinar la URL de retorno
 switch ($from) {
     case 'ofertas':
-        $url_retorno = 'solicitudes_empleo.php'; // Ajusta al nombre correcto de tu página de ofertas
+        $url_retorno = 'solicitudes_empleo.php';
         break;
     case 'empleados':
     default:
@@ -101,12 +101,6 @@ $historialEmpresas = $empresaDAO->obtenerHistorialEmpresas($dniTrabajador);
                   class="profile-image mb-2" 
                   style="max-height: 200px; border-radius: 50%;">
             <h2 class="mt-3"><?php echo htmlspecialchars($persona->getNombrePersona() . ' ' . $persona->getApellidosPersona()); ?></h2>
-            <div class="profile-actions">
-                <a href="<?= htmlspecialchars($url_retorno) ?>" class="btn btn-primary">
-                    <i class="fa fa-arrow-left"></i> Volver al perfil administrador
-                </a>
-            </div>
-
           </div>
           <hr>
           <div class="profile-info mt-4">
@@ -117,7 +111,13 @@ $historialEmpresas = $empresaDAO->obtenerHistorialEmpresas($dniTrabajador);
               <div class="col-md-6"><label>Fecha de nacimiento</label><p><?php echo htmlspecialchars(date('d/m/Y', strtotime($persona->getFechaNacimiento()))); ?></p></div>
             </div>
           </div>
+
           <hr>
+          <div class="profile-actions text-center">
+              <a href="<?= htmlspecialchars($url_retorno) ?>" class="btn btn-primary">
+                  <i class="fa fa-arrow-left"></i> Volver
+              </a>
+          </div>
         </div>
       </div>
     </section>
