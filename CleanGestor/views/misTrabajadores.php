@@ -93,8 +93,8 @@ foreach ($trabajadores as $trabajador) {
   </div>
 
   <!-- Trabajadores Section -->
-  <section class="service_section layout_padding">
-    <div class="container">
+  <div class="profile-card animate__animated animate__fadeInUp mx-auto" style="margin-top: 100px; max-width: 900px;">
+    <div class="container-fluid">
       <div class="mb-5 text-center">
         <h2 class="fw-bold">Trabajadores Asociados</h2>
         <p>
@@ -106,29 +106,38 @@ foreach ($trabajadores as $trabajador) {
       <div class="row">
         <?php if (!empty($trabajadoresConFoto)): ?>
           <ul class="list-group">
-            <?php foreach ($trabajadoresConFoto as $trabajador): ?>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                  <!-- Mostrar foto de perfil -->
-                  <img src="<?php echo htmlspecialchars($trabajador['foto_perfil']); ?>" 
-                       alt="Foto de perfil" 
-                       class="rounded-circle" 
-                       style="max-width: 50px; max-height: 50px; margin-right: 15px;">
-                  <div class="mr-4">
-                    <strong>DNI:</strong> <?php echo htmlspecialchars($trabajador['dni']); ?>
-                  </div>
-                  <div class="mr-4">
-                    <strong>Nombre:</strong> <?php echo htmlspecialchars($trabajador['nombre']); ?>
-                  </div>
-                  <div class="mr-4">
-                    <strong>Apellido:</strong> <?php echo htmlspecialchars($trabajador['apellido']); ?>
-                  </div>
-                  
-                </div>
-                <!-- Enlace para editar trabajador -->
-              </li>
-            <?php endforeach; ?>
-          </ul>
+  <?php foreach ($trabajadoresConFoto as $trabajador): ?>
+    <li class="list-group-item">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <img src="<?php echo htmlspecialchars($trabajador['foto_perfil']); ?>"
+               alt="Foto de perfil"
+               style="width:50px; height:50px; object-fit:cover; border-radius:50%;">
+        </div>
+        <div class="col-3 d-flex align-items-center">
+          <span class="font-weight-bold mr-1">DNI:</span>
+          <span><?php echo htmlspecialchars($trabajador['dni']); ?></span>
+        </div>
+        <div class="col-5 d-flex align-items-center">
+          <span class="font-weight-bold mr-1">NOMBRE:</span>
+          <span><?php echo htmlspecialchars($trabajador['nombre'] . ' ' . $trabajador['apellido']); ?></span>
+        </div>
+        <!-- Botones alineados en la misma fila -->
+        <div class="col-auto d-flex justify-content-end">
+          <a href="perfilTrabajadorLectura.php?dni=<?php echo urlencode($trabajador['dni']); ?>" class="btn btn-primary btn-sm me-2">
+            Detalles
+          </a>
+          <a href="procesar_despido.php?dni=<?php echo urlencode($trabajador['dni']); ?>" 
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('¿Estás seguro?');">
+            Despedir
+          </a>
+        </div>
+      </div>
+    </li>
+  <?php endforeach; ?>
+</ul>
+
         <?php else: ?>
           <div class="col-md-12">
             <p class="text-center">No hay trabajadores asociados a esta empresa.</p>
@@ -137,7 +146,7 @@ foreach ($trabajadores as $trabajador) {
       </div>
 
     </div>
-  </section>
+  </div>
 
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

@@ -16,6 +16,13 @@ session_start();
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link href="../assets/css/style.css" rel="stylesheet" />
   <link href="../assets/css/responsive.css" rel="stylesheet" />
+
+  <style>
+    /* Ocultar el botón de tarjeta de crédito/débito */
+    .paypal-button-wrapper {
+        display: none !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -39,18 +46,22 @@ session_start();
             </select>
           </div>
 
-          <!-- Campos Tarjeta -->
+          <!-- Stripe Card Fields -->
           <div id="tarjeta_fields" style="display: none;">
             <div class="form-group">
               <label for="card-element">Número de Tarjeta</label>
-              <div id="card-element">
-                <!-- Un elemento Stripe será insertado aquí -->
-              </div>
+              <div id="card-element"></div>
             </div>
-            <div id="card-errors" role="alert"></div>
+            <div id="card-errors" role="alert" style="color: red;"></div>
           </div>
 
-          <button type="submit" class="btn btn-success btn-block">Pagar</button>
+          <!-- PayPal Button (Always visible when selected) -->
+          <div id="paypal_fields" style="display: none;">
+            <div id="paypal-button-container"></div>
+          </div>
+
+          <!-- Submit Button (Visible only for Stripe) -->
+          <button type="submit" class="btn btn-success btn-block" id="submit-button" style="display: none;">Pagar</button>
         </form>
       </div>
     </section>
@@ -59,138 +70,104 @@ session_start();
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.js"></script>
 
+  <!-- Stripe -->
   <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    document.getElementById('forma_pago').addEventListener('change', function () {
-      const tarjetaFields = document.getElementById('tarjeta_fields');
-      const paypalFields = document.getElementById('paypal_fields');
 
-      if (this.value === 'tarjeta') {
+  <!-- PayPal SDK (Client ID ya incluido) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=ARbnydAWoP3tnbQ2Z_BkSMUPDb0ghoyh8z-hlycoMNNQODBONDWPttgXae8GNzJz2nygZnIAhXHloY3u&currency=USD&components=buttons"></script>
+
+  <script>
+    const stripe = Stripe('pk_test_51RJGemRiSDxu7JZhO5rKCvELDh5t8KA8pAUvGx4TEZpTM2jNvF6j5Du2iz65Edig1V5dNS8YF2HWYcPlnHgk7ut000Nxcx22JC');
+    const elements = stripe.elements();
+    const card = elements.create('card');
+    card.mount('#card-element');
+
+    const tarjetaFields = document.getElementById('tarjeta_fields');
+    const paypalFields = document.getElementById('paypal_fields');
+    const submitButton = document.getElementById('submit-button');
+
+    // Mostrar campos según el método de pago seleccionado
+    document.getElementById('forma_pago').addEventListener('change', function () {
+      const metodo = this.value;
+      if (metodo === 'tarjeta') {
         tarjetaFields.style.display = 'block';
         paypalFields.style.display = 'none';
-      } else if (this.value === 'paypal') {
-        paypalFields.style.display = 'block';
+        submitButton.style.display = 'block'; // Mostrar botón de pagar para tarjeta
+      } else if (metodo === 'paypal') {
         tarjetaFields.style.display = 'none';
+        paypalFields.style.display = 'block'; // Mostrar el botón de PayPal
+        submitButton.style.display = 'none'; // Ocultar el botón de pagar
       } else {
         tarjetaFields.style.display = 'none';
         paypalFields.style.display = 'none';
+        submitButton.style.display = 'none';
       }
     });
 
-    // Configura Stripe con tu clave pública
-    var stripe = Stripe('pk_test_51RJGemRiSDxu7JZhO5rKCvELDh5t8KA8pAUvGx4TEZpTM2jNvF6j5Du2iz65Edig1V5dNS8YF2HWYcPlnHgk7ut000Nxcx22JC'); // Usa tu clave pública de Stripe
-    var elements = stripe.elements();
-
-    // Crea el elemento de tarjeta
-    var card = elements.create('card');
-    card.mount('#card-element');  // Monta el campo de tarjeta en el DOM
-
-    // Manejador de errores
-    card.on('change', function(event) {
-      var displayError = document.getElementById('card-errors');
-      if (event.error) {
-        displayError.textContent = event.error.message;
-      } else {
-        displayError.textContent = '';
+    // Stripe tokenization
+    const form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+      if (document.getElementById('forma_pago').value === 'tarjeta') {
+        event.preventDefault();
+        stripe.createToken(card).then(function (result) {
+          if (result.error) {
+            document.getElementById('card-errors').textContent = result.error.message;
+          } else {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', result.token.id);
+            form.appendChild(hiddenInput);
+            form.submit();
+          }
+        });
       }
     });
 
-    // Enviar el formulario cuando se envíe
-    var form = document.getElementById('payment-form');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      // Crea un token de Stripe con los datos de la tarjeta
-      stripe.createToken(card).then(function(result) {
-        if (result.error) {
-          // Si hay un error, lo mostramos
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-        } else {
-          // Si el token se crea correctamente, lo enviamos al servidor
-          var token = result.token.id;
-
-          // Crea un input oculto para el token
-          var hiddenInput = document.createElement('input');
-          hiddenInput.setAttribute('type', 'hidden');
-          hiddenInput.setAttribute('name', 'stripeToken');
-          hiddenInput.setAttribute('value', token);
-
-          // Agrega el input oculto al formulario
-          form.appendChild(hiddenInput);
-
-          // Envía el formulario
-          form.submit();
+    // PayPal Button render
+    let paypalButtons;
+    function renderPaypalButton() {
+      if (paypalButtons) {
+        paypalButtons.close();
+      }
+      paypalButtons = paypal.Buttons({
+        createOrder: function (data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: '50.00'
+              }
+            }]
+          });
+        },
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (details) {
+            alert('Pago completado por ' + details.payer.name.given_name);
+            window.location.href = "confirmacion_pago.php";
+          });
+        },
+        onError: function (err) {
+          console.error(err);
+          alert('Error con el pago de PayPal.');
         }
       });
-    });
+      paypalButtons.render('#paypal-button-container');
+    }
+
+    renderPaypalButton(); // Siempre renderizar el botón de PayPal cuando se carga la página
   </script>
 
-  <!-- Info Section -->
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="info_contact">
-            <h4>Dirección</h4>
-            <div class="contact_link_box">
-              <a href="login.php">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>Calle Cineasta Carlos Saura, 123, Ciudad</span>
-              </a>
-              <a href="#">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>Llama al: 685 145 788</span>
-              </a>
-              <a href="#">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>contacto@cleangestor.com</span>
-              </a>
-            </div>
-          </div>
-          <div class="info_social">
-            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info_link_box">
-            <h4>Enlaces</h4>
-            <div class="info_links">
-              <a href="Index.php">Inicio</a>
-              <a href="informate.php">Sobre Nosotros</a>
-              <a href="servicios.php">Servicios</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info_detail">
-            <h4>Información</h4>
-            <p>CLEAN GESTOR es tu aliado para mantener tus espacios limpios y organizados. Contáctanos para más información.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end Info Section -->
-
-  <!-- Footer Section -->
+  <!-- Footer -->
   <footer class="footer_section">
     <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> Todos los derechos reservados por
-        <a href="#">CLEAN GESTOR</a>
-      </p>
+      <p>&copy; <span id="displayYear"></span> Todos los derechos reservados por
+        <a href="#">CLEAN GESTOR</a></p>
     </div>
   </footer>
-  <!-- end Footer Section -->
 
   <script>
     document.getElementById("displayYear").textContent = new Date().getFullYear();
   </script>
-
 </body>
 
 </html>

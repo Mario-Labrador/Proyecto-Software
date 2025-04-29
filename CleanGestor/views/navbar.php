@@ -22,6 +22,10 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
             <li class="nav-item"><a class="nav-link" href="servicios.php">SERVICIOS</a></li>
             <?php if (isset($_SESSION['dni'])): ?>
             
+            <?php if ($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'empleado'): ?>
+                <li class="nav-item"><a class="nav-link" href="buscar_empleo.php">SOLICITUDES DE EMPLEO</a></li>
+            <?php endif; ?>
+            
             <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>
                 <!-- Menú ÁREA CLIENTE -->
                 <li class="nav-item dropdown">
@@ -35,7 +39,7 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
                     </ul>
                 </li>
             <?php endif; ?>
-            
+
             <?php if ($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'administrador'): ?>
                     <!-- Menú desplegable MI EMPRESA -->
                     <li class="nav-item dropdown">

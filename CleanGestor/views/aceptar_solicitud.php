@@ -32,7 +32,7 @@ if ($idSolicitud && $accion === 'aceptar') {
         $trabajadorDAO->actualizarEmpresaTrabajador($dniTrabajador, $idEmpresa);
 
         // Redirigir a la lista de solicitudes o a donde desees
-        header("Location: perfil.php");
+        header("Location: misTrabajadores.php");
         exit();  // Aseguramos que el código no siga ejecutándose después de la redirección
     }
 }

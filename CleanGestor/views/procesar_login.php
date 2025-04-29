@@ -41,11 +41,6 @@ try {
         $trabajador = $trabajadorDAO->getTrabajadorByDni($persona->getDni());
         $rol = $trabajador->getRol();
         $idEmpresa = $trabajador->getIdEmpresa();
-
-        // Depuración: Verificar el valor de idEmpresa
-        if ($idEmpresa == 0) {
-            die("Error: El trabajador no está asociado a ninguna empresa válida. ID Empresa: $idEmpresa");
-        }
     } else {
         $_SESSION['error_type'] = 'sin_rol';
         header("Location: login.php");
@@ -64,23 +59,7 @@ try {
     $_SESSION['foto_perfil'] = $persona->getFotoPerfil() ?? '../assets/uploads/default.png';
     $_SESSION['idEmpresa'] = $idEmpresa;
 
-    // Redirigir según el tipo de usuario
-    if ($tipoUsuario === 'trabajador') {
-$_SESSION['idEmpresa'] = $idEmpresa;
-
-        // Verificar si el trabajador es administrador
-    $_SESSION['idEmpresa'] = $idEmpresa;
-
-        // Verificar si el trabajador es administrador
-        if ($rol === 'administrador') {
-            header("Location: perfilAdministrador.php");  // Redirigir a perfil administrador
-        } else {
-            header("Location: perfilTrabajador.php");  // Redirigir a perfil trabajador
-        }
-    } else {
-        header("Location: perfil.php");  // Redirigir a perfil de cliente
-    }
-    exit();
+    header("Location: perfil.php");  // Redirigir a perfil de cliente
 
 } catch (Exception $e) {    
     $_SESSION['error_type'] = 'error_general';

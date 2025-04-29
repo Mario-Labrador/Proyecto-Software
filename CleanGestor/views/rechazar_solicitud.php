@@ -16,7 +16,7 @@ if ($idSolicitud) {
     $solicitudDAO->eliminarSolicitud($idSolicitud);
 
     // Redirigir a la lista de solicitudes
-    header("Location: perfil.php");
+    header("Location: misTrabajadores.php");
     exit();  // Aseguramos que el código no siga ejecutándose después de la redirección
 }
 ?>
