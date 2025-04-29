@@ -22,7 +22,7 @@ class ServicioDAO {
         $horas = $servicio->getHoras();
         $sueldo = $servicio->getSueldo();
         $idEmpresa = $servicio->getEmpresa();
-        $fotoServicio = $servicio->getFotoServicio(); // Cambiado de "imagen" a "fotoServicio"
+        $fotoServicio = $servicio->getFotoServicio(); 
 
         // Pasar las variables por referencia
         $stmt->bind_param(

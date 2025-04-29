@@ -1283,6 +1283,7 @@ a:focus {
     outline: none;
   }
 
+<<<<<<< Updated upstream
   .success-box {
     background-color: white;
     color: #333;
@@ -1304,3 +1305,74 @@ a:focus {
   .success-box .btn {
     margin-top: 20px;
   }
+=======
+  #carrito-flotante {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Estilo para los elementos del carrito */
+.cart-item {
+  background-color: #f1f1f1; /* Fondo gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 15px; /* Espaciado interno */
+  margin-bottom: 15px; /* Espaciado entre elementos */
+  display: flex;
+  align-items: center;
+}
+
+/* Imagen del servicio */
+.cart-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover; /* Ajustar la imagen sin deformarla */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Espaciado entre imagen y texto */
+.cart-item .me-4 {
+  margin-right: 20px; /* Espaciado entre la imagen y el texto */
+}
+
+/* Espaciado entre título y precio */
+.cart-item h5 {
+  margin-bottom: 10px;
+}
+
+/* Resumen del carrito */
+.cart-summary {
+  background-color: #e9ecef; /* Fondo gris claro */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.cart-summary h4 {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.cart-summary p {
+  margin-bottom: 10px;
+}
+
+/* Botones */
+.btn-danger {
+  font-size: 0.9rem;
+}
+
+.btn-success, .btn-secondary {
+  font-size: 1rem;
+  padding: 10px 15px;
+}
+>>>>>>> Stashed changes

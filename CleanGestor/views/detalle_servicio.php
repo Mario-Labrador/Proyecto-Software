@@ -2,6 +2,7 @@
 session_start();
 require_once("../VO/ServicioVO.php");
 require_once("../DAO/ServicioDAO.php");
+require_once("../DAO/ContratoDAO.php"); // Cambiar a ContratoDAO
 
 // Validar el parámetro id
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -20,6 +21,7 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
+// Obtener los datos del servicio
 $sql = "SELECT * FROM servicio WHERE idServicio = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $id);
@@ -27,14 +29,28 @@ $stmt->execute();
 $result = $stmt->get_result();
 $servicio = $result->fetch_assoc();
 $stmt->close();
-$conexion->close();
 
 if (!$servicio) {
     die("Servicio no encontrado.");
 }
 
+// Verificar si el cliente tiene un contrato abierto
+$contratoDAO = new ContratoDAO($conexion);
+$contratoAbierto = $contratoDAO->obtenerContratoAbierto($_SESSION['dni'] ?? null);
+
+$servicioYaEnCarrito = false;
+if ($contratoAbierto) {
+    require_once("../DAO/ContratoServicioDAO.php");
+    $contratoServicioDAO = new ContratoServicioDAO($conexion);
+    $servicioYaEnCarrito = $contratoServicioDAO->servicioYaEnContrato($contratoAbierto['idContrato'], $servicio['idServicio']);
+}
+
+$conexion->close();
+
 $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../assets/uploads/default.png';
-$imagen = !empty($servicio['imagen']) ? $servicio['imagen'] : '../assets/images/default_service.png';
+$imagen = !empty($servicio['fotoServicio']) && file_exists(__DIR__ . "/" . $servicio['fotoServicio']) 
+    ? htmlspecialchars($servicio['fotoServicio']) 
+    : "../assets/images/default_service.png";
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +78,7 @@ $imagen = !empty($servicio['imagen']) ? $servicio['imagen'] : '../assets/images/
             </div>
         </header>
     </div>
+    <?php include_once("carrito_flotante.php"); ?>
 
     <div class="container py-4">
         <a href="javascript:history.back()" class="back-link mt-4 d-inline-block">
@@ -70,7 +87,7 @@ $imagen = !empty($servicio['imagen']) ? $servicio['imagen'] : '../assets/images/
         <div class="service-card mx-auto mt-4" style="max-width: 800px;">
             <div class="row g-4 align-items-center">
                 <div class="col-md-5 text-center">
-                    <img src="<?= htmlspecialchars($imagen) ?>" 
+                    <img src="<?= $imagen ?>" 
                          alt="Imagen del servicio" 
                          class="service-img img-fluid">
                 </div>
@@ -92,9 +109,9 @@ $imagen = !empty($servicio['imagen']) ? $servicio['imagen'] : '../assets/images/
                         </div>
                     <?php endif; ?>
 
-                    <a href="contratar_servicio.php?id=<?= $servicio['idServicio'] ?>" 
+                    <a href="<?= $servicioYaEnCarrito ? "ver_carrito.php?idContrato={$contratoAbierto['idContrato']}" : "agregar_servicio_carrito.php?idContrato={$contratoAbierto['idContrato']}&idServicio={$servicio['idServicio']}" ?>" 
                        class="btn btn-primary btn-lg">
-                        <i class="fas fa-shopping-cart"></i> Contratar Servicio
+                        <i class="fas fa-shopping-cart"></i> <?= $servicioYaEnCarrito ? 'Ya en el carrito' : 'Contratar Servicio' ?>
                     </a>
                 </div>
             </div>

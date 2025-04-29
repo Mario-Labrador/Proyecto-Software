@@ -1,22 +1,30 @@
 <?php
 class ContratoVO {
-    private $nombreEmpresa;
-    private $fechaContrato;
+    private $idContrato;
+    private $fecha;
+    private $lugar;
+    private $dni;
 
-    // Constructor para inicializar los valores
-    public function __construct($nombreEmpresa, $fechaContrato) {
-        $this->nombreEmpresa = $nombreEmpresa;
-        $this->fechaContrato = $fechaContrato;
+    public function __construct($fecha, $lugar, $dni) {
+        $this->fecha = $fecha;
+        $this->lugar = $lugar;
+        $this->dni = $dni;
     }
 
-    // Getter para obtener el nombre de la empresa
-    public function getNombreEmpresa() {
-        return $this->nombreEmpresa;
+    public function getIdContrato() {
+        return $this->idContrato;
     }
 
-    // Getter para obtener la fecha del contrato
-    public function getFechaContrato() {
-        return $this->fechaContrato;
+    public function getFecha() {
+        return $this->fecha;
+    }
+
+    public function getLugar() {
+        return $this->lugar;
+    }
+
+    public function getDni() {
+        return $this->dni;
     }
 }
 ?>

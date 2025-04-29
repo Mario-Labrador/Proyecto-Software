@@ -25,8 +25,8 @@
         <?php include_once("navbar.php"); ?>
       </div>
     </header>
-    <!-- header section ends -->
   </div>
+  <?php include_once("carrito_flotante.php"); ?>
 
   <!-- Servicios Section -->
   <section class="service_section layout_padding">
