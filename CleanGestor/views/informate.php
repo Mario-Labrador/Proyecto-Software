@@ -61,7 +61,7 @@
             <p>
               Regístrate o Identifícate para poder disfrutar de todos los servicios que ofrecemos.
             </p>
-            <a href="login.html">
+            <a href="login.php">
               Identifícate/Regístrate  
             </a>
             <?php endif; ?>
@@ -87,7 +87,7 @@
               Dirección
             </h4>
             <div class="contact_link_box">
-              <a href="">
+              <a href="href=login.php">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span>
                   Calle Cineasta Carlos Saura, 123, Ciudad
@@ -128,18 +128,16 @@
               Enlaces
             </h4>
             <div class="info_links">
-              <a href="index.html">
+              <a href="Index.php">
                 Inicio
               </a>
-              <a href="about.html">
+              <a href="informate.php">
                 Sobre Nosotros
               </a>
-              <a href="service.html">
+              <a href="servicios.php">
                 Servicios
               </a>
-              <a href="contact.html">
-                Contacto
-              </a>
+              
             </div>
           </div>
         </div>
