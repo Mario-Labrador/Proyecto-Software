@@ -4,6 +4,13 @@ require_once("../VO/ServicioVO.php");
 require_once("../DAO/ServicioDAO.php");
 require_once("../DAO/ContratoDAO.php"); // Cambiar a ContratoDAO
 
+
+
+// Verificar si el usuario está logueado y es cliente
+if (!isset($_SESSION['dni']) || $_SESSION['tipo_usuario'] !== 'cliente') {
+
+}
+
 // Validar el parámetro id
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("ID de servicio no válido.");
@@ -109,10 +116,18 @@ $imagen = !empty($servicio['fotoServicio']) && file_exists(__DIR__ . "/" . $serv
                         </div>
                     <?php endif; ?>
 
-                    <a href="<?= $servicioYaEnCarrito ? "ver_carrito.php?idContrato={$contratoAbierto['idContrato']}" : "agregar_servicio_carrito.php?idContrato={$contratoAbierto['idContrato']}&idServicio={$servicio['idServicio']}" ?>" 
-                       class="btn btn-primary btn-lg">
-                        <i class="fas fa-shopping-cart"></i> <?= $servicioYaEnCarrito ? 'Ya en el carrito' : 'Contratar Servicio' ?>
-                    </a>
+                    <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>
+                        <!-- Botón habilitado para clientes -->
+                        <a href="<?= $servicioYaEnCarrito ? "ver_carrito.php?idContrato={$contratoAbierto['idContrato']}" : "agregar_servicio_carrito.php?idContrato={$contratoAbierto['idContrato']}&idServicio={$servicio['idServicio']}" ?>" 
+                           class="btn btn-primary btn-lg">
+                            <i class="fas fa-shopping-cart"></i> <?= $servicioYaEnCarrito ? 'Ya en el carrito' : 'Contratar Servicio' ?>
+                        </a>
+                    <?php else: ?>
+                        <!-- Mensaje para usuarios no clientes -->
+                        <div class="alert alert-warning mt-3">
+                            <i class="fas fa-exclamation-circle"></i> Debes iniciar sesión como cliente para contratar un servicio.
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
