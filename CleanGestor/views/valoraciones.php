@@ -38,80 +38,7 @@ $serviciosPorContrato = $data['servicios'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="../assets/css/responsive.css" rel="stylesheet">
-    <style>
-        .star-rating {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: center;
-            margin-top: 5px;
-        }
 
-        .star-rating span {
-            font-size: 1rem;
-            margin-right: 2px;
-        }
-
-        .text-warning {
-            color: #ffc107;
-        }
-
-        .text-muted {
-            color: #ddd;
-        }
-
-        .card {
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .card-header {
-            font-size: 0.9rem;
-            padding: 8px 12px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #ddd;
-            text-align: center;
-        }
-
-        .card-body {
-            padding: 8px 12px;
-        }
-
-        ul {
-            padding-left: 0;
-            list-style: none;
-        }
-
-        li {
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn-valorar {
-            padding: 4px 8px;
-            font-size: 0.8rem;
-        }
-
-        .page-title {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .page-subtitle {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 15px;
-        }
-    </style>
 </head>
 <body class="sub_page">
     <div class="hero_area">
@@ -136,9 +63,9 @@ $serviciosPorContrato = $data['servicios'];
                     </div>
                     <div class="card-body">
                         <h6 class="mb-1 text-center">Servicios:</h6>
-                        <ul>
+                        <div class="ul-valoraciones">
                         <?php foreach ($serviciosPorContrato[$contrato['idContrato']] as $servicio): ?>
-                            <li>
+                            <div class="li-valoraciones">
                                 <div>
                                     <?= htmlspecialchars($servicio['nombreServicio']) ?> - 
                                     <?= number_format($servicio['precio'], 2, ',', '.') ?> €
@@ -159,9 +86,9 @@ $serviciosPorContrato = $data['servicios'];
                                         Valorar
                                     </a>
                                 <?php endif; ?>
-                            </li>
+                            </div>
                         <?php endforeach; ?>
-                        </ul>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>

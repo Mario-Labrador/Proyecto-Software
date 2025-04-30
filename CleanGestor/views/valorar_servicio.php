@@ -55,32 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valorar Servicio</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
-    <style>
-        .star-rating {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: center;
-        }
-
-        .star-rating input {
-            display: none;
-        }
-
-        .star-rating label {
-            font-size: 2rem;
-            color: #ddd;
-            cursor: pointer;
-        }
-
-        .star-rating input:checked ~ label {
-            color: #ffc107;
-        }
-
-        .star-rating label:hover,
-        .star-rating label:hover ~ label {
-            color: #ffc107;
-        }
-    </style>
+    <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="../assets/css/responsive.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">

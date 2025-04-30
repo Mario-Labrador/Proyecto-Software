@@ -23,7 +23,7 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
             <?php if (isset($_SESSION['dni'])): ?>
             
             <?php if ($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'empleado'): ?>
-                <li class="nav-item"><a class="nav-link" href="buscar_empleo.php">SOLICITUDES DE EMPLEO</a></li>
+                <li class="nav-item"><a class="nav-link" href="buscar_empleo.php">BUSCAR EMPLEO</a></li>
             <?php endif; ?>
             
             <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>

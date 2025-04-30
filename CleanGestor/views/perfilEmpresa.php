@@ -62,10 +62,9 @@ $yaSolicito = $solicitudDAO->yaHaSolicitado($dni, $idEmpresa);
       <div class="container">
         <div class="profile-card animate__animated animate__fadeInUp">
           <div class="text-center">
-            <img src="../assets/images/building-icon.png" 
-                alt="Logo empresa" 
-                class="profile-image mb-2" 
-                style="max-height: 200px; border-radius: 50%;">
+          <div class="profile-icon-container mb-2">
+            <i class="fa-solid fa-building fa-3x"></i>
+          </div>
             <h2 class="mt-3"><?php echo htmlspecialchars($empresa->getNombreEmpresa()); ?></h2>
             <p class="text-muted mb-2">Empresa registrada</p>
           </div>
