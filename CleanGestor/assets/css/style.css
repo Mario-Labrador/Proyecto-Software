@@ -1374,3 +1374,34 @@ a:focus {
   font-size: 1rem;
   padding: 10px 15px;
 }
+
+.image-container {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.service-img-container {
+  width: 100%;     
+  max-width: 300px;  
+  aspect-ratio: 1 / 1; 
+  margin: 0 auto 16px auto; 
+  margin-left: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.service-img {
+  max-width: 100%;      /* Nunca será más ancha que su contenedor */
+  max-height: 250px;    /* Limita la altura máxima, ajusta a tu diseño */
+  width: auto;          /* El ancho se ajusta automáticamente */
+  height: auto;         /* La altura se ajusta automáticamente */
+  display: block;
+  margin: 0 auto 24px auto; /* Centrada y con margen inferior */
+}
+
+

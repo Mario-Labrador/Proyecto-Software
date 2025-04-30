@@ -87,9 +87,11 @@ $imagen = !empty($servicio['fotoServicio']) && file_exists(__DIR__ . "/" . $serv
         <div class="service-card mx-auto mt-4" style="max-width: 800px;">
             <div class="row g-4 align-items-center">
                 <div class="col-md-5 text-center">
-                    <img src="<?= $imagen ?>" 
-                         alt="Imagen del servicio" 
-                         class="service-img img-fluid">
+                    <div class="service-img-container">
+                        <img src="<?= $imagen ?>" 
+                            alt="Imagen del servicio" 
+                            class="service-img">
+                    </div>
                 </div>
                 <div class="col-md-7">
                     <h1 class="service-title mb-3"><?= htmlspecialchars($servicio['nombreServicio']) ?></h1>
@@ -109,10 +111,18 @@ $imagen = !empty($servicio['fotoServicio']) && file_exists(__DIR__ . "/" . $serv
                         </div>
                     <?php endif; ?>
 
-                    <a href="<?= $servicioYaEnCarrito ? "ver_carrito.php?idContrato={$contratoAbierto['idContrato']}" : "agregar_servicio_carrito.php?idContrato={$contratoAbierto['idContrato']}&idServicio={$servicio['idServicio']}" ?>" 
-                       class="btn btn-primary btn-lg">
-                        <i class="fas fa-shopping-cart"></i> <?= $servicioYaEnCarrito ? 'Ya en el carrito' : 'Contratar Servicio' ?>
-                    </a>
+                    <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>
+                        <!-- Botón habilitado para clientes -->
+                        <a href="<?= $servicioYaEnCarrito ? "ver_carrito.php?idContrato={$contratoAbierto['idContrato']}" : "agregar_servicio_carrito.php?idContrato={$contratoAbierto['idContrato']}&idServicio={$servicio['idServicio']}" ?>" 
+                           class="btn btn-primary btn-lg mb-3">
+                            <i class="fas fa-shopping-cart"></i> <?= $servicioYaEnCarrito ? 'Ya en el carrito' : 'Contratar Servicio' ?>
+                        </a>
+                    <?php else: ?>
+                        <!-- Mensaje para usuarios no clientes -->
+                        <div class="alert alert-warning mt-3" style="margin-right: 40px;">
+                            <i class="fas fa-exclamation-circle"></i> Debes iniciar sesión como cliente para contratar un servicio.
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

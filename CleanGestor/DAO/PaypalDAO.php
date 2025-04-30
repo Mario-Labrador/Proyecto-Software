@@ -1,5 +1,5 @@
 <?php
-require_once 'Paypal.php';
+require_once 'PaypalVO.php';
 
 class PaypalDAO {
     private $conn;
