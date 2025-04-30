@@ -48,6 +48,7 @@ if (isset($_POST['finalizar_contrato'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

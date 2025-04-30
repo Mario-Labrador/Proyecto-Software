@@ -50,5 +50,39 @@ class ContratoServicioDAO {
         $resultado = $stmt->get_result();
         return $resultado->num_rows > 0; // Devuelve true si el servicio ya está en el contrato
     }
+
+    public function obtenerContratosConServicios($dni) {
+        $sqlContratos = "SELECT c.idContrato, c.fecha, c.lugar 
+                         FROM contrato c 
+                         WHERE c.dni = ?";
+        $stmt = $this->conexion->prepare($sqlContratos);
+        $stmt->bind_param("s", $dni);
+        $stmt->execute();
+        $resultContratos = $stmt->get_result();
+    
+        $contratos = [];
+        $servicios = [];
+    
+        while ($contrato = $resultContratos->fetch_assoc()) {
+            $contratos[] = $contrato;
+    
+            // Obtener servicios para cada contrato
+            $sqlServicios = "SELECT s.idServicio, s.nombreServicio, s.precio 
+                             FROM servicio s 
+                             INNER JOIN contratoservicio cs ON s.idServicio = cs.idServicio 
+                             WHERE cs.idContrato = ?";
+            $stmtServicios = $this->conexion->prepare($sqlServicios);
+            $stmtServicios->bind_param("i", $contrato['idContrato']);
+            $stmtServicios->execute();
+            $resultServicios = $stmtServicios->get_result();
+    
+            while ($servicio = $resultServicios->fetch_assoc()) {
+                $servicios[$contrato['idContrato']][] = $servicio;
+            }
+        }
+    
+        return ['contratos' => $contratos, 'servicios' => $servicios];
+    }
+
 }
 ?>
