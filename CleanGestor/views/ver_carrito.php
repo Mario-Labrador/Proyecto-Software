@@ -1,9 +1,9 @@
 <?php
 session_start();
 require_once("../DAO/ContratoServicioDAO.php");
+require_once("../DAO/ContratoDAO.php");
 require_once("../config/db.php");
 
-// Verificar si el usuario está logueado y es cliente
 if (!isset($_SESSION['dni']) || $_SESSION['tipo_usuario'] !== 'cliente') {
     header("Location: login.php?mensaje=Debes iniciar sesión como cliente para ver el carrito.");
     exit();
@@ -23,6 +23,29 @@ $servicios = $contratoServicioDAO->obtenerServiciosPorContrato($idContrato);
 // Variables para calcular el total
 $totalPrecio = 0;
 $totalServicios = 0;
+
+// Verificar si se ha enviado el formulario para finalizar el contrato
+if (isset($_POST['finalizar_contrato'])) {
+    // Crear una instancia del DAO de contrato
+    $contratoDAO = new ContratoDAO($conexion);
+
+    // Crear un objeto ContratoVO
+    // En este caso, pasamos el idContrato (ya lo tenemos en la variable) y el estado "finalizado"
+    $contratoVO = new ContratoVO(null, null, null, 'finalizado');  // Pasamos null para los otros campos que no necesitamos
+    $contratoVO->setIdContrato($idContrato);  // Establecer el id del contrato
+    
+
+    // Intentar cerrar el contrato pasando el objeto ContratoVO
+    if ($contratoDAO->cerrarContrato($contratoVO)) {
+        // Guardar el total en la sesión
+
+        // Redirigir a la página de pago
+        header("Location: pago2.php?idContrato=" . $idContrato);
+        exit();
+    } else {
+        echo "Hubo un error al cerrar el contrato.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +82,7 @@ $totalServicios = 0;
                                     <?php while ($row = $servicios->fetch_assoc()): ?>
                                         <?php
                                         $totalPrecio += $row['precio'];
+                                        $_SESSION['total_pago'] = $totalPrecio;
                                         $totalServicios++;
                                         $fotoServicio = !empty($row['fotoServicio']) 
                                             ? htmlspecialchars($row['fotoServicio']) 
