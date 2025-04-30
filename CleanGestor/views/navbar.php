@@ -34,7 +34,7 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
                     </a>
                     <ul class="dropdown-menu shadow rounded" aria-labelledby="areaClienteDropdown">
                         <li><a class="dropdown-item" href="servicios.php"><i class="fas fa-concierge-bell me-2"></i>Servicios</a></li>
-                        <li><a class="dropdown-item" href="servicios_contratados_cliente.php"><i class="fas fa-handshake me-2"></i>Servicios Contratados</a></li>
+                        <li><a class="dropdown-item" href="servicios_contratados.php"><i class="fas fa-handshake me-2"></i>Servicios Contratados</a></li>
                         <li><a class="dropdown-item" href="valoraciones.php"><i class="fas fa-star me-2"></i>Valoraciones</a></li>
                     </ul>
                 </li>

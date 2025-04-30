@@ -37,35 +37,23 @@ class ContratoDAO {
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc(); // Devuelve el contrato abierto o null si no existe
     }
-
-    public function obtenerContratosConServicios($dni) {
-        $sqlContratos = "SELECT c.idContrato, c.fecha, c.lugar 
-                         FROM contrato c 
-                         WHERE c.dni = ?";
-        $stmt = $this->conexion->prepare($sqlContratos);
-        $stmt->bind_param("s", $dni);
-        $stmt->execute();
-        $resultContratos = $stmt->get_result();
-        $contratos = $resultContratos->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
-
-        // Obtener los servicios asociados a cada contrato
-        $contratoServicios = [];
-        foreach ($contratos as $contrato) {
-            $idContrato = $contrato['idContrato'];
-            $sqlServicios = "SELECT s.nombreServicio, s.precio 
-                             FROM servicio s
-                             INNER JOIN contratoservicio cs ON s.idServicio = cs.idServicio
-                             WHERE cs.idContrato = ?";
-            $stmt = $this->conexion->prepare($sqlServicios);
-            $stmt->bind_param("i", $idContrato);
+    public function cerrarContrato(ContratoVO $contrato) {
+        try {
+            // En este caso, siempre actualizas el estado a 'finalizado'
+            $sql = "UPDATE contrato SET estado = 'finalizado' WHERE idContrato = ?";  
+            
+            $stmt = $this->conexion->prepare($sql);
+            
+            // Aquí solo necesitas el idContrato del objeto para actualizar el registro
+            $stmt->bind_param('i', $contrato->getIdContrato()); // 'i' es para integer
+            
             $stmt->execute();
-            $resultServicios = $stmt->get_result();
-            $contratoServicios[$idContrato] = $resultServicios->fetch_all(MYSQLI_ASSOC);
-            $stmt->close();
+            
+            return true;
+        } catch (Exception $e) {
+            echo "Error al actualizar el estado del contrato: " . $e->getMessage();
+            return false;
         }
-
-        return ['contratos' => $contratos, 'servicios' => $contratoServicios];
     }
 }
 ?>
