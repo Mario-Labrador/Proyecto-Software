@@ -66,7 +66,7 @@ if (isset($_POST['finalizar_contrato'])) {
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="card shadow-lg border-0">
+                <div class="card shadow-lg border-0" style="max-width:1200px; margin:0 auto;">
                     <div class="card-body p-4">
                         <div class="row">
                             <!-- Encabezado -->
