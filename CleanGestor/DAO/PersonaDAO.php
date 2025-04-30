@@ -175,7 +175,7 @@ class PersonaDAO {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result['nombrePersona'] : null;  
     }
-    public function getApelldioPorDni($dni) {
+    public function getApellidoPorDni($dni) {
         $pdo = Database::connect();
         $sql = "SELECT apellidosPersona FROM persona WHERE dni = :dni"; 
         $stmt = $pdo->prepare($sql);

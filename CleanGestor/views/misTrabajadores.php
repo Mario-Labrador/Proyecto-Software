@@ -41,7 +41,7 @@ foreach ($trabajadores as $trabajador) {
     // Obtener foto de perfil y nombre
     $fotoPerfil = $personaDAO->getFotoPerfilPorDni($dniTrabajador);
     $nombre = $personaDAO->getNombrePorDni($dniTrabajador);
-    $apellido = $personaDAO->getApelldioPorDni($dniTrabajador);
+    $apellido = $personaDAO->getApellidoPorDni($dniTrabajador);
 
     // Agregar los datos al array
     $trabajadoresConFoto[] = [
