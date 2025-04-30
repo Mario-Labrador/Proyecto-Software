@@ -49,82 +49,100 @@ if (isset($_POST['finalizar_contrato'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
+    <title>Carrito | CLEAN GESTOR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Carrito</h1>
-        <div class="row">
-            <!-- Lista de servicios -->
-            <div class="col-md-8">
-                <?php if ($servicios->num_rows > 0): ?>
-                    <?php while ($row = $servicios->fetch_assoc()): ?>
-                        <?php
-                        $totalPrecio += $row['precio'];
-                        $totalServicios++;
-                        ?>
-                        <div class="cart-item d-flex align-items-center p-3 mb-3 rounded">
-                            <div class="me-4">
-                                <?php
-                                $fotoServicio = !empty($row['fotoServicio']) 
-                                    ? htmlspecialchars($row['fotoServicio']) 
-                                    : '../assets/images/default_service.png';
-                                ?>
-                                <img src="<?= $fotoServicio ?>" 
-                                     alt="<?= htmlspecialchars($row['nombreServicio']) ?>" 
-                                     class="img-thumbnail cart-image">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <!-- Encabezado -->
+                            <div class="col-12 mb-4 text-center">
+                                <h2 class="fw-bold mb-0">
+                                    <i class="fas fa-shopping-cart text-success me-2"></i>
+                                    Tu Carrito de Servicios
+                                </h2>
+                                <p class="text-muted mb-0">Revisa y gestiona los servicios seleccionados</p>
                             </div>
-                            <div class="flex-grow-1">
-                                <h5 class="mb-2"><?= htmlspecialchars($row['nombreServicio']) ?></h5>
-                                <p class="mb-0 text-muted"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
+                            <!-- Lista de servicios -->
+                            <div class="col-md-8 border-end">
+                                <?php if ($servicios->num_rows > 0): ?>
+                                    <?php while ($row = $servicios->fetch_assoc()): ?>
+                                        <?php
+                                        $totalPrecio += $row['precio'];
+                                        $_SESSION['total_pago'] = $totalPrecio;
+                                        $totalServicios++;
+                                        $fotoServicio = !empty($row['fotoServicio']) 
+                                            ? htmlspecialchars($row['fotoServicio']) 
+                                            : '../assets/images/default_service.png';
+                                        ?>
+                                        <div class="d-flex align-items-center mb-4 p-3 bg-light rounded shadow-sm">
+                                            <img src="<?= $fotoServicio ?>" alt="<?= htmlspecialchars($row['nombreServicio']) ?>" 
+                                                class="img-thumbnail me-4" style="width: 80px; height: 80px; object-fit:cover;">
+                                            <div class="flex-grow-1">
+                                                <h5 class="ml-3"><?= htmlspecialchars($row['nombreServicio']) ?></h5>
+                                                <span class="badge bg-primary text-white ml-3"><?= number_format($row['precio'], 2, ',', '.') ?> €</span>
+                                            </div>
+                                            <a href="eliminar_servicio_carrito.php?idContrato=<?= $idContrato ?>&idServicio=<?= $row['idServicio'] ?>" 
+                                            class="btn btn-outline-danger btn-sm ms-4" title="Eliminar servicio">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </div>
+                                    <?php endwhile; ?>
+                                <?php else: ?>
+                                    <div class="alert alert-info text-center">
+                                        <i class="fas fa-info-circle"></i> Todavía no has añadido ningún servicio.
+                                    </div>
+                                <?php endif; ?>
                             </div>
-                            <div>
-                                <a href="eliminar_servicio_carrito.php?idContrato=<?= $idContrato ?>&idServicio=<?= $row['idServicio'] ?>" 
-                                   class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i> Eliminar
-                                </a>
+                            <!-- Resumen del carrito -->
+                            <div class="col-md-4 d-flex flex-column">
+                                <div class="p-4 bg-white rounded shadow-sm h-100 d-flex flex-column">
+                                    <h4 class="fw-bold mb-3">Resumen</h4>
+                                    <ul class="list-group mb-3">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Total de Servicios
+                                        <span class="badge bg-primary text-white rounded-pill"><?= $totalServicios ?></span>
+                                    </li>
+                                        <strong class="list-group-item d-flex justify-content-between align-items-center">
+                                            Precio Total
+                                            <span class="fw-bold text-success"><?= number_format($totalPrecio, 2, ',', '.') ?> €</span>
+                                        </strong>
+                                    </ul>
+                                    <div class="mt-auto">
+                                    <?php if ($totalServicios > 0): ?>
+                                         <!-- Formulario para finalizar el contrato -->
+                                        <form method="POST" action="">
+                                     <button type="submit" name="finalizar_contrato" class="btn btn-success btn-lg w-100 mb-3">
+                                        <i class="fas fa-check"></i> Finalizar Contrato
+                                    </button>
+                                     </form>
+                                     <?php else: ?>
+                                     <button class="btn btn-success" disabled>
+                                     <i class="fas fa-check"></i> Añade algún servicio al carrito
+                                       </button>
+                                        <?php endif; ?>
+                                        <a href="servicios.php" class="btn btn-outline-secondary btn-lg w-100">
+                                            <i class="fas fa-arrow-left"></i> Seguir Contratando
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <p class="text-center text-muted">Todavía no has añadido ningún servicio.</p>
-                <?php endif; ?>
-            </div>
-
-            <!-- Resumen del carrito -->
-            <div class="col-md-4">
-                <div class="cart-summary">
-                    <h4>Resumen del Carrito</h4>
-                    <p><strong>Total de Servicios:</strong> <?= $totalServicios ?></p>
-                    <p><strong>Precio Total:</strong> <?= number_format($totalPrecio, 2, ',', '.') ?> €</p>
-                    <div class="d-grid gap-2">
-                        <?php
-                        // Guardar el total en la sesión (solo esta línea añadida)
-                        $_SESSION['total_pago'] = $totalPrecio;
-                        ?>
-                        <?php if ($totalServicios > 0): ?>
-                            <!-- Formulario para finalizar el contrato -->
-                            <form method="POST" action="">
-                                <button type="submit" name="finalizar_contrato" class="btn btn-success">
-                                    <i class="fas fa-check"></i> Finalizar Contrato
-                                </button>
-                            </form>
-                        <?php else: ?>
-                            <button class="btn btn-success" disabled>
-                                <i class="fas fa-check"></i> Añade algún servicio al carrito
-                            </button>
-                        <?php endif; ?>
-                        <a href="servicios.php" class="btn btn-secondary">
-                            <i class="fas fa-arrow-left"></i> Seguir Contratando
-                        </a>
                     </div>
                 </div>
             </div>
