@@ -1,5 +1,6 @@
 <?php
 session_start();
+$totalPago = isset($_SESSION['total_pago']) ? number_format($_SESSION['total_pago'], 2, '.', '') : '0.00';
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +19,6 @@ session_start();
   <link href="../assets/css/responsive.css" rel="stylesheet" />
 
   <style>
-    /* Ocultar el botón de tarjeta de crédito/débito */
     .paypal-button-wrapper {
         display: none !important;
     }
@@ -35,7 +35,10 @@ session_start();
 
     <section class="login_section">
       <div class="login_box">
-        <h2>Selecciona tu Método de Pago</h2>
+      <h2>Total a pagar:</h2>
+      <h2><strong class="text-primary"><?= $totalPago ?> €</strong></h2>
+
+
         <form action="procesar_pago_stripe.php" method="POST" id="payment-form">
           <div class="form-group">
             <label for="forma_pago">Método de Pago</label>
@@ -55,12 +58,12 @@ session_start();
             <div id="card-errors" role="alert" style="color: red;"></div>
           </div>
 
-          <!-- PayPal Button (Always visible when selected) -->
+          <!-- PayPal Button -->
           <div id="paypal_fields" style="display: none;">
             <div id="paypal-button-container"></div>
           </div>
 
-          <!-- Submit Button (Visible only for Stripe) -->
+          <!-- Submit Button -->
           <button type="submit" class="btn btn-success btn-block" id="submit-button" style="display: none;">Pagar</button>
         </form>
       </div>
@@ -73,8 +76,8 @@ session_start();
   <!-- Stripe -->
   <script src="https://js.stripe.com/v3/"></script>
 
-  <!-- PayPal SDK (Client ID ya incluido) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=ARbnydAWoP3tnbQ2Z_BkSMUPDb0ghoyh8z-hlycoMNNQODBONDWPttgXae8GNzJz2nygZnIAhXHloY3u&currency=USD&components=buttons"></script>
+  <!-- PayPal -->
+  <script src="https://www.paypal.com/sdk/js?client-id=ARbnydAWoP3tnbQ2Z_BkSMUPDb0ghoyh8z-hlycoMNNQODBONDWPttgXae8GNzJz2nygZnIAhXHloY3u&currency=EUR&components=buttons"></script>
 
   <script>
     const stripe = Stripe('pk_test_51RJGemRiSDxu7JZhO5rKCvELDh5t8KA8pAUvGx4TEZpTM2jNvF6j5Du2iz65Edig1V5dNS8YF2HWYcPlnHgk7ut000Nxcx22JC');
@@ -86,17 +89,20 @@ session_start();
     const paypalFields = document.getElementById('paypal_fields');
     const submitButton = document.getElementById('submit-button');
 
-    // Mostrar campos según el método de pago seleccionado
+    // Total desde PHP (en euros como string)
+    const totalPago = "<?= $totalPago ?>";
+
+    // Cambiar visibilidad según método seleccionado
     document.getElementById('forma_pago').addEventListener('change', function () {
       const metodo = this.value;
       if (metodo === 'tarjeta') {
         tarjetaFields.style.display = 'block';
         paypalFields.style.display = 'none';
-        submitButton.style.display = 'block'; // Mostrar botón de pagar para tarjeta
+        submitButton.style.display = 'block';
       } else if (metodo === 'paypal') {
         tarjetaFields.style.display = 'none';
-        paypalFields.style.display = 'block'; // Mostrar el botón de PayPal
-        submitButton.style.display = 'none'; // Ocultar el botón de pagar
+        paypalFields.style.display = 'block';
+        submitButton.style.display = 'none';
       } else {
         tarjetaFields.style.display = 'none';
         paypalFields.style.display = 'none';
@@ -104,7 +110,7 @@ session_start();
       }
     });
 
-    // Stripe tokenization
+    // Stripe token
     const form = document.getElementById('payment-form');
     form.addEventListener('submit', function (event) {
       if (document.getElementById('forma_pago').value === 'tarjeta') {
@@ -124,7 +130,7 @@ session_start();
       }
     });
 
-    // PayPal Button render
+    // Renderizar botón de PayPal
     let paypalButtons;
     function renderPaypalButton() {
       if (paypalButtons) {
@@ -135,7 +141,7 @@ session_start();
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: '50.00'
+                value: totalPago // Usar total de sesión
               }
             }]
           });
@@ -154,14 +160,95 @@ session_start();
       paypalButtons.render('#paypal-button-container');
     }
 
-    renderPaypalButton(); // Siempre renderizar el botón de PayPal cuando se carga la página
+    renderPaypalButton();
   </script>
 
-  <!-- Footer -->
+  <!-- Info Section -->
+  <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="info_contact">
+            <h4>
+              Dirección
+            </h4>
+            <div class="contact_link_box">
+              <a href="href=login.php">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Calle Cineasta Carlos Saura, 123, Ciudad
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  Llama al: 685 145 788
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  contacto@cleangestor.com
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="info_social">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_link_box">
+            <h4>
+              Enlaces
+            </h4>
+            <div class="info_links">
+              <a href="Index.php">
+                Inicio
+              </a>
+              <a href="informate.php">
+                Sobre Nosotros
+              </a>
+              <a href="servicios.php">
+                Servicios
+              </a>
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_detail">
+            <h4>
+              Información
+            </h4>
+            <p>
+              CLEAN GESTOR es tu aliado para mantener tus espacios limpios y organizados. Contáctanos para más información.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end Info Section -->
+
+  <!-- Footer Section -->
   <footer class="footer_section">
     <div class="container">
-      <p>&copy; <span id="displayYear"></span> Todos los derechos reservados por
-        <a href="#">CLEAN GESTOR</a></p>
+      <p>
+        &copy; <span id="displayYear"></span> Todos los derechos reservados por
+        <a href="#">CLEAN GESTOR</a>
+      </p>
     </div>
   </footer>
 
@@ -169,5 +256,4 @@ session_start();
     document.getElementById("displayYear").textContent = new Date().getFullYear();
   </script>
 </body>
-
 </html>
