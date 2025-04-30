@@ -28,6 +28,8 @@ $conexion->close();
     <title>Historial de Contratos</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body class="sub_page">
     <div class="hero_area">

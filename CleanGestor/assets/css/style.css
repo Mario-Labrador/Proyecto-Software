@@ -1373,3 +1373,79 @@ a:focus {
   font-size: 1rem;
   padding: 10px 15px;
 }
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.star-rating span {
+  font-size: 1rem;
+  margin-right: 2px;
+}
+
+.text-warning {
+  color: #ffc107;
+}
+
+.text-muted {
+  color: #ddd;
+}
+
+.card {
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-header {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.card-body {
+  padding: 8px 12px;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+li {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-valorar {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.page-title {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.page-subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* ------- */
+
