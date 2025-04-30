@@ -1,29 +1,40 @@
 <?php
+session_start();
 require_once '../vendor/autoload.php';  // Usa Composer para cargar la librería Stripe
 
-// Configura tu clave secreta de prueba de Stripe
+\Stripe\Stripe::setApiKey('sk_test_51RJGemRiSDxu7JZh0lntrnDAZ8Gs4GZitFspHbofMBQXvriDZkQ1rRTSjoKbYsYyB4rFA22kJLwVk2aEbCSLDGuB00FNM8xJ0b'); // Cambia por tu clave secreta real
 
-// Obtén el token enviado desde el frontend
+// Obtener el token desde el formulario
+$token = $_POST['stripeToken'] ?? null;
 
 if (!$token) {
     die('Token no recibido. El pago no pudo ser procesado.');
 }
 
+// Verifica si el total está disponible en la sesión
+if (!isset($_SESSION['total_pago'])) {
+    die('No se ha establecido el monto del pago en la sesión.');
+}
+
+$monto = $_SESSION['total_pago']; // Monto en euros
+$montoCentavos = intval($monto * 100); // Stripe trabaja en centavos
+
 try {
-    // Crea el cargo (pago) en Stripe
     $charge = \Stripe\Charge::create([
-        'amount' => 5000,  // El monto en centavos (Ej: 5000 = $50)
-        'currency' => 'usd',
-        'description' => 'Pago de prueba',
-        'source' => $token,  // El token enviado desde el formulario
+        'amount' => $montoCentavos,
+        'currency' => 'eur',
+        'description' => 'Pago de servicios contratados',
+        'source' => $token,
     ]);
 
-    // Si el pago es exitoso, redirige a la página de confirmación
-    header("Location: confirmacion_pago.php");
+    // Limpia el total de la sesión si el pago fue exitoso
+    unset($_SESSION['total_pago']);
+
+    // Redirige a la confirmación
+    header("Location: pago_confirmado.php");
     exit;
 
 } catch (\Stripe\Exception\ApiErrorException $e) {
-    // Maneja el error
     echo "Error al procesar el pago: " . $e->getMessage();
 }
 ?>

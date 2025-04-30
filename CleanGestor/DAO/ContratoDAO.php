@@ -37,7 +37,24 @@ class ContratoDAO {
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc(); // Devuelve el contrato abierto o null si no existe
     }
-
+    public function cerrarContrato(ContratoVO $contrato) {
+        try {
+            // En este caso, siempre actualizas el estado a 'finalizado'
+            $sql = "UPDATE contrato SET estado = 'finalizado' WHERE idContrato = ?";  
+            
+            $stmt = $this->conexion->prepare($sql);
+            
+            // Aquí solo necesitas el idContrato del objeto para actualizar el registro
+            $stmt->bind_param('i', $contrato->getIdContrato()); // 'i' es para integer
+            
+            $stmt->execute();
+            
+            return true;
+        } catch (Exception $e) {
+            echo "Error al actualizar el estado del contrato: " . $e->getMessage();
+            return false;
+        }
+    }
     public function obtenerContratosConServicios($dni) {
         $sqlContratos = "SELECT c.idContrato, c.fecha, c.lugar 
                          FROM contrato c 

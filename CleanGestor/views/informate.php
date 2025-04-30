@@ -183,69 +183,6 @@
     gsap.from(".img-box img", { duration: 1.5, scale: 0.8, opacity: 0, delay: 1 });
   </script>
 </body>
-<!-- Info Section -->
-<section class="info_section layout_padding2">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="info_contact">
-          <h4>Dirección</h4>
-          <div class="contact_link_box">
-            <a href="login.php">
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span>Calle Cineasta Carlos Saura, 123, Ciudad</span>
-            </a>
-            <a href="#">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              <span>Llama al: 685 145 788</span>
-            </a>
-            <a href="#">
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              <span>contacto@cleangestor.com</span>
-            </a>
-          </div>
-        </div>
-        <div class="info_social">
-          <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-          <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-          <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-          <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="info_link_box">
-          <h4>Enlaces</h4>
-          <div class="info_links">
-            <a href="Index.php">Inicio</a>
-            <a href="informate.php">Sobre Nosotros</a>
-            <a href="servicios.php">Servicios</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="info_detail">
-          <h4>Información</h4>
-          <p>CLEAN GESTOR es tu aliado para mantener tus espacios limpios y organizados. Contáctanos para más información.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end Info Section -->
 
-<!-- Footer Section -->
-<footer class="footer_section">
-  <div class="container">
-    <p>
-      &copy; <span id="displayYear"></span> Todos los derechos reservados por
-      <a href="#">CLEAN GESTOR</a>
-    </p>
-  </div>
-</footer>
-<!-- end Footer Section -->
-
-<script>
-  document.getElementById("displayYear").textContent = new Date().getFullYear();
-</script>
 
 </html>
