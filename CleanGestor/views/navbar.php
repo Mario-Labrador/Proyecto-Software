@@ -11,86 +11,91 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
     <a class="navbar-brand animate__animated animate__fadeInDown" href="index.php">
         <span>CLEAN GESTOR</span>
     </a>
-    <button class="navbar-toggler animate__animated animate__fadeInDown" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler animate__animated animate__fadeInDown" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item"><a class="nav-link" href="index.php">INICIO</a></li>
             <li class="nav-item"><a class="nav-link" href="informate.php">SOBRE NOSOTROS</a></li>
-            <li class="nav-item"><a class="nav-link" href="servicios.php">SERVICIOS</a></li>
+            
             <?php if (isset($_SESSION['dni'])): ?>
-            
-            <?php if ($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'empleado'): ?>
-                <li class="nav-item"><a class="nav-link" href="buscar_empleo.php">BUSCAR EMPLEO</a></li>
-            <?php endif; ?>
-            
-            <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>
-                <!-- Menú ÁREA CLIENTE -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="areaClienteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle me-1"></i> ÁREA CLIENTE
-                    </a>
-                    <ul class="dropdown-menu shadow rounded" aria-labelledby="areaClienteDropdown">
-                        <li><a class="dropdown-item" href="servicios.php"><i class="fas fa-concierge-bell me-2"></i>Servicios</a></li>
-                        <li><a class="dropdown-item" href="servicios_contratados_cliente.php"><i class="fas fa-handshake me-2"></i>Servicios Contratados</a></li>
-                        <li><a class="dropdown-item" href="valoraciones.php"><i class="fas fa-star me-2"></i>Valoraciones</a></li>
-                    </ul>
-                </li>
-            <?php endif; ?>
+                <?php if (!($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'empleado')): ?>
+                    <li class="nav-item"><a class="nav-link" href="servicios.php">SERVICIOS</a></li>
+                <?php else: ?>
+                    <li class="nav-item"><a class="nav-link" href="servicios_pendientes.php">SERVICIOS</a></li>
+                <?php endif; ?>
 
-            <?php if ($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'administrador'): ?>
+                <?php if ($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'empleado'): ?>
+                    <li class="nav-item"><a class="nav-link" href="buscar_empleo.php">BUSCAR EMPLEO</a></li>
+                <?php endif; ?>
+
+                <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>
+                    <!-- Menú ÁREA CLIENTE -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="areaClienteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-1"></i> ÁREA CLIENTE
+                        </a>
+                        <ul class="dropdown-menu shadow rounded" aria-labelledby="areaClienteDropdown">
+                            <li><a class="dropdown-item" href="servicios.php"><i class="fas fa-concierge-bell me-2"></i>Servicios</a></li>
+                            <li><a class="dropdown-item" href="servicios_contratados_cliente.php"><i class="fas fa-handshake me-2"></i>Servicios Contratados</a></li>
+                            <li><a class="dropdown-item" href="valoraciones.php"><i class="fas fa-star me-2"></i>Valoraciones</a></li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($_SESSION['tipo_usuario'] === 'trabajador' && $_SESSION['rol'] === 'administrador'): ?>
                     <!-- Menú desplegable MI EMPRESA -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="miEmpresaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="miEmpresaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             MI EMPRESA
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="miEmpresaDropdown">
-                            <a class="dropdown-item" href="misServicios.php"><i class="fas fa-briefcase me-2"></i>Mis Servicios</a>
-                            <a class="dropdown-item" href="estadisticas.php"><i class="fas fa-chart-bar me-2"></i>Estadisticas</a>
-                            <a class="dropdown-item" href="asignar_servicio.php"><i class="fas fa-user-check me-2"></i>Asignar contrato</a>
-                            <a class="dropdown-item" href="misTrabajadores.php"><i class="fas fa-user-tie me-2"></i>Mis trabajadores</a>
-                            <a class="dropdown-item" href="solicitudes_empleo.php"><i class="fas fa-file-signature me-2"></i>Solicitudes de empleo </a>
-                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="miEmpresaDropdown">
+                            <li><a class="dropdown-item" href="misServicios.php"><i class="fas fa-briefcase me-2"></i>Mis Servicios</a></li>
+                            <li><a class="dropdown-item" href="estadisticas.php"><i class="fas fa-chart-bar me-2"></i>Estadisticas</a></li>
+                            <li><a class="dropdown-item" href="asignar_servicio.php"><i class="fas fa-user-check me-2"></i>Asignar contrato</a></li>
+                            <li><a class="dropdown-item" href="misTrabajadores.php"><i class="fas fa-user-tie me-2"></i>Mis trabajadores</a></li>
+                            <li><a class="dropdown-item" href="solicitudes_empleo.php"><i class="fas fa-file-signature me-2"></i>Solicitudes de empleo </a></li>
+                        </ul>
                     </li>
-            <?php endif; ?>
+                <?php endif; ?>
 
-            <!-- Perfil del usuario -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 10px 15px;">
-                    <img 
-                        src="<?php echo htmlspecialchars($foto_perfil); ?>"
-                        alt="Foto de perfil"
-                        class="rounded-circle shadow-sm border border-2"
-                        style="height: 42px; width: 42px; object-fit: cover; margin-right: 8px;"
-                    >
-                    <span class="fw-semibold"><?php echo $_SESSION['nombre'] ?? 'Usuario'; ?></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow rounded" aria-labelledby="profileDropdown">
-                    <li class="px-3 py-2 text-center">
+                <!-- Perfil del usuario -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 10px 15px;">
                         <img 
                             src="<?php echo htmlspecialchars($foto_perfil); ?>"
                             alt="Foto de perfil"
-                            class="rounded-circle mb-2"
-                            style="height: 60px; width: 60px; object-fit: cover; border: 2px solid #eee;"
+                            class="rounded-circle shadow-sm border border-2"
+                            style="height: 42px; width: 42px; object-fit: cover; margin-right: 8px;"
                         >
-                        <div class="fw-bold" style="font-family: 'Montserrat', Arial, sans-serif;"><?php echo $_SESSION['nombre'] ?? 'Usuario'; ?></div>
-                        <small class="text-muted"><?php echo $_SESSION['email'] ?? ''; ?></small>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item" href="perfil.php" style="font-family: 'Montserrat', Arial, sans-serif;">
-                            <i class="fa fa-pencil me-2"></i> Mi Perfil
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item text-danger" href="logout.php" style="font-family: 'Montserrat', Arial, sans-serif;">
-                            <i class="fa fa-sign-out me-2"></i> Cerrar Sesión
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                        <span class="fw-semibold"><?php echo $_SESSION['nombre'] ?? 'Usuario'; ?></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow rounded" aria-labelledby="profileDropdown">
+                        <li class="px-3 py-2 text-center">
+                            <img 
+                                src="<?php echo htmlspecialchars($foto_perfil); ?>"
+                                alt="Foto de perfil"
+                                class="rounded-circle mb-2"
+                                style="height: 60px; width: 60px; object-fit: cover; border: 2px solid #eee;"
+                            >
+                            <div class="fw-bold" style="font-family: 'Montserrat', Arial, sans-serif;"><?php echo $_SESSION['nombre'] ?? 'Usuario'; ?></div>
+                            <small class="text-muted"><?php echo $_SESSION['email'] ?? ''; ?></small>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="perfil.php" style="font-family: 'Montserrat', Arial, sans-serif;">
+                                <i class="fa fa-pencil me-2"></i> Mi Perfil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-danger" href="logout.php" style="font-family: 'Montserrat', Arial, sans-serif;">
+                                <i class="fa fa-sign-out me-2"></i> Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             <?php else: ?>
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-primary px-4 ms-2 rounded-pill" href="login.php">
@@ -98,7 +103,6 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
                     </a>
                 </li>
             <?php endif; ?>
-
         </ul>
     </div>
 </nav>

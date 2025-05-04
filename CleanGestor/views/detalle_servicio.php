@@ -118,11 +118,14 @@ $imagen = !empty($servicio['fotoServicio']) && file_exists(__DIR__ . "/" . $serv
                            class="btn btn-primary btn-lg mb-3">
                             <i class="fas fa-shopping-cart"></i> <?= $servicioYaEnCarrito ? 'Ya en el carrito' : 'Contratar Servicio' ?>
                         </a>
-                    <?php else: ?>
-                        <!-- Mensaje para usuarios no clientes -->
-                        <div class="alert alert-warning mt-3" style="margin-right: 40px;">
-                            <i class="fas fa-exclamation-circle"></i> Debes iniciar sesión como cliente para contratar un servicio.
-                        </div>
+                    <?php else:
+                        $origen = $_GET['origen'] ?? '';
+                        if ($_SESSION['tipo_usuario'] !== 'cliente' && $origen !== 'servicios_pendientes'): 
+                        ?>
+                            <div class="alert alert-warning mt-3" style="margin-right: 40px;">
+                                <i class="fas fa-exclamation-circle"></i> Debes iniciar sesión como cliente para contratar un servicio.
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
             </div>

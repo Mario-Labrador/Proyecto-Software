@@ -92,7 +92,7 @@ unset($_SESSION['registro_error_type'], $_SESSION['registro_data']);
             <select class="form-control" id="rol_trabajador" name="rol_trabajador">
               <option value="">Selecciona un rol</option>
               <option value="administrador">Administrador de empresa</option>
-              <option value="empleado">Empleado normal</option>
+              <option value="empleado">Empleado</option>
             </select>
           </div>
           <?php if ($errorType): ?>
