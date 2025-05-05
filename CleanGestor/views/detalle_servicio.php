@@ -3,7 +3,7 @@
 session_start();
 require_once("../VO/ServicioVO.php");
 require_once("../DAO/ServicioDAO.php");
-require_once("../DAO/ContratoDAO.php"); // Cambiar a ContratoDAO
+require_once("../DAO/ContratoDAO.php");
 
 // Validar el parámetro id
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -38,6 +38,7 @@ if (!$servicio) {
 // Verificar si el cliente tiene un contrato abierto
 $contratoDAO = new ContratoDAO($conexion);
 $contratoAbierto = $contratoDAO->obtenerContratoAbierto($_SESSION['dni'] ?? null);
+
 
 $servicioYaEnCarrito = false;
 if ($contratoAbierto) {
@@ -114,10 +115,18 @@ $imagen = !empty($servicio['fotoServicio']) && file_exists(__DIR__ . "/" . $serv
 
                     <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>
                         <!-- Botón habilitado para clientes -->
-                        <a href="<?= $servicioYaEnCarrito ? "ver_carrito.php?idContrato={$contratoAbierto['idContrato']}" : "agregar_servicio_carrito.php?idContrato={$contratoAbierto['idContrato']}&idServicio={$servicio['idServicio']}" ?>" 
-                           class="btn btn-primary btn-lg mb-3">
-                            <i class="fas fa-shopping-cart"></i> <?= $servicioYaEnCarrito ? 'Ya en el carrito' : 'Contratar Servicio' ?>
+                        
+                    <?php if ($contratoAbierto): ?>
+                        <a href="<?= $servicioYaEnCarrito 
+                            ? "ver_carrito.php?idContrato={$contratoAbierto['idContrato']}" 
+                            : "agregar_servicio_carrito.php?idContrato={$contratoAbierto['idContrato']}&idServicio={$servicio['idServicio']}" ?>" 
+                            class="btn btn-primary">
+                            <?= $servicioYaEnCarrito ? "Ver Carrito" : "Contratar Servicio" ?>
                         </a>
+                    <?php else: ?>
+                        <a href="crear_contrato.php" class="btn btn-warning">Crear contrato para contratar</a>
+                    <?php endif; ?>
+
                     <?php else:
                         $origen = $_GET['origen'] ?? '';
                         if ($_SESSION['tipo_usuario'] !== 'cliente' && $origen !== 'servicios_pendientes'): 
