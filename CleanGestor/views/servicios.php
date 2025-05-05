@@ -1,20 +1,3 @@
-<?php
-  // Conexión a la base de datos
-  $conexion = new mysqli("localhost", "root", "", "gestor");
-  if ($conexion->connect_error) {
-      die("Error de conexión: " . $conexion->connect_error);
-  }
-
-  // Consulta para obtener servicios y empresa
-  $sql = "SELECT s.idServicio, s.nombreServicio, s.descripcion, s.precio, s.horas, e.nombreEmpresa, s.fotoServicio
-          FROM servicio s
-          JOIN empresa e ON s.idEmpresa = e.idEmpresa";
-  $resultado = $conexion->query($sql);
-  if (!$resultado) {
-      die("Error en la consulta: " . $conexion->error);
-  }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,6 +35,24 @@
         <h2 class="fw-bold">Nuestros Servicios</h2>
         <p>Encuentra, contrata y gestiona servicios de limpieza de forma fácil, rápida y confiable.</p>
       </div>
+      <?php
+
+      // Conexión a la base de datos
+      $conexion = new mysqli("localhost", "root", "", "gestor");
+      if ($conexion->connect_error) {
+          die("Error de conexión: " . $conexion->connect_error);
+      }
+
+      // Consulta para obtener servicios y empresa
+      $sql = "SELECT s.idServicio, s.nombreServicio, s.descripcion, s.precio, s.horas, e.nombreEmpresa, s.fotoServicio
+              FROM servicio s
+              JOIN empresa e ON s.idEmpresa = e.idEmpresa";
+      $resultado = $conexion->query($sql);
+      if (!$resultado) {
+          die("Error en la consulta: " . $conexion->error);
+      }
+      ?>
+
 
       <!-- Buscador y botón de filtro -->
       <div class="mb-4 d-flex justify-content-center">
