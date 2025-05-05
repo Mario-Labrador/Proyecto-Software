@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2025 a las 04:29:54
+-- Tiempo de generación: 05-05-2025 a las 02:43:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -36,8 +36,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`dni`) VALUES
-('123456789'),
-('a');
+('98765432Z');
 
 -- --------------------------------------------------------
 
@@ -53,14 +52,6 @@ CREATE TABLE `contrato` (
   `estado` enum('abierto','finalizado') DEFAULT 'abierto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `contrato`
---
-
-INSERT INTO `contrato` (`idContrato`, `fecha`, `lugar`, `dni`, `estado`) VALUES
-(1, '2025-04-30', 'Calle tralalero tralala numero 1', '123456789', 'abierto'),
-(2, '2025-03-30', 'Calle Terrero num4', '123456789', 'finalizado');
-
 -- --------------------------------------------------------
 
 --
@@ -72,17 +63,6 @@ CREATE TABLE `contratoservicio` (
   `idServicio` int(11) NOT NULL,
   `dni` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `contratoservicio`
---
-
-INSERT INTO `contratoservicio` (`idContrato`, `idServicio`, `dni`) VALUES
-(1, 2, NULL),
-(1, 3, NULL),
-(1, 13, NULL),
-(2, 2, NULL),
-(2, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -103,10 +83,9 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`idEmpresa`, `nombreEmpresa`, `telefonoEmpresa`, `direccion`, `correoDirector`) VALUES
-(1, 'yatuchaberia', 0, 'calle yatu', 'pancho@gmail.com'),
-(1234, 'Si', 123, 'Si', 'Si'),
-(111111, 'Empresa2', 99928, 'C/ tu carita', 'directo2@test'),
-(123456, 'Empresa1 ', 123, 'C/joseante ', 'director1@test');
+(1, 'Limpiezas Sol', 912345678, 'Calle Mayor 10, Madrid', 'director@limpiezassol.com'),
+(2, 'Brillo Total', 934567890, 'Av. Diagonal 200, Barcelona', 'info@brillototal.es'),
+(3, 'EcoClean', 955123456, 'Av. Andalucía 50, Sevilla', 'contacto@ecoclean.es');
 
 -- --------------------------------------------------------
 
@@ -153,13 +132,14 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`dni`, `nombrePersona`, `apellidosPersona`, `emailPersona`, `contrasenyaPersona`, `telefonoPersona`, `fechaNacimiento`, `foto_perfil`) VALUES
-('00000', 'masca', 'tuna', 'masca@gmail.com', '$2y$10$NdECXFH03IfPFdCHpaHE/.NmaLTxIuZ3hYSr89svMB8v4C8Qvuxwa', 0, '2000-01-01', '../assets/uploads/680eab3269552_1718450574218.png'),
-('123456789', 'yatu', 'sabe', 'yatusa@gmail.com', '$2y$10$RpdZMFsMIEMuZbSuSayOSe7dOshzHt15gdBElhgIAML/RU2lskKDe', 999000888, '1999-12-12', '../assets/uploads/680eabbf04a1f_1737476057552.png'),
-('23123123', 'testTrabajador2', 'testTrabajador2', 'tt@test', '$2y$10$UI5lPUc5vMyhcEEc8nQDiuNynKOaU/Km1PGepO5XAUyx8moHWLNxe', 123333, '2025-04-10', NULL),
-('565656', 'panecho', 'panecho', 'pancho@gmail.com', '$2y$10$qd8AsyHRC4OGUv4hi80GoOXePQvpP5Pyl3/VfN93kaNRrnOFcqjJm', 565656, '1956-06-05', '../assets/uploads/680f1f9876873_españa.png'),
-('77215141R', 'testTrabajadorNombre', 'testTrabajadorApellido', 'testTrabajador@test', '$2y$10$8bz5lpnUaQLM4MgjkKEB3u4/MtgRje9/gviJ7Y8nj/EcQGMmhI61e', 123456, '2025-04-10', NULL),
-('876543', 'Sisisisisi', 'nonononnono', 'director1@test', '$2y$10$gwQTWzFHnUGW2qhyJMvcT.gVEh5hkAh50A4UPYCRevdpzQAr7ZKe2', 2147483647, '2025-04-18', NULL),
-('a', 'a', 'a', 'a@a', '$2y$10$fFY4EcdfMLgncvQCo82wLegQlXgDiqPwKdTWl49oD6kMD.k/y2ew.', 1, '0000-00-00', '../assets/uploads/foto_a.jpg');
+('11223344V', 'Lucía', 'Martín Castro', 'lucia.martin@hotmail.com', '$2y$10$lAOgqsgodfiNT/ST7yMGSeooNyiRFumFg8dEGyTr/BG/Fu4JGLSWS', 611223344, '1993-03-15', NULL),
+('11224433R', 'Sofía', 'López Martín', 'sofia.lopez@hotmail.com', '$2y$10$GVs4fGysDUnZwuSgf98zO.ycIAC1Ia9zeCpNmWsucUU8fkwbqvdw6', 611223355, '2002-02-22', NULL),
+('12345678A', 'Laura', 'Martínez López', 'director@limpiezassol.com', '$2y$10$6sh6wgQ/aqNu2EgLkGXcCe07QfLH5c7Nw48BmOSa6MjrMPQtabrTu', 912345678, '1980-05-12', NULL),
+('23456789B', 'Pablo', 'García Torres', 'info@brillototal.es', '$2y$10$RkRi2UPm8olrwZFDHDA20OQ20sgcKpk4b4HrH6dKZdsv8GlULGsHm', 934567890, '1975-09-22', NULL),
+('34567890C', 'Marta', 'Ruiz Sánchez', 'contacto@ecoclean.es', '$2y$10$D5KjBczb0vV1DDsjVSkk2u4aw6i5M61Ovh2IDObFIZIm8q80QM4t2', 955123456, '1988-03-30', NULL),
+('55443322W', 'David', 'Sánchez Pérez', 'david.sanchez@gmail.com', '$2y$10$8Q6.fBHKBU.AsFetMMRBcO9GxDtmXoqvutSm4F6NJSUS7L7c/EHgW', 655443322, '1987-11-08', NULL),
+('87654321X', 'Ana', 'Gómez Jiménez', 'ana.gomez@outlook.com', '$2y$10$Jo2gMyARa.YHNKRblB/uxOs6GICxFKr1Qiy71JYwDIpTCvQj21s7a', 677889900, '1983-07-25', NULL),
+('98765432Z', 'Mateo', 'Fernández Ruiz', 'mateo.fernandez@gmail.com', '$2y$10$AlJsHDVud2Qs2dEnl7zGQu0dlr2/fk6eg/j/NPaOdu5hZIIjqL1Ku', 699112233, '1990-04-20', NULL);
 
 -- --------------------------------------------------------
 
@@ -177,17 +157,6 @@ CREATE TABLE `servicio` (
   `fotoServicio` varchar(255) DEFAULT NULL,
   `idEmpresa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `servicio`
---
-
-INSERT INTO `servicio` (`idServicio`, `precio`, `nombreServicio`, `descripcion`, `sueldo`, `horas`, `fotoServicio`, `idEmpresa`) VALUES
-(1, 50, 'Limpieza Piso/Apartamento Completa', 'Limpieza', 20, 2, '', 123456),
-(2, 100, 'Limpieza prueba', 'limpieza', 50, 1, '', 1),
-(3, 120, 'Limpieza prueba 2', 'Limpieza de vivienda', 10, 1, '../assets/images/nigeria.png', 1),
-(7, 100, 'Politecnica 2', 'te ganamos un partido facilito', 10, 2, '../assets/uploads/680ec1989c225_1737472349034.png', 1),
-(13, 40, 'Cortar Cesped', 'Jardines y patios', 10, 1, '../assets/uploads/68110b37a619c_cesped.jpeg', 1);
 
 -- --------------------------------------------------------
 
@@ -208,9 +177,7 @@ CREATE TABLE `solicitudempleo` (
 --
 
 INSERT INTO `solicitudempleo` (`idSolicitud`, `dniTrabajador`, `idEmpresa`, `fechaSolicitud`, `estado`) VALUES
-(2, '23123123', 1234, '2025-04-23', 'pendiente'),
-(3, '23123123', 111111, '2025-04-23', 'pendiente'),
-(8, '00000', 123456, '2025-04-26', 'pendiente');
+(11, '11224433R', 2, '2025-05-05', 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -243,11 +210,13 @@ CREATE TABLE `trabajador` (
 --
 
 INSERT INTO `trabajador` (`rol`, `especialidad`, `dni`, `idEmpresa`) VALUES
-('empleado', NULL, '00000', 1),
-('empleado', NULL, '23123123', 123456),
-('administrador', NULL, '565656', 1),
-('empleado', NULL, '77215141R', 1234),
-('administrador', NULL, '876543', 123456);
+('empleado', NULL, '11223344V', 2),
+('empleado', NULL, '11224433R', NULL),
+('administrador', NULL, '12345678A', 1),
+('administrador', NULL, '23456789B', 2),
+('administrador', NULL, '34567890C', 3),
+('empleado', NULL, '55443322W', 1),
+('empleado', NULL, '87654321X', 3);
 
 -- --------------------------------------------------------
 
@@ -261,14 +230,6 @@ CREATE TABLE `valoracion` (
   `idContrato` int(11) NOT NULL,
   `idServicio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `valoracion`
---
-
-INSERT INTO `valoracion` (`nota`, `descripcion`, `idContrato`, `idServicio`) VALUES
-(3, 'aaa', 1, 2),
-(3, 'si', 2, 2);
 
 --
 -- Índices para tablas volcadas
@@ -376,7 +337,7 @@ ALTER TABLE `servicio`
 -- AUTO_INCREMENT de la tabla `solicitudempleo`
 --
 ALTER TABLE `solicitudempleo`
-  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas

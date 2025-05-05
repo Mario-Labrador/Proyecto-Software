@@ -22,7 +22,7 @@ $nombreTrabajador = $personaDAO->getNombrePorDni($dniTrabajador);
 $apellidoTrabajador = $personaDAO->getApellidoPorDni($dniTrabajador);
 $fotoTrabajador = $personaDAO->getFotoPerfilPorDni($dniTrabajador);
 
-// Conexión directa a la base de datos para evitar problemas con $conn global
+// Conexión directa a la base de datos para evitar problemas con $conn global   
 $conexion = new mysqli("localhost", "root", "", "gestor");
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
