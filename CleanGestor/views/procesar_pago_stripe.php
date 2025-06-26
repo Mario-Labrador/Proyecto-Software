@@ -30,6 +30,15 @@ try {
     // Limpia el total de la sesión si el pago fue exitoso
     unset($_SESSION['total_pago']);
 
+    require_once("../DAO/ContratoDAO.php");
+    $conexion = new mysqli("localhost", "root", "", "gestor");
+    $contratoDAO = new ContratoDAO($conexion);
+
+    $idContrato = $_GET['idContrato'] ?? null;
+    if ($idContrato) {
+        $contratoDAO->finalizarContrato($idContrato); // Este método solo cambia el estado a 'finalizado'
+    }
+
     // Redirige a la confirmación
     header("Location: pago_confirmado.php");
     exit;

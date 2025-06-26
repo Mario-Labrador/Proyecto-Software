@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once("../VO/ServicioVO.php");
@@ -114,19 +113,9 @@ $imagen = !empty($servicio['fotoServicio']) && file_exists(__DIR__ . "/" . $serv
                     <?php endif; ?>
 
                     <?php if ($_SESSION['tipo_usuario'] === 'cliente'): ?>
-                        <!-- Botón habilitado para clientes -->
-                        
-                    <?php if ($contratoAbierto): ?>
-                        <a href="<?= $servicioYaEnCarrito 
-                            ? "ver_carrito.php?idContrato={$contratoAbierto['idContrato']}" 
-                            : "agregar_servicio_carrito.php?idContrato={$contratoAbierto['idContrato']}&idServicio={$servicio['idServicio']}" ?>" 
-                            class="btn btn-primary">
+                        <a href="agregar_servicio_carrito.php?idServicio=<?= $servicio['idServicio'] ?>" class="btn btn-primary">
                             <?= $servicioYaEnCarrito ? "Ver Carrito" : "Contratar Servicio" ?>
                         </a>
-                    <?php else: ?>
-                        <a href="crear_contrato.php" class="btn btn-warning">Crear contrato para contratar</a>
-                    <?php endif; ?>
-
                     <?php else:
                         $origen = $_GET['origen'] ?? '';
                         if ($_SESSION['tipo_usuario'] !== 'cliente' && $origen !== 'servicios_pendientes'): 

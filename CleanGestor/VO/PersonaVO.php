@@ -23,7 +23,7 @@ class PersonaVO {
         $this->fechaNacimiento = $fechaNacimiento;
         
         if (empty($foto_perfil)) {
-            $this->foto_perfil = '../assets/images/default.png';  // Ruta a la imagen por defecto
+            $this->foto_perfil = '../assets/uploads/default.png';  // Ruta a la imagen por defecto
         } else {
             $this->foto_perfil = $foto_perfil;
         }

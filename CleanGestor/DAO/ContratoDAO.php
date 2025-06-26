@@ -30,12 +30,14 @@ class ContratoDAO {
     }
 
     public function obtenerContratoAbierto($dni) {
-        $sql = "SELECT * FROM contrato WHERE dni = ? AND estado = 'abierto'";
+        $sql = "SELECT * FROM contrato WHERE dni = ? AND estado = 'abierto' LIMIT 1";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("s", $dni);
         $stmt->execute();
-        $resultado = $stmt->get_result();
-        return $resultado->fetch_assoc(); // Devuelve el contrato abierto o null si no existe
+        $result = $stmt->get_result();
+        $contrato = $result->fetch_assoc();
+        $stmt->close();
+        return $contrato;
     }
     public function cerrarContrato(ContratoVO $contrato) {
         try {
@@ -56,7 +58,7 @@ class ContratoDAO {
         }
     }
     public function obtenerContratosConServicios($dni) {
-        $sqlContratos = "SELECT c.idContrato, c.fecha, c.lugar 
+        $sqlContratos = "SELECT c.idContrato, c.fecha, c.lugar, c.estado 
                          FROM contrato c 
                          WHERE c.dni = ?";
         $stmt = $this->conexion->prepare($sqlContratos);
@@ -85,6 +87,28 @@ class ContratoDAO {
         return ['contratos' => $contratos, 'servicios' => $contratoServicios];
     }
 
-    
+    public function crearContratoVacio($dni) {
+        $stmt = $this->conexion->prepare("INSERT INTO contrato (dni, estado) VALUES (?, 'abierto')");
+        $stmt->bind_param("s", $dni);
+        $stmt->execute();
+        $idContrato = $stmt->insert_id;
+        $stmt->close();
+        return $idContrato;
+    }
+
+
+    public function actualizarLugarYFecha($idContrato, $lugar, $fecha) {
+        $stmt = $this->conexion->prepare("UPDATE contrato SET lugar = ?, fecha = ? WHERE idContrato = ?");
+        $stmt->bind_param("ssi", $lugar, $fecha, $idContrato);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function finalizarContrato($idContrato) {
+        $stmt = $this->conexion->prepare("UPDATE contrato SET estado = 'finalizado' WHERE idContrato = ?");
+        $stmt->bind_param("i", $idContrato);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
 ?>

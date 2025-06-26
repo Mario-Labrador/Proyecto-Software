@@ -35,10 +35,11 @@ class ContratoServicioDAO {
 
     // Método para eliminar un servicio de un contrato
     public function eliminarServicioDeContrato($idContrato, $idServicio) {
-        $sql = "DELETE FROM contratoservicio WHERE idContrato = ? AND idServicio = ?";
-        $stmt = $this->conexion->prepare($sql);
+        $stmt = $this->conexion->prepare("DELETE FROM contratoservicio WHERE idContrato = ? AND idServicio = ?");
         $stmt->bind_param("ii", $idContrato, $idServicio);
-        return $stmt->execute();
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
     }
 
     // Método para verificar si un servicio ya está en un contrato
@@ -52,36 +53,33 @@ class ContratoServicioDAO {
     }
 
     public function obtenerContratosConServicios($dni) {
-        $sqlContratos = "SELECT c.idContrato, c.fecha, c.lugar 
-                         FROM contrato c 
+        $sqlContratos = "SELECT c.idContrato, c.fecha, c.lugar, c.estado
+                         FROM contrato c
                          WHERE c.dni = ?";
         $stmt = $this->conexion->prepare($sqlContratos);
         $stmt->bind_param("s", $dni);
         $stmt->execute();
         $resultContratos = $stmt->get_result();
-    
-        $contratos = [];
-        $servicios = [];
-    
-        while ($contrato = $resultContratos->fetch_assoc()) {
-            $contratos[] = $contrato;
-    
-            // Obtener servicios para cada contrato
-            $sqlServicios = "SELECT s.idServicio, s.nombreServicio, s.precio 
-                             FROM servicio s 
-                             INNER JOIN contratoservicio cs ON s.idServicio = cs.idServicio 
+        $contratos = $resultContratos->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+
+        // Obtener los servicios asociados a cada contrato
+        $contratoServicios = [];
+        foreach ($contratos as $contrato) {
+            $idContrato = $contrato['idContrato'];
+            $sqlServicios = "SELECT s.idServicio, s.nombreServicio, s.precio
+                             FROM servicio s
+                             INNER JOIN contratoservicio cs ON s.idServicio = cs.idServicio
                              WHERE cs.idContrato = ?";
-            $stmtServicios = $this->conexion->prepare($sqlServicios);
-            $stmtServicios->bind_param("i", $contrato['idContrato']);
-            $stmtServicios->execute();
-            $resultServicios = $stmtServicios->get_result();
-    
-            while ($servicio = $resultServicios->fetch_assoc()) {
-                $servicios[$contrato['idContrato']][] = $servicio;
-            }
+            $stmt = $this->conexion->prepare($sqlServicios);
+            $stmt->bind_param("i", $idContrato);
+            $stmt->execute();
+            $resultServicios = $stmt->get_result();
+            $contratoServicios[$idContrato] = $resultServicios->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
         }
-    
-        return ['contratos' => $contratos, 'servicios' => $servicios];
+
+        return ['contratos' => $contratos, 'servicios' => $contratoServicios];
     }
 
 }

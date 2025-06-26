@@ -124,7 +124,7 @@ if (isset($_POST['finalizar_contrato'])) {
                                     </ul>
                                     <div class="mt-auto">
                                         <?php if ($totalServicios > 0): ?>
-                                            <a href="pago2.php?idContrato=<?= $idContrato ?>" class="btn btn-success btn-lg w-100 mb-3">
+                                            <a href="crear_contrato.php?idContrato=<?= $idContrato ?>" class="btn btn-success btn-lg w-100 mb-3">
                                                 <i class="fas fa-check"></i> Finalizar Contrato
                                             </a>
                                         <?php else: ?>

@@ -8,6 +8,12 @@ if (!isset($_SESSION['dni']) || $_SESSION['tipo_usuario'] !== 'cliente') {
     exit();
 }
 
+// Validar parámetros
+if (!isset($_GET['idContrato']) || !isset($_GET['idServicio'])) {
+    header("Location: ver_carrito.php?error=Parámetros inválidos");
+    exit();
+}
+
 // Conexión a la base de datos
 $conexion = new mysqli("localhost", "root", "", "gestor");
 if ($conexion->connect_error) {
@@ -15,8 +21,8 @@ if ($conexion->connect_error) {
 }
 
 // Obtener los datos del contrato y servicio
-$idContrato = $_GET['idContrato'];
-$idServicio = $_GET['idServicio'];
+$idContrato = intval($_GET['idContrato']);
+$idServicio = intval($_GET['idServicio']);
 
 // Crear una instancia del DAO
 $contratoServicioDAO = new ContratoServicioDAO($conexion);
@@ -24,6 +30,7 @@ $contratoServicioDAO = new ContratoServicioDAO($conexion);
 // Eliminar el servicio del contrato
 if ($contratoServicioDAO->eliminarServicioDeContrato($idContrato, $idServicio)) {
     header("Location: ver_carrito.php?idContrato=$idContrato&mensaje=Servicio eliminado del carrito.");
+    exit();
 } else {
     echo "Error al eliminar el servicio del carrito.";
 }

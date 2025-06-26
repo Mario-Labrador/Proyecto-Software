@@ -17,6 +17,11 @@ $data = $contratoDAO->obtenerContratosConServicios($dni);
 $contratos = $data['contratos'];
 $contratoServicios = $data['servicios'];
 
+// Filtrar contratos finalizados
+$contratos = array_filter($contratos, function($contrato) {
+    return isset($contrato['estado']) && $contrato['estado'] === 'finalizado';
+});
+
 $conexion->close();
 ?>
 
@@ -83,6 +88,16 @@ $conexion->close();
                                                 </span>
                                             </li>
                                         <?php endforeach; ?>
+                                        <?php
+                                        $totalContrato = 0;
+                                        foreach ($contratoServicios[$contrato['idContrato']] as $servicio) {
+                                            $totalContrato += $servicio['precio'];
+                                        }
+                                        ?>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                                            <strong>Total</strong>
+                                            <span class="fw-bold"><?= number_format($totalContrato, 2, ',', '.') ?> €</span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

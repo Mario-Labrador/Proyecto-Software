@@ -22,6 +22,11 @@ $valoracionDAO = new ValoracionDAO($conexion);
 $data = $contratoServicioDAO->obtenerContratosConServicios($dniCliente);
 $contratos = $data['contratos'];
 $serviciosPorContrato = $data['servicios'];
+
+// Filtrar solo contratos finalizados
+$contratos = array_filter($contratos, function($contrato) {
+    return isset($contrato['estado']) && $contrato['estado'] === 'finalizado';
+});
 ?>
 
 <!DOCTYPE html>
