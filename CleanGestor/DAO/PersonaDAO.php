@@ -70,8 +70,8 @@ class PersonaDAO {
         $fechaNacimiento = $persona->getFechaNacimiento();
         
         // SQL de inserción
-        $sql = "INSERT INTO persona (dni, nombrePersona, apellidosPersona, emailPersona, contrasenyaPersona, telefonoPersona, fechaNacimiento) 
-                VALUES (:dni, :nombrePersona, :apellidosPersona, :emailPersona, :contrasenyaPersona, :telefonoPersona, :fechaNacimiento)";
+        $sql = "INSERT INTO persona (dni, nombrePersona, apellidosPersona, emailPersona, contrasenyaPersona, telefonoPersona, fechaNacimiento, foto_perfil) 
+                VALUES (:dni, :nombrePersona, :apellidosPersona, :emailPersona, :contrasenyaPersona, :telefonoPersona, :fechaNacimiento, :foto_perfil)";
         
         $stmt = $pdo->prepare($sql);
         
@@ -83,6 +83,7 @@ class PersonaDAO {
         $stmt->bindParam(':contrasenyaPersona', $contrasenya);
         $stmt->bindParam(':telefonoPersona', $telefono);
         $stmt->bindParam(':fechaNacimiento', $fechaNacimiento);
+        $stmt->bindValue(':foto_perfil', $persona->getFotoPerfil() ?: '../assets/images/default.png'); // Asignar foto por defecto si no se proporciona
 
         // Ejecutar
         $stmt->execute();

@@ -38,6 +38,9 @@ if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
         $fotoServicio = $rutaCompleta;
     }
 }
+else {
+    $fotoServicio = "../assets/images/default_service.png";
+}
 
 // Crear un objeto ServicioVO
 $servicio = new ServicioVO($nombreServicio, $descripcion, $precio, $horas, $sueldo, $idEmpresa, $fotoServicio);

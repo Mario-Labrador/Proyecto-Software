@@ -59,7 +59,7 @@ $foto_perfil = $_SESSION['foto_perfil'] ?? ''; // Obtener la ruta de la foto de 
         <div class="profile-card animate__animated animate__fadeInUp">
           <div class="text-center">
             <!-- Mostrar la imagen de perfil o la predeterminada -->
-            <img src="<?php echo !empty($foto_perfil) ? $foto_perfil : '../assets/images/default.png'; ?>" 
+            <img src="<?php echo $foto_perfil?>" 
                  alt="Foto de perfil" 
                  class="profile-image mb-2" 
                  style="max-height: 200px; border-radius: 50%;">

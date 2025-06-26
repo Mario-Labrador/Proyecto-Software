@@ -22,7 +22,7 @@ unset($_SESSION['error_type'], $_SESSION['preserved_email']);
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   
   <!-- Site Metas -->
-  <link rel="icon" href="../assets/iamges/IconoEscoba.png" type="image/gif" />
+  <link rel="icon" href="../assets/images/IconoEscoba.png" type="image/gif" />
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
