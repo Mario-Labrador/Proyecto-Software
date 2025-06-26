@@ -69,7 +69,7 @@
         </div>
         <div class="col-md-6">
           <div class="img-box">
-            <img src="imagenes/empresa.jpg" alt="Sobre CLEAN GESTOR">
+            <img src="../assets/images/empresa.jpg" alt="Sobre CLEAN GESTOR">
           </div>
         </div>
       </div>

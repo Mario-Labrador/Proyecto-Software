@@ -26,7 +26,10 @@
         <div class="container">
             <div class="success-box animate__animated animate__fadeIn">
             <h2>¡Pago realizado correctamente!</h2>
-            <a href="servicios.php" class="btn btn-primary">Volver a servicios</a>
+            <form action="cerrar_contrato.php" method="post" style="display:inline;">
+                <input type="hidden" name="idContrato" value="<?= htmlspecialchars($idContrato) ?>">
+                <button type="submit" class="btn btn-primary">Volver a servicios</button>
+            </form>
             </div>
         </div>
         </section>

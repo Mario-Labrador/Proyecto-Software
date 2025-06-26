@@ -93,6 +93,7 @@ if (isset($_GET['idContrato'])) {
 <h2><strong class="text-primary"><?= $totalPago ?> €</strong></h2>
 
         <form action="procesar_pago_stripe.php" method="POST" id="payment-form">
+          <input type="hidden" name="idContrato" value="<?= htmlspecialchars($_GET['idContrato']) ?>">
           <div class="form-group">
             <label for="forma_pago">Método de Pago</label>
             <select class="form-control" id="forma_pago" name="forma_pago" required>
