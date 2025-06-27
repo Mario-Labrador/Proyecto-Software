@@ -42,6 +42,9 @@ http://localhost/CleanGestor/views/index.php
 
 También puedes acceder haciendo click aquí: [CleanGestor](http://localhost/CleanGestor/views/index.php)
 
+7. Para que funcionen también la API de pago será necesario instalar composer en la carpeta del proyecto, lo cual nos permitirá después instalar Stripe.
+   En el archivo autoload.php del proyecto será necesario poner la clave (ApiKey) que tenga tu cuenta para que los pagos se transfieran ahí.
+
 ## 🌐Contribución
 
 1. Haz un fork del repositorio
@@ -73,8 +76,9 @@ git push origin nombre-de-la-rama
 #### ⏹️MARIO RECIO - Administrador de las bases de datos (Database Manager)
 
 
-## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 20/4/2025
-![proyecto_software_gantt](https://github.com/user-attachments/assets/016729f6-a93f-4910-afc4-ea22033d75e2)
+## 🗓️Planificación del Proyecto - Diagrama de Gantt actualizado a 27/6/2025
+![proyecto_software_gantt](https://github.com/user-attachments/assets/5b6191f5-66c7-4e3c-8b61-1808a87084f9)
+
 
 
 ## ⏳Fases del diagrama de Gantt
