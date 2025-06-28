@@ -40,7 +40,7 @@ Para acceder al menú principal, copia esta URL en tu navegador:
 http://localhost/CleanGestor/views/Index.php
 ```
 
-También puedes acceder haciendo click aquí: [CleanGestor](http://localhost/CleanGestor/views/index.php)
+También puedes acceder haciendo click aquí: [CleanGestor](http://localhost/CleanGestor/views/Index.php)
 
 7. Para que funcionen también la API de pago será necesario instalar composer en la carpeta del proyecto, lo cual nos permitirá después instalar Stripe.
    En el archivo autoload.php del proyecto será necesario poner la clave (ApiKey) que tenga tu cuenta para que los pagos se transfieran ahí.
