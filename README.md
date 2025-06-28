@@ -37,7 +37,7 @@ Una vez realizados estos pasos, ya estarás listo para utilizar la aplicación.
 Para acceder al menú principal, copia esta URL en tu navegador:
 
 ```
-http://localhost/CleanGestor/views/index.php
+http://localhost/CleanGestor/views/Index.php
 ```
 
 También puedes acceder haciendo click aquí: [CleanGestor](http://localhost/CleanGestor/views/index.php)
