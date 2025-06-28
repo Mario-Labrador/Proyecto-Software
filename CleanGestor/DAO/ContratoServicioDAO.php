@@ -13,11 +13,10 @@ class ContratoServicioDAO {
     public function agregarServicioAContrato(ContratoServicioVO $contratoServicio) {
         $sql = "INSERT INTO contratoservicio (idContrato, idServicio) VALUES (?, ?)";
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param(
-            "ii",
-            $contratoServicio->getIdContrato(),
-            $contratoServicio->getIdServicio()
-        );
+        $idContrato = $contratoServicio->getIdContrato();
+		$idServicio = $contratoServicio->getIdServicio();
+		
+		$stmt->bind_param("ii", $idContrato, $idServicio);
         return $stmt->execute();
     }
 

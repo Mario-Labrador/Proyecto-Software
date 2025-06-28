@@ -87,14 +87,21 @@ class ContratoDAO {
         return ['contratos' => $contratos, 'servicios' => $contratoServicios];
     }
 
-    public function crearContratoVacio($dni) {
-        $stmt = $this->conexion->prepare("INSERT INTO contrato (dni, estado) VALUES (?, 'abierto')");
-        $stmt->bind_param("s", $dni);
-        $stmt->execute();
-        $idContrato = $stmt->insert_id;
-        $stmt->close();
-        return $idContrato;
+public function crearContratoVacio($dni) {
+    // Usar nombres exactos de columnas y proveer valores default
+    $sql = "INSERT INTO contrato (dni, estado, fecha, lugar) 
+            VALUES (?, 'abierto', CURDATE(), '')";
+    
+    $stmt = $this->conexion->prepare($sql);
+    $stmt->bind_param("s", $dni);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Error creando contrato: " . $stmt->error);
     }
+    
+    return $stmt->insert_id;
+}
+
 
 
     public function actualizarLugarYFecha($idContrato, $lugar, $fecha) {
