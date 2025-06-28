@@ -8,7 +8,7 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <nav class="navbar navbar-expand-lg custom_nav-container">
-    <a class="navbar-brand animate__animated animate__fadeInDown" href="index.php">
+    <a class="navbar-brand animate__animated animate__fadeInDown" href="Index.php">
         <span>CLEAN GESTOR</span>
     </a>
     <button class="navbar-toggler animate__animated animate__fadeInDown" type="button" data-bs-toggle="collapse"
@@ -17,7 +17,7 @@ $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item"><a class="nav-link" href="index.php">INICIO</a></li>
+            <li class="nav-item"><a class="nav-link" href="Index.php">INICIO</a></li>
             <li class="nav-item"><a class="nav-link" href="informate.php">SOBRE NOSOTROS</a></li>
             
             <?php if (isset($_SESSION['dni'])): ?>
