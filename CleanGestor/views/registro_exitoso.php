@@ -20,7 +20,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.php">
+          <a class="navbar-brand" href="Index.php">
             <span>CLEAN GESTOR</span>
           </a>
 
@@ -30,7 +30,7 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a class="nav-link" href="index.php">INICIO</a></li>
+              <li class="nav-item"><a class="nav-link" href="Index.php">INICIO</a></li>
               <li class="nav-item"><a class="nav-link" href="about.php">SOBRE NOSOTROS</a></li>
               <li class="nav-item"><a class="nav-link" href="service.php">SERVICIOS</a></li>
               <li class="nav-item"><a class="nav-link" href="contact.php">CONTACTO</a></li>
