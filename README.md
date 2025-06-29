@@ -8,7 +8,9 @@ http://155.210.71.57/CleanGestor/views/Index.php
 Cuentas ya creadas para realizar pruebas:
 
 Empleada: lucia.martin@hotmail.com
+
 Administradora de empresa: director@limpiezassol.com
+
 Cliente: mateo.fernandez@gmail.com
 
 La contraseña para estos usuarios es en todos los casos: 123
