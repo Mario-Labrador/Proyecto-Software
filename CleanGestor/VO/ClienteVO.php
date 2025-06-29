@@ -1,5 +1,6 @@
 <?php
-
+//ClienteVO.php
+//Alberto Lacarta
 class ClienteVO {
     private $dni;
 

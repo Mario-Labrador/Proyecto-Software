@@ -1,5 +1,5 @@
 <?php
-// Conecta con la base de datos MySQL usando PDO
+//ClientDAO.php
 //Alberto Lacarta
 include_once '../config/db.php';
 include_once '../VO/ClienteVO.php';

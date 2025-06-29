@@ -1,5 +1,6 @@
 <?php
-
+// ContratoServicioVO.php
+// Alberto Lacarta
 class ContratoServicioVO {
     private $idContrato;
     private $idServicio;
