@@ -1,6 +1,20 @@
 # GESTOR EMPRESAS DE LIMPIEZA ♻️🗑️
 Este proyecto consiste en desarrollar una aplicación que permita conectar empresas de limpieza con clientes interesados en contratar sus servicios.
 
+Está disponible en la máquina virtual de la asignatura. Se puede acceder a ella desde el siguiente enlace (estando conectado a la red de eduroam):
+
+http://155.210.71.57/CleanGestor/views/Index.php
+
+Cuentas ya creadas para realizar pruebas:
+
+Empleada: lucia.martin@hotmail.com
+Administradora de empresa: director@limpiezassol.com
+Cliente: mateo.fernandez@gmail.com
+
+La contraseña para estos usuarios es en todos los casos: 123
+
+
+
 ## 🎯Requisitos previos
 
 Antes de descargar el proyecto, asegúrate de tener los siguientes programas instalados:
