@@ -1,4 +1,6 @@
 <?php
+//Mario Recio
+// crear_contrato.php
 session_start();
 require_once("../DAO/ContratoDAO.php");
 $conexion = new mysqli("localhost", "root", "", "gestor");

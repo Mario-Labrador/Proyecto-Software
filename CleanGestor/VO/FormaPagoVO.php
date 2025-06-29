@@ -1,5 +1,7 @@
 
 <?php
+// FormaPagoVO.php
+// Alberto Lacarta
 class FormaPago {
     private $idContrato;
     private $fecha;

@@ -1,6 +1,6 @@
 <?php
 // asignar_empleado.php
-
+// Mario Labrador
 session_start();
 include_once '../config/db.php';
 include_once '../DAO/EmpresaDAO.php';

@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+// procesar_crear_contrato.php
+// Mario Recio
 // Verificar si el usuario está logueado y es cliente
 if (!isset($_SESSION['dni']) || $_SESSION['tipo_usuario'] !== 'cliente') {
     header("Location: login.php?mensaje=Debes iniciar sesión como cliente para crear un contrato.");

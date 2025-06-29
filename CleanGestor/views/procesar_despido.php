@@ -1,4 +1,6 @@
 <?php
+// procesar_despido.php
+// Mario Labrador
 include_once '../config/db.php';
 include_once '../DAO/TrabajadorDAO.php';
 

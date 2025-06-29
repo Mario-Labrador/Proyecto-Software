@@ -1,4 +1,6 @@
 <?php
+// perfilEmpresa.php
+// Mario Labrador
 session_start();
 include_once '../DAO/EmpresaDAO.php';
 include_once '../DAO/SolicitudDAO.php';

@@ -1,4 +1,6 @@
 <?php
+//TrabajadorDAO.php
+//Alberto Lacarta
 include_once '../config/db.php';
 include_once '../VO/TrabajadorVO.php';
 

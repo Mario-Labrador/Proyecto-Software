@@ -1,4 +1,5 @@
 <?php
+
 class ContratoServicioVO {
     private $idContrato;
     private $idServicio;

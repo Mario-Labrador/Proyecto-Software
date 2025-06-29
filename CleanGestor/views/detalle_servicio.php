@@ -1,4 +1,6 @@
 <?php
+// Mario Recio
+// detalle_servicio.php
 session_start();
 require_once("../VO/ServicioVO.php");
 require_once("../DAO/ServicioDAO.php");

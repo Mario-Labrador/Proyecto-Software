@@ -1,5 +1,7 @@
 <!-- filepath: c:\xampp\htdocs\CleanGestor\models\ServicioVO.php -->
 <?php
+// ServicioVO.php
+// Alberto Lacarta
 class ServicioVO {
     private $idServicio;
     private $nombreServicio;

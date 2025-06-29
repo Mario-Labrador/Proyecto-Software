@@ -1,9 +1,12 @@
+
 <?php
+// Conecta con la base de datos MySQL usando PDO
+//Alberto Lacarta
 class Database {
-    private static $host = 'localhost';     // El servidor de tu base de datos (puede ser localhost o una IP si estás en un servidor remoto)
-    private static $dbname = 'gestor';  // El nombre de la base de datos
-    private static $username = 'root';       // El nombre de usuario de la base de datos (cambia si no es root)
-    private static $password = '';           // La contraseña de la base de datos (si no tiene contraseña, dejarlo vacío)
+    private static $host = 'localhost';    
+    private static $dbname = 'gestor';  
+    private static $username = 'root';       
+    private static $password = '';          
 
     private static $pdo = null;
 

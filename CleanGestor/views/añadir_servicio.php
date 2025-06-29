@@ -1,5 +1,7 @@
 <!-- filepath: c:\xampp\htdocs\CleanGestor\views\añadir_servicio.php -->
 <?php
+// añadir_servicio.php
+// Mario Recio
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 // Verificar si el usuario es administrador

@@ -1,5 +1,6 @@
 <?php
-
+// PersonaVO.php
+// Alberto Lacarta
 include_once '../config/db.php';
 
 class PersonaVO {

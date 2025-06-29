@@ -1,4 +1,6 @@
 <?php
+// detalle_empleado.php
+// Mario Labrador
 session_start();
 
 include_once '../DAO/EmpresaDAO.php';  // Incluir el DAO de Empresa

@@ -1,4 +1,6 @@
 <?php
+//ContraDAO.php
+//Alberto Lacarta
 require_once("../VO/ContratoVO.php");
 
 class ContratoDAO {

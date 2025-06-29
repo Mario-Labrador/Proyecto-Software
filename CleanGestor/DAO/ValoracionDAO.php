@@ -1,4 +1,6 @@
 <?php
+//ValoracionDAO.php
+//Alberto Lacarta
 class ValoracionDAO {
     private $conexion;
 

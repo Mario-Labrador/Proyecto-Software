@@ -1,4 +1,6 @@
 <?php
+// verificar_contrato.php
+// Mario Recio
 session_start();
 require_once("../DAO/ContratoDAO.php");
 

@@ -1,4 +1,6 @@
 <?php
+// perfilAdministrador.php
+// Mario Recio
 session_start();
 include_once '../DAO/EmpresaDAO.php';  // Incluir el DAO de Empresa
 include_once '../DAO/SolicitudDAO.php'; // Incluir el DAO de Solicitud

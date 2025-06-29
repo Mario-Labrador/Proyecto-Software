@@ -1,4 +1,6 @@
 <?php
+// navbar.php
+// Mario Labrador
 if (session_status() === PHP_SESSION_NONE) session_start();
 $foto_perfil = isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : '../assets/uploads/default.png';
 ?>

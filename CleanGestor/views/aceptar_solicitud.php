@@ -1,8 +1,10 @@
 <?php
+// aceptar_solicitud.php
+// Mario Labrador
 session_start();
 include_once '../DAO/SolicitudDAO.php';
-include_once '../DAO/EmpresaDAO.php';  // Asegúrate de incluir el DAO de Empresa
-include_once '../DAO/TrabajadorDAO.php'; // Incluir el DAO de Trabajador
+include_once '../DAO/EmpresaDAO.php';  
+include_once '../DAO/TrabajadorDAO.php'; 
 
 if (!isset($_SESSION['dni'])) {
     header("Location: login.php");
@@ -15,7 +17,7 @@ $accion = $_GET['accion'] ?? '';
 if ($idSolicitud && $accion === 'aceptar') {
     $solicitudDAO = new SolicitudDAO();
     $empresaDAO = new EmpresaDAO();
-    $trabajadorDAO = new TrabajadorDAO(); // Instanciamos el DAO de Trabajador
+    $trabajadorDAO = new TrabajadorDAO(); 
 
     // Obtener la solicitud por ID
     $solicitud = $solicitudDAO->getSolicitudById($idSolicitud);

@@ -1,4 +1,6 @@
 <?php
+// rechazar_solicitud.php
+// Mario Labrador
 session_start();
 include_once '../DAO/SolicitudDAO.php';
 

@@ -1,4 +1,6 @@
 <?php
+//PayPalDAO.php
+//Alberto Lacarta
 require_once 'Paypal.php';
 
 class PaypalDAO {

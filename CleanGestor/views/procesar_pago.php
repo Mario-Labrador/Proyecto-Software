@@ -1,4 +1,6 @@
 <?php
+// procesar_pago.php
+// Alberto Lacarta
 require_once '../config/db.php'; // Contiene la conexión
 require_once 'FormaPagoDAO.php';
 require_once 'PaypalDAO.php';

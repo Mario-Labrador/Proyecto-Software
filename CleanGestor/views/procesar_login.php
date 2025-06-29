@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+//Alberto Lacarta
+// procesar_login.php
 include_once '../config/db.php';
 include_once '../DAO/PersonaDAO.php';
 include_once '../DAO/TrabajadorDAO.php';

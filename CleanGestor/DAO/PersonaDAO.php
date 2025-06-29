@@ -1,4 +1,6 @@
 <?php
+//PersonaDAO.php
+//Alberto Lacarta
 include_once '../config/db.php';
 include_once '../VO/PersonaVO.php';
 

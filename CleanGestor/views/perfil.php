@@ -1,4 +1,6 @@
 <?php
+// perfil.php
+//Mario Labrador
 session_start();
 
 // Verificar si la sesión está activa

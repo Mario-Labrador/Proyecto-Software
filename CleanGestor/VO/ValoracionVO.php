@@ -1,4 +1,6 @@
 <?php
+// ValoracionVO.php
+// Alberto Lacarta
 class ValoracionVO {
     private $nota;
     private $descripcion;

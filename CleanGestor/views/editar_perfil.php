@@ -1,4 +1,6 @@
 <?php
+// editar_perfil.php
+// Mario Labrador
 session_start();
 if (!isset($_SESSION['dni'])) {
     header("Location: login.php");

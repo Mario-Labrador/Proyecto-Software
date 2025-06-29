@@ -1,5 +1,6 @@
 <?php
-
+// misTrabajadores.php
+// Mario Labrador
 include_once '../config/db.php'; 
 include_once '../DAO/EmpresaDAO.php';
 include_once '../DAO/PersonaDAO.php';  // Incluye el PersonaDAO

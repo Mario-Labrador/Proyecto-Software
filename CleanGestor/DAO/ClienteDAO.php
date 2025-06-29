@@ -1,4 +1,6 @@
 <?php
+// Conecta con la base de datos MySQL usando PDO
+//Alberto Lacarta
 include_once '../config/db.php';
 include_once '../VO/ClienteVO.php';
 

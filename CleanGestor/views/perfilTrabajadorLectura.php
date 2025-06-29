@@ -1,5 +1,7 @@
 <?php
 session_start();
+//Alberto Lacarta
+// perfilTrabajadorLectura.php
 
 include_once '../DAO/EmpresaDAO.php';  // Incluir el DAO de Empresa
 include_once '../DAO/TrabajadorDAO.php'; // Asegúrate de que este es el correcto

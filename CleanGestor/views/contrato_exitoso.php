@@ -1,3 +1,5 @@
+<!--- Mario recio  --->
+<!--- contrato_exitoso.php  --->
 <!DOCTYPE html>
 <html lang="es">
 <head>

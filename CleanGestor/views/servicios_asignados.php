@@ -1,4 +1,6 @@
 <?php
+// servicios_asignados.php
+// Mario Recio
 include_once '../config/db.php';
 include_once '../DAO/PersonaDAO.php';
 

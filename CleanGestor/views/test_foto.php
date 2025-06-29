@@ -1,4 +1,6 @@
 <?php
+// test_foto.php
+// Alberto Lacarta
 session_start();
 
 // Verificar si la sesión está activa

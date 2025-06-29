@@ -1,4 +1,6 @@
 <?php
+// ver_carrito.php
+// Mario Recio
 session_start();
 require_once("../DAO/ContratoServicioDAO.php");
 require_once("../DAO/ContratoDAO.php");

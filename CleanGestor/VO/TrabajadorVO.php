@@ -1,5 +1,6 @@
 <?php
-
+// TrabajadorVO.php
+// Alberto Lacarta
 class TrabajadorVO {
     private $rol;
     private $especialidad;

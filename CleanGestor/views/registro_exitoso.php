@@ -1,3 +1,5 @@
+<!-- Alberto Lacarta -->
+<!-- registro_exitoso.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>

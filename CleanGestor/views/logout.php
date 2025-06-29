@@ -1,4 +1,6 @@
 <?php
+// logout.php
+// Alberto Lacarta
 session_start();
 
 $_SESSION = array();

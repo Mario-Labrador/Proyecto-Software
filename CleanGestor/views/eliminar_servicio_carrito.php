@@ -1,4 +1,6 @@
 <?php
+// eliminar_servicio_carrito.php
+// Mario Recio
 session_start();
 require_once("../DAO/ContratoServicioDAO.php");
 

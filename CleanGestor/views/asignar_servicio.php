@@ -1,5 +1,6 @@
 <?php
-// Verificamos que el usuario esté autenticado como empresario
+//Mario Labrador
+// asignar_servicio.php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 include_once '../config/db.php'; 

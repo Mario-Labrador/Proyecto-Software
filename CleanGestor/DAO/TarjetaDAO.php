@@ -1,4 +1,6 @@
 <?php
+// TarjetaDAO.php
+//Alberto Lacarta
 require_once 'TarjetaVO.php';
 
 class TarjetaDAO {

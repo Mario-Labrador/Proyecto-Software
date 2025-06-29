@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+// perfilTrabajador.php
+// Mario Recio 
 include_once '../DAO/EmpresaDAO.php'; // Incluir el DAO de Empresa
 
 // Verificar si la sesión está activa

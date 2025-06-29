@@ -1,4 +1,6 @@
 <?php
+// procesar_pago_stripe.php
+// Alberto Lacarta
 session_start();
 require_once '../vendor/autoload.php';  // Usa Composer para cargar la librería Stripe
 

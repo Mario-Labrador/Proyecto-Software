@@ -1,5 +1,6 @@
 <?php
-
+// SolicitudVO.php
+// Alberto Lacarta
 class SolicitudVO {
     private $id;
     private $dni;

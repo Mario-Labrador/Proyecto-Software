@@ -1,3 +1,5 @@
+<!--Alberto Lacarta-->
+<!-- pago_confirmado.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>

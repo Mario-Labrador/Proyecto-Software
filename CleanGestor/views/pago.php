@@ -1,4 +1,6 @@
 <?php
+//Alberto Lacarta
+//pago_confirmado.php
 session_start();
 $totalPago = isset($_SESSION['total_pago']) ? number_format($_SESSION['total_pago'], 2, '.', '') : '0.00';
 

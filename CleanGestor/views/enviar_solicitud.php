@@ -1,4 +1,6 @@
 <?php
+// enviar_solicitud.php
+// Alberto Lacarta
 session_start();
 include_once '../config/db.php';
 include_once '../VO/SolicitudVO.php';

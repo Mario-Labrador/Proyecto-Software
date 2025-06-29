@@ -1,5 +1,6 @@
 <?php
-// Habilitar visualización de errores (quitar en producción)
+// agregar_servicio_carrito.php
+// Mario Recio 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);

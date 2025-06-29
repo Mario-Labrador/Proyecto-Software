@@ -1,5 +1,7 @@
 <!-- filepath: c:\xampp\htdocs\CleanGestor\views\procesar_editar_servicio.php -->
 <?php
+// procesar_editar_servicio.php
+// Mario Recio
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 // Verificar si el usuario es administrador

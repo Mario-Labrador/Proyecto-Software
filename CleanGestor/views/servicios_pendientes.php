@@ -1,4 +1,6 @@
 <?php
+// servicios_pendientes.php
+// Mario Labrador
 session_start();
 
 include_once '../DAO/EmpresaDAO.php';

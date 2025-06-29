@@ -1,4 +1,6 @@
 <?php
+// registro.php
+// Mario Labrador
 session_start();
 $errorType = $_SESSION['registro_error_type'] ?? '';
 $registroData = $_SESSION['registro_data'] ?? [];

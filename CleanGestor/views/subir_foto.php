@@ -1,4 +1,6 @@
 <?php
+// subir_foto.php
+// Alberto Lacarta
 session_start();
 
 if (!isset($_SESSION['dni'])) {

@@ -1,5 +1,7 @@
 <?php
-// Agrega esto AL INICIO de tu login.php (antes de <!DOCTYPE>)
+//Alberto Lacarta
+// login.php
+
 session_start();
 if (isset($_SESSION['dni'])) {
   header("Location: perfil.php");

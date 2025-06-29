@@ -1,5 +1,7 @@
 <!-- filepath: c:\xampp\htdocs\CleanGestor\views\contratar_servicio.php -->
 <?php
+//Mario Labrador 
+// contratar_servicio.php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 // Verificar si el usuario está logueado y es cliente

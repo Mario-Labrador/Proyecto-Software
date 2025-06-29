@@ -1,5 +1,7 @@
 
 <?php
+//FoormPagoDAO.php
+//Alberto Lacarta
 require_once 'FormaPagoVO.php';
 
 class FormaPagoDAO {

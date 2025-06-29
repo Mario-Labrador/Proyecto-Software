@@ -1,4 +1,6 @@
 <?php
+// procesar_registro.php
+// Alberto Lacarta
 session_start();
 
 include_once '../config/db.php';

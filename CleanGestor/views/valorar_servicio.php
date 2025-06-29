@@ -1,4 +1,6 @@
 <?php
+// valoraciones_servicio.php
+// Mario Recio
 session_start();
 require_once("../DAO/ValoracionDAO.php");
 require_once("../VO/ValoracionVO.php");

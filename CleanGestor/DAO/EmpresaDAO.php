@@ -1,4 +1,6 @@
 <?php
+//EmpresaDAO.php
+//Alberto Lacarta
 include_once '../config/db.php';
 include_once '../VO/EmpresaVO.php';
 include_once '../VO/ContratoVO.php';

@@ -1,4 +1,6 @@
 <?php
+// EmpresaVO.php
+// Alberto Lacarta
 class EmpresaVO {
     private $idEmpresa;
     private $nombreEmpresa;

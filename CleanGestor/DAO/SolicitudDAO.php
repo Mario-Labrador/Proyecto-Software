@@ -1,4 +1,6 @@
 <?php
+//SolicitudDAO.php
+//Alberto Lacarta
 include_once '../VO/SolicitudVO.php';
 include_once '../config/db.php';
 

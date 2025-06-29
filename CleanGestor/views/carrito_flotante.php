@@ -1,6 +1,7 @@
 <?php
 // filepath: c:\xampp\htdocs\CleanGestor\views\carrito_flotante.php
-
+//Mario Recio 
+// carrito_flotante.php
 if (isset($_SESSION['dni']) && $_SESSION['tipo_usuario'] === 'cliente') {
     require_once("../DAO/ContratoDAO.php");
     $conexion = new mysqli("localhost", "root", "", "gestor");

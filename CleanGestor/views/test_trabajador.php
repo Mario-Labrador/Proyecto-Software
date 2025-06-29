@@ -1,4 +1,6 @@
 <?php
+// test_trabajador.php
+// Alberto Lacarta
 session_start();
 
 include_once '../DAO/EmpresaDAO.php'; // Incluir el DAO de Empresa

@@ -1,5 +1,6 @@
 <?php
-
+// TarjetaVO.php
+// Alberto Lacarta
 class Tarjeta {
     private $idContrato;
     private $numeroTarjeta;
